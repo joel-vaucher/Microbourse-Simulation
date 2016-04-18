@@ -30,10 +30,10 @@ public class Test {
             
             ResultSet result = state.executeQuery("SELECT * FROM BEBE WHERE ID <= 7");
             while (result.next()) {
-            Long id = result.getLong("ID");
-            String name = result.getString("NOM");
-            System.out.println(id + "\t" + name);
-        }
+                Long id = result.getLong("ID");
+                String name = result.getString("NOM");
+                System.out.println(id + "\t" + name);
+            }
         }catch(SQLException ex){
             ex.getMessage();
         }

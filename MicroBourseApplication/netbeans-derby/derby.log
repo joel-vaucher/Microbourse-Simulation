@@ -1,11 +1,14 @@
-Mon Apr 18 13:59:32 CEST 2016 : Apache Derby Serveur rÃ©seau - 10.8.1.2 - (1095077) dÃ©marrÃ© et prÃªt Ã  accepter les connexions sur le port 1527
+Mon Apr 18 17:19:36 CEST 2016 : Apache Derby Network Server - 10.11.1.2 - (1629631) démarré et prêt à accepter les connexions sur le port 1527
 ----------------------------------------------------------------
-Mon Apr 18 13:59:33 CEST 2016:
-AmorÃ§age de Derby version The Apache Software Foundation - Apache Derby - 10.8.1.2 - (1095077) : instance a816c00e-0154-293d-6810-0000541f5ad5 
-dans le rÃ©pertoire de base de donnÃ©es /Users/charlesombangndo/.netbeans-derby/microBourseDataBase  avec le chargeur de classe sun.misc.Launcher$AppClassLoader@5451c3a8
-
+Mon Apr 18 17:19:38 CEST 2016:
+Amorçage de Derby version The Apache Software Foundation - Apache Derby - 10.11.1.2 - (1629631) : instance a816c00e-0154-29f4-98db-ffff8969dca3 
+dans le répertoire de base de données C:\Users\joel\Documents\GitHub\Microbourse-Simulation\MicroBourseApplication\netbeans-derby\microBourseDataBase avec le chargeur de classe sun.misc.Launcher$AppClassLoader@5e2de80c
+Chargé de file:/C:/Soft/java/jdk/db/lib/derby.jar
 java.vendor=Oracle Corporation
-java.runtime.version=1.8.0_20-b26
-user.dir=/Applications/NetBeans/glassfish-3.1.2.2/javadb
-derby.system.home=/Users/charlesombangndo/.netbeans-derby
-Chargeur de classe de la base de donnÃ©es dÃ©marrÃ© - derby.database.classpath=''
+java.runtime.version=1.8.0_60-b27
+user.dir=C:\Soft\java\jdk\db
+os.name=Windows 8.1
+os.arch=amd64
+os.version=6.3
+derby.system.home=C:\Users\joel\Documents\GitHub\Microbourse-Simulation\MicroBourseApplication\netbeans-derby
+Chargeur de classe de la base de données démarré - derby.database.classpath = ''

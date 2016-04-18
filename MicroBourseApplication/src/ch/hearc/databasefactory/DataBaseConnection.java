@@ -27,7 +27,7 @@ public class DataBaseConnection {
             this.connection = DriverManager.getConnection(url, username, password);
             this.connection.setAutoCommit(false);
         }catch(SQLException ex){
-            throw new DatabaseException("Connection à la base de données impossible!");
+            throw new DatabaseException("Connection à la base de données impossible!" + ex.getMessage());
         }
     }
     

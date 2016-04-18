@@ -7,9 +7,9 @@ import ch.hearc.servicesdao.ServicesOffreDao;
  *
  * @author charlesombangndo
  */
-public class offreDaoImplement implements ServicesOffreDao{
+public class OffreDaoImplement implements ServicesOffreDao{
     
-    public offreDaoImplement (){
+    public OffreDaoImplement (){
         
     }
 
