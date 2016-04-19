@@ -1,22 +1,28 @@
 package ch.hearc.metiers;
+
+import java.sql.Date;
+
 /**
  *
  * @author charlesombangndo
  */
 public class HistoriqueEntreprise {
     private Long idHisto;
-    private String date;
+    private int quantiteRessource;
+    private Date date;
     private Entreprise entreprise;
 
-    public HistoriqueEntreprise(Long idHisto, String date, Entreprise entreprise) {
+    public HistoriqueEntreprise(Long idHisto, Date date, int quantiteRessource, Entreprise entreprise) {
         this.idHisto = idHisto;
         this.date = date;
+        this.quantiteRessource = quantiteRessource;
         this.entreprise = entreprise;
     }
 
     public HistoriqueEntreprise(Long idHisto) {
         this.idHisto = idHisto;
         this.date = null;
+        this.quantiteRessource = 0;
         this.entreprise = null;
     }
 
@@ -28,12 +34,20 @@ public class HistoriqueEntreprise {
         this.idHisto = idHisto;
     }
 
-    public String getDate() {
+    public Date getDate() {
         return date;
     }
 
-    public void setDate(String date) {
+    public void setDate(Date date) {
         this.date = date;
+    }
+    
+    public int getQuantiteRessource() {
+        return quantiteRessource;
+    }
+
+    public void setQuantiteRessource(int quantiteRessource) {
+        this.quantiteRessource = quantiteRessource;
     }
 
     public Entreprise getEntreprise() {
