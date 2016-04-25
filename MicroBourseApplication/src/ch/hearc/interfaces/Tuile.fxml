@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.LineChart?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<TitledPane fx:id="tilePane" animated="false" collapsible="false" prefHeight="350.0" prefWidth="390.0" text="Produit 1" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ch.hearc.interfaces.TuileController">
+    <content>
+        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="350.0" prefWidth="390.0">
+            <children>
+                <VBox prefHeight="319.0" prefWidth="388.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                    <children>
+                        <HBox prefHeight="246.0" prefWidth="390.0">
+                            <children>
+                                <LineChart fx:id="chart" prefHeight="225.0" prefWidth="263.0">
+                                    <xAxis>
+                                        <CategoryAxis side="BOTTOM" />
+                                    </xAxis>
+                                    <yAxis>
+                                        <NumberAxis side="LEFT" />
+                                    </yAxis>
+                                </LineChart>
+                                <VBox prefHeight="225.0" prefWidth="126.0">
+                                    <children>
+                                        <Label alignment="CENTER" prefHeight="17.0" prefWidth="155.0" text="Prix offert" textAlignment="CENTER">
+                                            <VBox.margin>
+                                                <Insets top="5.0" />
+                                            </VBox.margin>
+                                            <font>
+                                                <Font size="13.0" />
+                                            </font>
+                                        </Label>
+                                        <Label fx:id="lblPrixOffered" alignment="CENTER" prefHeight="17.0" prefWidth="183.0" text="Label" textAlignment="CENTER">
+                                            <VBox.margin>
+                                                <Insets top="5.0" />
+                                            </VBox.margin>
+                                            <font>
+                                                <Font size="13.0" />
+                                            </font>
+                                        </Label>
+                                        <Label alignment="CENTER" prefHeight="17.0" prefWidth="177.0" text="Prix demandé" textAlignment="CENTER">
+                                            <VBox.margin>
+                                                <Insets top="20.0" />
+                                            </VBox.margin>
+                                            <font>
+                                                <Font size="13.0" />
+                                            </font>
+                                        </Label>
+                                        <Label fx:id="lblPriceRequested" alignment="CENTER" prefHeight="20.0" prefWidth="146.0" text="Label" textAlignment="CENTER">
+                                            <VBox.margin>
+                                                <Insets top="5.0" />
+                                            </VBox.margin>
+                                            <font>
+                                                <Font size="13.0" />
+                                            </font>
+                                        </Label>
+                                        <Label alignment="CENTER" prefHeight="17.0" prefWidth="177.0" text="Actions en vente" textAlignment="CENTER">
+                                            <VBox.margin>
+                                                <Insets top="20.0" />
+                                            </VBox.margin>
+                                            <font>
+                                                <Font size="13.0" />
+                                            </font>
+                                        </Label>
+                                        <Label fx:id="lblSharesSale" alignment="CENTER" prefHeight="17.0" prefWidth="155.0" text="Label" textAlignment="CENTER">
+                                            <VBox.margin>
+                                                <Insets top="5.0" />
+                                            </VBox.margin>
+                                            <font>
+                                                <Font size="13.0" />
+                                            </font>
+                                        </Label>
+                              <Hyperlink fx:id="linkDetail" alignment="CENTER" onMouseClicked="#onMouseClicked_linkDetail" prefHeight="25.0" prefWidth="175.0" text="Détail du produit">
+                                 <VBox.margin>
+                                    <Insets top="15.0" />
+                                 </VBox.margin>
+                                 <font>
+                                    <Font name="System Bold" size="13.0" />
+                                 </font>
+                              </Hyperlink>
+                                    </children>
+                                    <opaqueInsets>
+                                        <Insets />
+                                    </opaqueInsets>
+                                </VBox>
+                            </children>
+                        </HBox>
+                        <HBox prefHeight="100.0" prefWidth="200.0" spacing="10.0">
+                            <children>
+                                <GridPane prefHeight="92.0" prefWidth="198.0">
+                                    <columnConstraints>
+                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="96.0" minWidth="10.0" prefWidth="67.00000381469727" />
+                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="42.0" minWidth="0.0" prefWidth="13.999996185302734" />
+                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="74.0" minWidth="10.0" prefWidth="65.0" />
+                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="55.0" minWidth="10.0" prefWidth="26.0" />
+                                    </columnConstraints>
+                                    <rowConstraints>
+                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    </rowConstraints>
+                                    <children>
+                                        <Button fx:id="btnRequest" mnemonicParsing="false" prefHeight="27.0" prefWidth="80.0" text="Demande" GridPane.columnSpan="2" GridPane.rowIndex="1" />
+                                        <Button fx:id="btnOffer" mnemonicParsing="false" prefHeight="27.0" prefWidth="80.0" text="Offre" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.halignment="RIGHT" GridPane.rowIndex="1" />
+                                        <TextField fx:id="txtNbShares" promptText="Nb d'actions" />
+                                        <TextField fx:id="txtPriceShares" promptText="Prix d'une action" GridPane.columnIndex="2" />
+                                        <Label prefHeight="17.0" prefWidth="27.0" text="à" GridPane.columnIndex="1">
+                                            <padding>
+                                                <Insets left="3.0" />
+                                            </padding>
+                                        </Label>
+                                        <Label text="CHF" GridPane.columnIndex="3">
+                                            <padding>
+                                                <Insets left="3.0" />
+                                            </padding>
+                                        </Label>
+                                    </children>
+                                </GridPane>
+                        <Separator orientation="VERTICAL" prefHeight="200.0" />
+                                <GridPane>
+                                    <columnConstraints>
+                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                    </columnConstraints>
+                                    <rowConstraints>
+                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    </rowConstraints>
+                                    <children>
+                                        <Button fx:id="btnRequestAP" mnemonicParsing="false" prefHeight="27.0" prefWidth="80.0" text="Demande" GridPane.rowIndex="1" />
+                                        <Button fx:id="btnOfferAP" mnemonicParsing="false" prefHeight="27.0" prefWidth="80.0" text="Offre" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                        <Label text="au prix actuel" GridPane.columnIndex="1">
+                                            <padding>
+                                                <Insets left="3.0" />
+                                            </padding>
+                                        </Label>
+                                        <TextField fx:id="txtNbSharesAP" promptText="Nb d'actions" />
+                                    </children>
+                                </GridPane>
+                            </children>
+                        </HBox>
+                    </children>
+                </VBox>
+            </children>
+        </AnchorPane>
+    </content>
+    <font>
+        <Font size="14.0" />
+    </font>
+</TitledPane>

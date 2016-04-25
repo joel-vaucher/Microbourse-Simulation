@@ -3,20 +3,7 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/joel/Documents/GitHub/Microbourse-Simulation/MicroBourseApplication/src/ch/hearc/servicesdao/ServicesHistoriqueEntrepriseDao.java</file>
-            <file>file:/C:/Users/joel/Documents/GitHub/Microbourse-Simulation/MicroBourseApplication/src/ch/hearc/daoimplement/ProducteurConsommateurDaoImplement.java</file>
-            <file>file:/C:/Users/joel/Documents/GitHub/Microbourse-Simulation/MicroBourseApplication/src/ch/hearc/daoimplement/OffreDaoImplement.java</file>
-            <file>file:/C:/Users/joel/Documents/GitHub/Microbourse-Simulation/MicroBourseApplication/src/ch/hearc/metiers/Entreprise.java</file>
-            <file>file:/C:/Users/joel/Documents/GitHub/Microbourse-Simulation/MicroBourseApplication/src/ch/hearc/daoimplement/EntrepriseDaoImplement.java</file>
-            <file>file:/C:/Users/joel/Documents/GitHub/Microbourse-Simulation/MicroBourseApplication/src/ch/hearc/servicesdao/ServicesEntrepriseDao.java</file>
-            <file>file:/C:/Users/joel/Documents/GitHub/Microbourse-Simulation/MicroBourseApplication/src/ch/hearc/metiers/Consommateur.java</file>
-            <file>file:/C:/Users/joel/Documents/GitHub/Microbourse-Simulation/MicroBourseApplication/src/ch/hearc/daoimplement/HistoriqueEntrepriseDaoImplement.java</file>
-            <file>file:/C:/Users/joel/Documents/GitHub/Microbourse-Simulation/MicroBourseApplication/src/ch/hearc/programme/Test.java</file>
-            <file>file:/C:/Users/joel/Documents/GitHub/Microbourse-Simulation/MicroBourseApplication/src/ch/hearc/databasefactory/DataBaseConnection.java</file>
-            <file>file:/C:/Users/joel/Documents/GitHub/Microbourse-Simulation/MicroBourseApplication/src/ch/hearc/metiers/HistoriqueEntreprise.java</file>
-            <file>file:/C:/Users/joel/Documents/GitHub/Microbourse-Simulation/MicroBourseApplication/src/ch/hearc/metiers/Producteur.java</file>
-            <file>file:/C:/Users/joel/Documents/GitHub/Microbourse-Simulation/MicroBourseApplication/src/ch/hearc/servicesdao/ServicesOffreDao.java</file>
-            <file>file:/C:/Users/joel/Documents/GitHub/Microbourse-Simulation/MicroBourseApplication/src/ch/hearc/servicesdao/ServicesProducteurConsommateurDao.java</file>
+            <file>file:/C:/Users/daniel.rodrigue/Documents/2280_1_P2_INF/Microbourse-Simulation/MicroBourseApplication/src/ch/hearc/programme/Test.java</file>
         </group>
     </open-files>
 </project-private>
