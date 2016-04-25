@@ -15,3 +15,6 @@ hs_err_pid*
 *.properties
 
 *.log
+
+# NetBeans Project Directory
+nbproject/
