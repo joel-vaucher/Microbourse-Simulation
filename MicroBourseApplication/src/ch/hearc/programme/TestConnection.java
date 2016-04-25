@@ -1,4 +1,4 @@
-﻿package ch.hearc.programme;
+package ch.hearc.programme;
 
 import ch.hearc.daoimplement.ActionnaireDaoImplement;
 import ch.hearc.databasefactory.DataBaseConnection;
