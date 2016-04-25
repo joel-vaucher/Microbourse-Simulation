@@ -20,6 +20,30 @@ public class Action {
         this.quantite = 0;
         entreprise = null;
     }
+
+    public Long getIdACtion() {
+        return idACtion;
+    }
+
+    public int getQuantite() {
+        return quantite;
+    }
+
+    public Entreprise getEntreprise() {
+        return entreprise;
+    }
+
+    public void setIdACtion(Long idACtion) {
+        this.idACtion = idACtion;
+    }
+
+    public void setQuantite(int quantite) {
+        this.quantite = quantite;
+    }
+
+    public void setEntreprise(Entreprise entreprise) {
+        this.entreprise = entreprise;
+    }
     
     
 }

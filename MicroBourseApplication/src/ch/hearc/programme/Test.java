@@ -1,7 +1,10 @@
 package ch.hearc.programme;
 
+import ch.hearc.daoimplement.ActionnaireDaoImplement;
 import ch.hearc.databasefactory.DataBaseConnection;
 import ch.hearc.exception.DatabaseException;
+import ch.hearc.metiers.Action;
+import ch.hearc.metiers.Actionnaire;
 import ch.hearc.utilitaires.CreateDataBase;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -61,5 +64,10 @@ public class Test extends Application{
         creation.createTable();
         
         launch(args);
+        ActionnaireDaoImplement test1 = new ActionnaireDaoImplement();
+        Actionnaire act = new Actionnaire(1L);
+        Action action = new Action(1L);
+        
+        System.out.println(test1.getQuantiteAction(act,action));
     }
 }
