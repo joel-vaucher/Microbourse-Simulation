@@ -1,4 +1,4 @@
-package ch.hearc.programme;
+﻿package ch.hearc.programme;
 
 import ch.hearc.daoimplement.ActionnaireDaoImplement;
 import ch.hearc.databasefactory.DataBaseConnection;
@@ -20,7 +20,7 @@ import javafx.stage.Stage;
  *
  * @author charlesombangndo
  */
-public class Test extends Application{
+public class TestConnection extends Application{
     
     /**
      * 
