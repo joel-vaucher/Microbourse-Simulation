@@ -9,7 +9,7 @@ package ch.hearc.metiers;
  *
  * @author charlesombangndo
  */
-class Capital {
+public class Capital {
     private Long idCapitaux;
     private int quantite;
     private Monnaie devise;

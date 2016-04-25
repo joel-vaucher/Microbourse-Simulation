@@ -1,5 +1,6 @@
 package ch.hearc.servicesdao;
 
+import ch.hearc.metiers.Entreprise;
 import ch.hearc.metiers.Producteur;
 
 /**
@@ -8,6 +9,7 @@ import ch.hearc.metiers.Producteur;
  */
 public interface ServicesProducteurConsommateurDao {
     
-    void vendreRessource(Producteur prod); 
-    void acheterRessource(Producteur cons);
+    public void vendreRessource(Producteur prod); 
+    public void acheterRessource(Producteur cons);
+    public Entreprise getEntrepriseById(long idProdCons);
 }

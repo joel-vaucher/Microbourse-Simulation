@@ -4,6 +4,6 @@ package ch.hearc.metiers;
  *
  * @author charlesombangndo
  */
-class Consommateur {
+public class Consommateur {
     
 }

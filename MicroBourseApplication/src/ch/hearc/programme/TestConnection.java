@@ -12,7 +12,7 @@ import java.sql.Statement;
  *
  * @author charlesombangndo
  */
-public class Test {
+public class TestConnection {
     /**
      * @param args the command line arguments
      * @throws ch.hearc.exception.DatabaseException
