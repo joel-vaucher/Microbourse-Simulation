@@ -39,7 +39,7 @@ public class TestConnection extends Application{
     public static void main(String[] args) throws DatabaseException {
         launch(args);
         ActionnaireDaoImplement test1 = new ActionnaireDaoImplement();
-        
+       
         //test1.getQuantiteAction(1L,1L);
     }
 }
