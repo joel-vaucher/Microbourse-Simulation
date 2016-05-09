@@ -1,5 +1,7 @@
 package ch.hearc.metiers;
 
+import java.sql.Date;
+
 /**
  *
  * @author charlesombangndo
@@ -7,9 +9,10 @@ package ch.hearc.metiers;
 public class Offre {
     private Long idOffre;
     private int quantite;
+    private int prix;
     private String statut;
     private int operation;
-    private String date;
+    private Date date;
     private Actionnaire actionnaireOffre;
     private Actionnaire actionnaireOpIm;
     private Entreprise entreprise;
@@ -18,9 +21,10 @@ public class Offre {
         this.idOffre = idOffre;
     }
 
-    public Offre(Long idOffre, int quantite, String statut, int operation, String date, Actionnaire actionnaireOffre, Actionnaire actionnaireOpIm, Entreprise entreprise) {
+    public Offre(Long idOffre, int quantite, int prix, String statut, int operation, Date date, Actionnaire actionnaireOffre, Actionnaire actionnaireOpIm, Entreprise entreprise) {
         this.idOffre = idOffre;
         this.quantite = quantite;
+        this.prix = prix;
         this.statut = statut;
         this.operation = operation;
         this.date = date;
@@ -45,6 +49,14 @@ public class Offre {
         this.quantite = quantite;
     }
 
+    public int getPrix() {
+        return prix;
+    }
+
+    public void setPrix(int prix) {
+        this.prix = prix;
+    }
+
     public String getStatut() {
         return statut;
     }
@@ -61,11 +73,11 @@ public class Offre {
         this.operation = operation;
     }
 
-    public String getDate() {
+    public Date getDate() {
         return date;
     }
 
-    public void setDate(String date) {
+    public void setDate(Date date) {
         this.date = date;
     }
 

@@ -52,4 +52,10 @@ public class ActionnaireDaoImplement implements ServicesActionnaireDAO{
     }
     return quantite;
     }
+
+    @Override
+    public Actionnaire getActionnaireByID() {
+        //TODO
+        return new Actionnaire(Integer.toUnsignedLong(1), "Max");
+    }
 }

@@ -51,7 +51,7 @@ public class EntrepriseDaoImplement implements ServicesEntrepriseDao {
         try {
             conn = DataBaseConnection.getDataBase().getConnection();
             state = conn.createStatement();
-            ResultSet result = state.executeQuery(String.format("SELECT * FROM HISTORIQUESENTREPRISES WHERE fk_Entreprise = %d  AND date > \'%s\' ORDER BY date", entreprise.getIdEntreprise(), nearDate.toString()));
+            ResultSet result = state.executeQuery(String.format("SELECT * FROM HISTORIQUESENTREPRISES WHERE fk_Entreprise = %d  AND date < \'%s\' ORDER BY date", entreprise.getIdEntreprise(), nearDate.toString()));
             result.next();
             Long id = result.getLong("ID");
             Date date = result.getDate("DATE");

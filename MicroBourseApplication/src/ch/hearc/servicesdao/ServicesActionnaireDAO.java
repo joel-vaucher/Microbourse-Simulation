@@ -12,4 +12,6 @@ public interface ServicesActionnaireDAO{
     
     //Retourner le nombre d'action 
     int getQuantiteAction(Actionnaire actionnaire, Action action) throws DatabaseException;
+
+    public Actionnaire getActionnaireByID();
 }
