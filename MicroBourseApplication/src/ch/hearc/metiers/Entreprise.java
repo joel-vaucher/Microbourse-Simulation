@@ -10,37 +10,19 @@ public class Entreprise {
     private Long idEntreprise;
     private String nom;
     private int quantiteRessource;
-    //TODO
-    //ajouter les champs :
-    //private int quantiteVendu;
-    //private int quantiteAcheter;
-    //private double capitalTransfere;
-    private List<Capital> listeCapitaux;
-    private List<Producteur> listeProducteur;
-    private List<Consommateur> listeConsommateur;
-
-    public Entreprise(Long idEntreprise) {
-        this.idEntreprise = idEntreprise;
-    }
-
-    public Entreprise(Long idEntreprise, String nom, int quantiteRessource) {
+    private int quantiteRessourceVenteTotal;
+    private double capital;
+    private double capitalVenteTotal;
+    
+    public Entreprise(Long idEntreprise, String nom, int quantiteRessource, int quantiteRessourceVenteTotal, double capital, double capitalVenteTotal){
         this.idEntreprise = idEntreprise;
         this.nom = nom;
         this.quantiteRessource = quantiteRessource;
-        this.listeCapitaux = null;
-        this.listeProducteur = null;
-        this.listeConsommateur = null;
+        this.quantiteRessourceVenteTotal = quantiteRessourceVenteTotal;
+        this.capital = capital;
+        this.capitalVenteTotal = capitalVenteTotal;
     }
     
-    public Entreprise(Long idEntreprise, String nom, int quantiteRessource, List<Capital> listeCapitaux, List<Producteur> listeProducteur, List<Consommateur> listeConsommateur) {
-        this.idEntreprise = idEntreprise;
-        this.nom = nom;
-        this.quantiteRessource = quantiteRessource;
-        this.listeCapitaux = listeCapitaux;
-        this.listeProducteur = listeProducteur;
-        this.listeConsommateur = listeConsommateur;
-    }
-
     public Long getIdEntreprise() {
         return idEntreprise;
     }
@@ -65,27 +47,29 @@ public class Entreprise {
         this.quantiteRessource = quantiteRessource;
     }
 
-    public List<Capital> getListeCapitaux() {
-        return listeCapitaux;
+    public int getQuantiteRessourceVenteTotal() {
+        return quantiteRessourceVenteTotal;
     }
 
-    public void setListeCapitaux(List<Capital> listeCapitaux) {
-        this.listeCapitaux = listeCapitaux;
+    public void setQuantiteRessourceVenteTotal(int quantiteRessourceVenteTotal) {
+        this.quantiteRessourceVenteTotal = quantiteRessourceVenteTotal;
     }
 
-    public List<Producteur> getListeProducteur() {
-        return listeProducteur;
+    public double getCapital() {
+        return capital;
     }
 
-    public void setListeProducteur(List<Producteur> listeProducteur) {
-        this.listeProducteur = listeProducteur;
+    public void setCapital(double capital) {
+        this.capital = capital;
     }
 
-    public List<Consommateur> getListeConsommateur() {
-        return listeConsommateur;
+    public double getCapitalVenteTotal() {
+        return capitalVenteTotal;
     }
 
-    public void setListeConsommateur(List<Consommateur> listeConsommateur) {
-        this.listeConsommateur = listeConsommateur;
+    public void setCapitalVenteTotal(double capitalVenteTotal) {
+        this.capitalVenteTotal = capitalVenteTotal;
     }
+
+    
 }

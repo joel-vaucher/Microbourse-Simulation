@@ -13,9 +13,9 @@ public class Offre {
     private statusType statut;
     private operationType operation;
     private Date date;
-    private Actionnaire actionnaireOffre;
-    private Actionnaire actionnaireOpIm;
-    private Entreprise entreprise;
+    private Long idActionnaireOffre;
+    private Long idActionnaireOpIm;
+    private Long idEntreprise;
     
     public static enum statusType {
         ANNULE,
@@ -30,18 +30,18 @@ public class Offre {
         this.idOffre = idOffre;
     }
 
-    public Offre(Long idOffre, int quantite, double prix, statusType statut, operationType operation, Date date, Actionnaire actionnaireOffre, Actionnaire actionnaireOpIm, Entreprise entreprise) {
+    public Offre(Long idOffre, int quantite, double prix, statusType statut, operationType operation, Date date, Long idActionnaireOffre, Long idActionnaireOpIm, Long idEntreprise) {
         this.idOffre = idOffre;
         this.quantite = quantite;
         this.prix = prix;
         this.statut = statut;
         this.operation = operation;
         this.date = date;
-        this.actionnaireOffre = actionnaireOffre;
-        this.actionnaireOpIm = actionnaireOpIm;
-        this.entreprise = entreprise;
+        this.idActionnaireOffre = idActionnaireOffre;
+        this.idActionnaireOpIm = idActionnaireOpIm;
+        this.idEntreprise = idEntreprise;
     }
-
+    
     public Long getIdOffre() {
         return idOffre;
     }
@@ -90,30 +90,27 @@ public class Offre {
         this.date = date;
     }
 
-    public Actionnaire getActionnaireOffre() {
-        return actionnaireOffre;
+    public Long getIdActionnaireOffre() {
+        return idActionnaireOffre;
     }
 
-    public void setActionnaireOffre(Actionnaire actionnaireOffre) {
-        this.actionnaireOffre = actionnaireOffre;
+    public void setIdActionnaireOffre(Long idActionnaireOffre) {
+        this.idActionnaireOffre = idActionnaireOffre;
     }
 
-    public Actionnaire getActionnaireOpIm() {
-        return actionnaireOpIm;
+    public Long getIdActionnaireOpIm() {
+        return idActionnaireOpIm;
     }
 
-    public void setActionnaireOpIm(Actionnaire actionnaireOpIm) {
-        this.actionnaireOpIm = actionnaireOpIm;
+    public void setIdActionnaireOpIm(Long idActionnaireOpIm) {
+        this.idActionnaireOpIm = idActionnaireOpIm;
     }
 
-    public Entreprise getEntreprise() {
-        return entreprise;
+    public Long getIdEntreprise() {
+        return idEntreprise;
     }
 
-    public void setEntreprise(Entreprise entreprise) {
-        this.entreprise = entreprise;
+    public void setIdEntreprise(Long idEntreprise) {
+        this.idEntreprise = idEntreprise;
     }
-    
-    
-    
 }

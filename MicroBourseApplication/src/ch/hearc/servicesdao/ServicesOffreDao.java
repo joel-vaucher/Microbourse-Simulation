@@ -16,13 +16,13 @@ public interface ServicesOffreDao {
     void updateOffre(Offre offre);
     void deleteOffre(Offre offre);   
 
-    public List<Offre> getOffresByEntreprise(Entreprise e);
+    public List<Offre> getOffresByEntreprise(Long idE);
 
-    public void buyImmediat(Offre o, Actionnaire a, int quantite);
+    public void buyImmediat(Offre o, Long idA, int quantite);
 
-    public void sellImmediat(Offre o, Actionnaire a, int quantite);
+    public void sellImmediat(Offre o, Long idA, int quantite);
 
-    public void buyOffer(Actionnaire a, Entreprise e, int nbAction, int prix);
+    public void buyOffer(Long idA, Long idE, int nbAction, int prix);
 
-    public void sellOffer(Actionnaire a, Entreprise e, int nbAction, int prix);
+    public void sellOffer(Long idA, Long idE, int nbAction, int prix);
 }

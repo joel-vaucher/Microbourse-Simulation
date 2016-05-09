@@ -27,9 +27,9 @@ public class ActionnaireDaoImplement implements ServicesActionnaireDAO{
     }
 
     @Override
-    public Actionnaire getActionnaireByID() {
+    public Actionnaire getActionnaireByID(Long idA) {
         //TODO
-        return new Actionnaire(Integer.toUnsignedLong(1), "Max");
+        return new Actionnaire(1L,"Max",1200.2);
     }
 
     @Override

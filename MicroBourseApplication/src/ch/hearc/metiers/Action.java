@@ -5,44 +5,48 @@ package ch.hearc.metiers;
  * @author charlesombangndo
  */
 public class Action {
-    private Long idACtion;
+    private Long idAction;
     private int quantite;
-    private Entreprise entreprise;
+    private Long idEntreprise;
+    private Long idActionnaire;
 
-    public Action(Long idACtion, int quantite, Entreprise entreprise) {
-        this.idACtion = idACtion;
+    public Action(Long idAction, int quantite, Long idEntreprise, Long idActionnaire) {
+        this.idAction = idAction;
         this.quantite = quantite;
-        this.entreprise = entreprise;
-    }
-
-    public Action(Long idACtion) {
-        this.idACtion = idACtion;
-        this.quantite = 0;
-        entreprise = null;
+        this.idEntreprise = idEntreprise;
+        this.idActionnaire = idActionnaire;
     }
 
     public Long getIdACtion() {
-        return idACtion;
+        return idAction;
+    }
+
+    public void setIdACtion(Long idACtion) {
+        this.idAction = idACtion;
     }
 
     public int getQuantite() {
         return quantite;
     }
 
-    public Entreprise getEntreprise() {
-        return entreprise;
-    }
-
-    public void setIdACtion(Long idACtion) {
-        this.idACtion = idACtion;
-    }
-
     public void setQuantite(int quantite) {
         this.quantite = quantite;
     }
 
-    public void setEntreprise(Entreprise entreprise) {
-        this.entreprise = entreprise;
+    public Long getIdEntreprise() {
+        return idEntreprise;
+    }
+
+    public void setIdEntreprise(Long idEntreprise) {
+        this.idEntreprise = idEntreprise;
+    }
+
+    public Long getIdActionnaire() {
+        return idActionnaire;
+    }
+
+    public void setIdActionnaire(Long idActionnaire) {
+        this.idActionnaire = idActionnaire;
     }
     
     

@@ -9,21 +9,12 @@ import java.util.List;
 public class Actionnaire {
     private Long idActionnaire;
     private String nom;
-    private List<Capital> listeCapitaux;
-    private List<Action> listeActions;
+    private double capital;
 
-    public Actionnaire(Long idActionnaire, String nom) {
+    public Actionnaire(Long idActionnaire, String nom, double capital) {
         this.idActionnaire = idActionnaire;
         this.nom = nom;
-        this.listeActions = null;
-        this.listeCapitaux = null;
-    }
-
-    public Actionnaire(Long idActionnaire) {
-        this.idActionnaire = idActionnaire;
-        this.nom = null;
-        this.listeCapitaux = null;
-        this.listeActions = null;
+        this.capital = capital;
     }
 
     public Long getIdActionnaire() {
@@ -42,19 +33,11 @@ public class Actionnaire {
         this.nom = nom;
     }
 
-    public List<Capital> getListeCapitaux() {
-        return listeCapitaux;
+    public double getCapital() {
+        return capital;
     }
 
-    public void setListeCapitaux(List<Capital> listeCapitaux) {
-        this.listeCapitaux = listeCapitaux;
-    }
-
-    public List<Action> getListeActions() {
-        return listeActions;
-    }
-
-    public void setListeActions(List<Action> listeActions) {
-        this.listeActions = listeActions;
+    public void setCapital(double capital) {
+        this.capital = capital;
     }
 }

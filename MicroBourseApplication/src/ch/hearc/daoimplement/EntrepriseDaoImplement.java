@@ -2,12 +2,9 @@ package ch.hearc.daoimplement;
 
 import ch.hearc.databasefactory.DataBaseConnection;
 import ch.hearc.exception.DatabaseException;
-import ch.hearc.metiers.Capital;
-import ch.hearc.metiers.Consommateur;
 import ch.hearc.metiers.Entreprise;
 import ch.hearc.metiers.HistoriqueEntreprise;
 import ch.hearc.metiers.Offre;
-import ch.hearc.metiers.Producteur;
 import ch.hearc.servicesdao.ServicesEntrepriseDao;
 import java.sql.Connection;
 import java.sql.Date;
@@ -29,73 +26,32 @@ import java.util.logging.Logger;
 public class EntrepriseDaoImplement implements ServicesEntrepriseDao {
 
     @Override
-    public double StockActuel(Entreprise entreprise) {
-        return ((double) entreprise.getQuantiteRessource()) / ConsommationMensuelle(entreprise);
-    }
-
-    @Override
-    public double ConsommationMensuelle(Entreprise entreprise) {
-        Calendar c = Calendar.getInstance();
-        c.add(Calendar.MONTH, -1);
-        Date lastMonth = new Date(c.get(Calendar.LONG));
-        HistoriqueEntreprise h = getNearestHistorique(entreprise,lastMonth);
-        return entreprise.getQuantiteRessource() - h.getQuantiteRessource();
-    }
-
-
-    @Override
-    public HistoriqueEntreprise getNearestHistorique(Entreprise entreprise, Date nearDate) {
+    public Entreprise getEntrepriseByID(Long idE) {
         Connection conn;
         Statement state = null;
-        HistoriqueEntreprise historiqueList = null;
+        Entreprise entreprise = null;
         try {
             conn = DataBaseConnection.getDataBase().getConnection();
             state = conn.createStatement();
-            ResultSet result = state.executeQuery(String.format("SELECT * FROM HISTORIQUESENTREPRISES WHERE fk_Entreprise = %d  AND date < \'%s\' ORDER BY date", entreprise.getIdEntreprise(), nearDate.toString()));
+            ResultSet result = state.executeQuery(String.format("SELECT * FROM Entreprises"));
+
             result.next();
+
             Long id = result.getLong("ID");
-            Date date = result.getDate("DATE");
+            String nom = result.getString("NOM");
             int quantite = result.getInt("QUANTITE_RESSOURCE");
+            int quantiteRessourceVenteTotal = result.getInt("QUANTITE_RES_VENTE_TOTALE");
+            double capital = result.getDouble("CAPITAL");
+            double capitalVenteTotal = result.getInt("CAPITAL_VENTE_TOTAL");
 
-            historiqueList = new HistoriqueEntreprise(id, date, quantite, entreprise);
-            
+            entreprise = new Entreprise(id, nom, quantite, quantiteRessourceVenteTotal, capital, capitalVenteTotal);
+
         } catch (DatabaseException ex) {
             Logger.getLogger(EntrepriseDaoImplement.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
             ex.getMessage();
         }
-        return historiqueList;
-    }
-    
-    @Override
-    public List<HistoriqueEntreprise> getHistoriqueOf(Entreprise entreprise) {
-
-        Connection conn;
-        Statement state = null;
-        List<HistoriqueEntreprise> historiqueList = null;
-        try {
-            conn = DataBaseConnection.getDataBase().getConnection();
-            state = conn.createStatement();
-            historiqueList = new ArrayList<HistoriqueEntreprise>(30);
-            ResultSet result = state.executeQuery(String.format("SELECT * FROM HistoriqueEntreprises WHERE fk_Entreprise = %d", entreprise.getIdEntreprise()));
-            while (result.next()) {
-                Long id = result.getLong("ID");
-                Date date = result.getDate("DATE");
-                int quantite = result.getInt("QUANTITE_RESSOURCE");
-                
-                historiqueList.add(new HistoriqueEntreprise(id, date, quantite, entreprise));
-            }
-        } catch (DatabaseException ex) {
-            Logger.getLogger(EntrepriseDaoImplement.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex) {
-            ex.getMessage();
-        }
-        return historiqueList;
-    }
-    
-    @Override
-    public Entreprise getEntrepriseByID(Long idEntreprise) {
-        return null;
+        return entreprise;
     }
 
     @Override
@@ -109,19 +65,14 @@ public class EntrepriseDaoImplement implements ServicesEntrepriseDao {
             entreprises = new ArrayList<Entreprise>();
             ResultSet result = state.executeQuery(String.format("SELECT * FROM Entreprises"));
             while (result.next()) {
-                Long idEntreprise = result.getLong("ID");
-                String nom  = result.getString("NOM");
-                int quantiteRessource  = result.getInt("QUANTITE_RESSOURCE");
-                
-                //TODO obtenir List des objets en fonction des id
-                //donc créer les manager pour capitaux, produteur, consommateur
-                //genre
-                // = getCapitauxByEntreprise(result.getLong("fk_entreprise");
-                List<Capital> listeCapitaux = null;
-                List<Producteur> listeProducteur = null;
-                List<Consommateur> listeConsommateur = null;
-                
-                entreprises.add(new Entreprise(idEntreprise, nom, quantiteRessource, listeCapitaux,listeProducteur,listeConsommateur));
+                Long id = result.getLong("ID");
+                String nom = result.getString("NOM");
+                int quantite = result.getInt("QUANTITE_RESSOURCE");
+                int quantiteRessourceVenteTotal = result.getInt("QUANTITE_RES_VENTE_TOTALE");
+                double capital = result.getDouble("CAPITAL");
+                double capitalVenteTotal = result.getInt("CAPITAL_VENTE_TOTAL");
+
+                entreprises.add(new Entreprise(id, nom, quantite, quantiteRessourceVenteTotal, capital, capitalVenteTotal));
             }
         } catch (DatabaseException ex) {
             Logger.getLogger(EntrepriseDaoImplement.class.getName()).log(Level.SEVERE, null, ex);
@@ -129,6 +80,78 @@ public class EntrepriseDaoImplement implements ServicesEntrepriseDao {
             ex.getMessage();
         }
         return entreprises;
+    }
+
+    @Override
+    public double StockActuel(Long idE) {
+        Entreprise e = getEntrepriseByID(idE);
+        return ((double) e.getQuantiteRessource()) / ConsommationMensuelle(idE);
+    }
+
+    @Override
+    public double ConsommationMensuelle(Long idE) {
+        Calendar c = Calendar.getInstance();
+        c.add(Calendar.MONTH, -1);
+        Date lastMonth = new Date(c.get(Calendar.LONG));
+        Entreprise e = getEntrepriseByID(idE);
+        HistoriqueEntreprise h = getNearestHistorique(idE, lastMonth);
+        return e.getQuantiteRessourceVenteTotal() - h.getQuantiteRessourceVenteTotal();
+    }
+
+    @Override
+    public HistoriqueEntreprise getNearestHistorique(Long idE, Date nearDate) {
+        Connection conn;
+        Statement state = null;
+        HistoriqueEntreprise historiqueList = null;
+        try {
+            conn = DataBaseConnection.getDataBase().getConnection();
+            state = conn.createStatement();
+            ResultSet result = state.executeQuery(String.format("SELECT * FROM HISTORIQUESENTREPRISES WHERE fk_Entreprise = %d  AND date < \'%s\' ORDER BY date", idE, nearDate.toString()));
+            result.next();
+            Long id = result.getLong("ID");
+            Date date = result.getDate("DATE_HISTO");
+            int quantite = result.getInt("QUANTITE_RESSOURCE");
+            int quantiteRessourceVenteTotal = result.getInt("QUANTITE_RES_VENTE_TOTALE");
+            double capital = result.getDouble("CAPITAL");
+            double capitalVenteTotal = result.getInt("CAPITAL_VENTE_TOTAL");
+
+            historiqueList = new HistoriqueEntreprise(id, quantite, quantiteRessourceVenteTotal, capital, capitalVenteTotal, date, idE);
+
+        } catch (DatabaseException ex) {
+            Logger.getLogger(EntrepriseDaoImplement.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            ex.getMessage();
+        }
+        return historiqueList;
+    }
+
+    @Override
+    public List<HistoriqueEntreprise> getHistoriqueOf(Long idE) {
+
+        Connection conn;
+        Statement state = null;
+        List<HistoriqueEntreprise> historiqueList = null;
+        try {
+            conn = DataBaseConnection.getDataBase().getConnection();
+            state = conn.createStatement();
+            historiqueList = new ArrayList<HistoriqueEntreprise>(30);
+            ResultSet result = state.executeQuery(String.format("SELECT * FROM HistoriqueEntreprises WHERE fk_Entreprise = %d", idE));
+            while (result.next()) {
+                Long id = result.getLong("ID");
+                Date date = result.getDate("DATE_HISTO");
+                int quantite = result.getInt("QUANTITE_RESSOURCE");
+                int quantiteRessourceVenteTotal = result.getInt("QUANTITE_RES_VENTE_TOTALE");
+                double capital = result.getDouble("CAPITAL");
+                double capitalVenteTotal = result.getInt("CAPITAL_VENTE_TOTAL");
+
+                historiqueList.add(new HistoriqueEntreprise(id, quantite, quantiteRessourceVenteTotal, capital, capitalVenteTotal, date, idE));
+            }
+        } catch (DatabaseException ex) {
+            Logger.getLogger(EntrepriseDaoImplement.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            ex.getMessage();
+        }
+        return historiqueList;
     }
 
 }

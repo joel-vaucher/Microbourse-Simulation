@@ -11,15 +11,15 @@ import java.util.List;
  */
 public interface ServicesEntrepriseDao {
     
-    public double StockActuel(Entreprise entreprise);
+    public double StockActuel(Long idE);
     
-    double ConsommationMensuelle(Entreprise entreprise);
+    double ConsommationMensuelle(Long idE);
     
-    HistoriqueEntreprise getNearestHistorique(Entreprise entreprise, Date date);
+    HistoriqueEntreprise getNearestHistorique(Long idE, Date date);
     
-    List<HistoriqueEntreprise> getHistoriqueOf(Entreprise entreprise);
+    List<HistoriqueEntreprise> getHistoriqueOf(Long idE);
     
-    Entreprise getEntrepriseByID(Long idEntreprise);
+    Entreprise getEntrepriseByID(Long idE);
     
     List<Entreprise> getEntreprises();
 }

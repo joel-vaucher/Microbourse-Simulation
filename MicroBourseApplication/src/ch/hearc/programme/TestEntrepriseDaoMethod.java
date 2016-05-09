@@ -23,7 +23,7 @@ public class TestEntrepriseDaoMethod {
         
         List<Entreprise> entreprises = manager.getEntreprises();
         for(Entreprise e : entreprises) {
-            System.out.println(manager.StockActuel(e));
+            System.out.println(manager.StockActuel(e.getIdEntreprise()));
         }
     }
     

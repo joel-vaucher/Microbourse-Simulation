@@ -27,12 +27,12 @@ public class ActionDaoImplement implements ServicesActionDAO{
     }
 
     @Override
-    public Action getActionOfActionnaireByEnterprise(Actionnaire a, Entreprise e) {
+    public void updateAction(Action acVendeur) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public void updateAction(Action acVendeur) {
+    public Action getActionOfActionnaireByEnterprise(Long idA, Long idE) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

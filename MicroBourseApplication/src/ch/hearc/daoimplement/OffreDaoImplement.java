@@ -52,7 +52,7 @@ public class OffreDaoImplement implements ServicesOffreDao{
     }
 
     @Override
-    public List<Offre> getOffresByEntreprise(Entreprise e) {
+    public List<Offre> getOffresByEntreprise(Long idE) {
         
         Statement state = null;
         Connection conn = null;
@@ -61,7 +61,7 @@ public class OffreDaoImplement implements ServicesOffreDao{
         try{
             conn = DataBaseConnection.getDataBase().getConnection();
             state = conn.createStatement();
-            String query = "SELECT * FROM OFFRES WHERE fk_enterprise_2 = "+ e.getIdEntreprise();
+            String query = "SELECT * FROM OFFRES WHERE fk_entreprise_2 = "+ idE;
             result = state.executeQuery(query);
             while(result.next()){
                 Long id = result.getLong("ID");
@@ -82,10 +82,10 @@ public class OffreDaoImplement implements ServicesOffreDao{
     }
 
     @Override
-    public void buyImmediat(Offre o, Actionnaire a, int quantite) {
+    public void buyImmediat(Offre o, Long idA, int quantite) {
         Calendar c = Calendar.getInstance();
         Offre historiqueTransaction;
-        historiqueTransaction = new Offre(null, quantite, o.getPrix(), Offre.statusType.FINI, Offre.operationType.VENTE, new Date(c.get(Calendar.LONG)), o.getActionnaireOffre(), a, o.getEntreprise());
+        historiqueTransaction = new Offre(null, quantite, o.getPrix(), Offre.statusType.FINI, Offre.operationType.VENTE, new Date(c.get(Calendar.LONG)), o.getIdActionnaireOffre(), idA, o.getIdEntreprise());
         createOffre(historiqueTransaction);
         
         if(o.getQuantite() <= quantite){
@@ -100,9 +100,9 @@ public class OffreDaoImplement implements ServicesOffreDao{
         ServicesEntrepriseDao seo = new EntrepriseDaoImplement();
         ServicesActionDAO saco = new ActionDaoImplement();
         
-        Action acVendeur = saco.getActionOfActionnaireByEnterprise(historiqueTransaction.getActionnaireOffre(), historiqueTransaction.getEntreprise());
+        Action acVendeur = saco.getActionOfActionnaireByEnterprise(historiqueTransaction.getIdActionnaireOffre(), historiqueTransaction.getIdEntreprise());
         acVendeur.setQuantite(acVendeur.getQuantite()-historiqueTransaction.getQuantite());
-        Action acAcheteur = saco.getActionOfActionnaireByEnterprise(historiqueTransaction.getActionnaireOpIm(), historiqueTransaction.getEntreprise());
+        Action acAcheteur = saco.getActionOfActionnaireByEnterprise(historiqueTransaction.getIdActionnaireOpIm(), historiqueTransaction.getIdEntreprise());
         acAcheteur.setQuantite(acAcheteur.getQuantite()+historiqueTransaction.getQuantite());
         
         saco.updateAction(acVendeur);
@@ -110,10 +110,10 @@ public class OffreDaoImplement implements ServicesOffreDao{
     }
 
     @Override
-    public void sellImmediat(Offre o, Actionnaire a, int quantite) {
+    public void sellImmediat(Offre o, Long idA, int quantite) {
         Calendar c = Calendar.getInstance();
         Offre historiqueTransaction;
-        historiqueTransaction = new Offre(null, quantite, o.getPrix(), Offre.statusType.FINI, Offre.operationType.ACHAT, new Date(c.get(Calendar.LONG)), o.getActionnaireOffre(), a, o.getEntreprise());
+        historiqueTransaction = new Offre(null, quantite, o.getPrix(), Offre.statusType.FINI, Offre.operationType.ACHAT, new Date(c.get(Calendar.LONG)), o.getIdActionnaireOffre(), idA, o.getIdEntreprise());
         createOffre(historiqueTransaction);
         
         if(o.getQuantite() <= quantite){
@@ -128,9 +128,9 @@ public class OffreDaoImplement implements ServicesOffreDao{
         ServicesEntrepriseDao seo = new EntrepriseDaoImplement();
         ServicesActionDAO saco = new ActionDaoImplement();
         
-        Action acVendeur = saco.getActionOfActionnaireByEnterprise(historiqueTransaction.getActionnaireOpIm(), historiqueTransaction.getEntreprise());
+        Action acVendeur = saco.getActionOfActionnaireByEnterprise(historiqueTransaction.getIdActionnaireOpIm(), historiqueTransaction.getIdEntreprise());
         acVendeur.setQuantite(acVendeur.getQuantite()-historiqueTransaction.getQuantite());
-        Action acAcheteur = saco.getActionOfActionnaireByEnterprise(historiqueTransaction.getActionnaireOffre(), historiqueTransaction.getEntreprise());
+        Action acAcheteur = saco.getActionOfActionnaireByEnterprise(historiqueTransaction.getIdActionnaireOffre(), historiqueTransaction.getIdEntreprise());
         acAcheteur.setQuantite(acAcheteur.getQuantite()+historiqueTransaction.getQuantite());
         
         saco.updateAction(acVendeur);
@@ -138,16 +138,16 @@ public class OffreDaoImplement implements ServicesOffreDao{
     }
 
     @Override
-    public void buyOffer(Actionnaire a, Entreprise e, int nbAction, int prix) {
+    public void buyOffer(Long idA, Long idE, int nbAction, int prix) {
         Calendar c = Calendar.getInstance();
-        Offre newOffer = new Offre(null, nbAction, prix, Offre.statusType.EN_COURS, Offre.operationType.ACHAT, new Date(c.get(Calendar.LONG)), a, null, e);
+        Offre newOffer = new Offre(null, nbAction, prix, Offre.statusType.EN_COURS, Offre.operationType.ACHAT, new Date(c.get(Calendar.LONG)), idA, null, idE);
         createOffre(newOffer);
     }
 
     @Override
-    public void sellOffer(Actionnaire a, Entreprise e, int nbAction, int prix) {
+    public void sellOffer(Long idA, Long idE, int nbAction, int prix) {
         Calendar c = Calendar.getInstance();
-        Offre newOffer = new Offre(null, nbAction, prix, Offre.statusType.EN_COURS, Offre.operationType.VENTE, new Date(c.get(Calendar.LONG)), a, null, e);
+        Offre newOffer = new Offre(null, nbAction, prix, Offre.statusType.EN_COURS, Offre.operationType.VENTE, new Date(c.get(Calendar.LONG)), idA, null, idE);
         createOffre(newOffer);
     }
 

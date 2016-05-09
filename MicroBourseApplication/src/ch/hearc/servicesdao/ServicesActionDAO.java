@@ -14,7 +14,7 @@ public interface ServicesActionDAO{
     
     public Action getActionByID();
     
-    public Action getActionOfActionnaireByEnterprise(Actionnaire a, Entreprise e);
+    public Action getActionOfActionnaireByEnterprise(Long idA, Long idE);
 
     public void updateAction(Action acVendeur);
 }

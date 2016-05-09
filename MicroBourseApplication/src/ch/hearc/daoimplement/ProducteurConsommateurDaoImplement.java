@@ -5,7 +5,6 @@ import ch.hearc.exception.DatabaseException;
 import ch.hearc.metiers.Entreprise;
 import ch.hearc.metiers.HistoriqueEntreprise;
 import ch.hearc.metiers.Offre;
-import ch.hearc.metiers.Producteur;
 import ch.hearc.servicesdao.ServicesProducteurConsommateurDao;
 import java.sql.Connection;
 import java.sql.Date;
@@ -22,10 +21,10 @@ import java.util.logging.Logger;
 public class ProducteurConsommateurDaoImplement implements ServicesProducteurConsommateurDao{
 
     @Override
-    public void vendreRessource(Producteur prod) {
+    public void vendreRessource(Long idProd) {
         EntrepriseDaoImplement managerEntreprise = new EntrepriseDaoImplement();
-        Entreprise entreprise = getEntrepriseById(prod.getIdProducteur());
-        double stockActuel = managerEntreprise.StockActuel(entreprise);  //nbre mois avant épuisement des stock
+        Entreprise entreprise = getEntrepriseById(idProd);
+        double stockActuel = managerEntreprise.StockActuel(entreprise.getIdEntreprise());  //nbre mois avant épuisement des stock
         int quantiteVendu = 50;
         double coeffPrix = (double)quantiteVendu/(quantiteVendu+entreprise.getQuantiteRessource());
         coeffPrix *= 1/(1+stockActuel/10);
@@ -44,9 +43,9 @@ public class ProducteurConsommateurDaoImplement implements ServicesProducteurCon
     }
 
     @Override
-    public void acheterRessource(Producteur cons) {
+    public void acheterRessource(Long idCons) {
         EntrepriseDaoImplement managerEntreprise = new EntrepriseDaoImplement();
-        Entreprise entreprise = getEntrepriseById(cons.getIdProducteur());
+        Entreprise entreprise = getEntrepriseById(idCons);
         /*double prixunitaire = entreprise.prixUnitaireMensuelle;
         double stockActuel = entreprise.quantiteRessource/entreprise.consMensuelle;  //nbre mois avant épuisement des stock
         prixunitaire /= stockActuel/entreprise.stockIdeal;    // trop de stock signifie un prix moins cher, pas assez augmente le prix, peut aller de 0 à PrixUnitairePlafond
@@ -74,7 +73,7 @@ public class ProducteurConsommateurDaoImplement implements ServicesProducteurCon
     }
     
     @Override
-    public Entreprise getEntrepriseById(long idProdCons){
+    public Entreprise getEntrepriseById(Long idProdCons){
         Connection conn;
         Statement state = null;
         Entreprise entreprise = null;
