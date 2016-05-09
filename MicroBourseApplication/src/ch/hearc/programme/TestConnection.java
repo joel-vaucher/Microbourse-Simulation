@@ -2,6 +2,11 @@ package ch.hearc.programme;
 
 import ch.hearc.daoimplement.ActionnaireDaoImplement;
 import ch.hearc.exception.DatabaseException;
+import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
 
 
 
@@ -35,6 +40,6 @@ public class TestConnection extends Application{
         ActionnaireDaoImplement test1 = new ActionnaireDaoImplement();
         
         
-        test1.getQuantiteAction(1L,1L);
+        //test1.getQuantiteAction(1L,1L);
     }
 }

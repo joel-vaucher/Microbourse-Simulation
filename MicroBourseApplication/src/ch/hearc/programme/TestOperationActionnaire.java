@@ -37,7 +37,7 @@ public class TestOperationActionnaire {
             int nbAction = 10;
             Actionnaire a = sao.getActionnaireByID();
             Entreprise e = seo.getEntrepriseByID(Integer.toUnsignedLong(1));
-            List<Offre> offres = soo.getOffresByEntreprise();
+            List<Offre> offres = soo.getOffresByEntreprise(e);
             
             int nbActionAchetee = 0;
             int iOffre = 0;
@@ -61,7 +61,7 @@ public class TestOperationActionnaire {
             int nbAction = 10;
             Actionnaire a = sao.getActionnaireByID();
             Entreprise e = seo.getEntrepriseByID(Integer.toUnsignedLong(1));
-            List<Offre> offres = soo.getOffresByEntreprise();
+            List<Offre> offres = soo.getOffresByEntreprise(e);
             
             int nbActionVendu = 0;
             int iOffre = 0;

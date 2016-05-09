@@ -9,19 +9,28 @@ import java.sql.Date;
 public class Offre {
     private Long idOffre;
     private int quantite;
-    private int prix;
-    private String statut;
-    private int operation;
+    private double prix;
+    private statusType statut;
+    private operationType operation;
     private Date date;
     private Actionnaire actionnaireOffre;
     private Actionnaire actionnaireOpIm;
     private Entreprise entreprise;
-
+    
+    public static enum statusType {
+        ANNULE,
+        EN_COURS,
+        FINI
+    };
+    public static enum operationType {
+        VENTE,
+        ACHAT
+    };
     public Offre(Long idOffre) {
         this.idOffre = idOffre;
     }
 
-    public Offre(Long idOffre, int quantite, int prix, String statut, int operation, Date date, Actionnaire actionnaireOffre, Actionnaire actionnaireOpIm, Entreprise entreprise) {
+    public Offre(Long idOffre, int quantite, double prix, statusType statut, operationType operation, Date date, Actionnaire actionnaireOffre, Actionnaire actionnaireOpIm, Entreprise entreprise) {
         this.idOffre = idOffre;
         this.quantite = quantite;
         this.prix = prix;
@@ -49,27 +58,27 @@ public class Offre {
         this.quantite = quantite;
     }
 
-    public int getPrix() {
+    public double getPrix() {
         return prix;
     }
 
-    public void setPrix(int prix) {
+    public void setPrix(double prix) {
         this.prix = prix;
     }
 
-    public String getStatut() {
+    public statusType getStatut() {
         return statut;
     }
 
-    public void setStatut(String statut) {
+    public void setStatut(statusType statut) {
         this.statut = statut;
     }
 
-    public int getOperation() {
+    public operationType getOperation() {
         return operation;
     }
 
-    public void setOperation(int operation) {
+    public void setOperation(operationType operation) {
         this.operation = operation;
     }
 

@@ -6,6 +6,8 @@
 package ch.hearc.daoimplement;
 import ch.hearc.databasefactory.DataBaseConnection;
 import ch.hearc.exception.DatabaseException;
+import ch.hearc.metiers.Action;
+import ch.hearc.metiers.Actionnaire;
 
 import ch.hearc.servicesdao.ServicesActionnaireDAO;
 import java.sql.Connection;
@@ -23,15 +25,15 @@ public class ActionnaireDaoImplement implements ServicesActionnaireDAO{
     public ActionnaireDaoImplement(){
         
     }
-    
-    /**
-     *
-     * @param id1
-     * @param id2
-     * @throws DatabaseException
-     */
+
     @Override
-    public void getQuantiteAction(Long id1,Long id2) throws DatabaseException {
+    public Actionnaire getActionnaireByID() {
+        //TODO
+        return new Actionnaire(Integer.toUnsignedLong(1), "Max");
+    }
+
+    @Override
+    public int getQuantiteAction(Actionnaire actionnaire, Action action) throws DatabaseException {
         
         Statement state = null;
         Connection conn = null;
@@ -48,18 +50,7 @@ public class ActionnaireDaoImplement implements ServicesActionnaireDAO{
         }catch(SQLException ex){
             ex.getMessage();
           
-    }
-    }
-
-    @Override
-    public Actionnaire getActionnaireByID() {
-        //TODO
-        return new Actionnaire(Integer.toUnsignedLong(1), "Max");
-    }
-
-    @Override
-    public Actionnaire getActionnaireByID() {
-        //TODO
-        return new Actionnaire(Integer.toUnsignedLong(1), "Max");
+        }
+        return 0;
     }
 }
