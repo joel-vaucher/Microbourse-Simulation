@@ -5,7 +5,10 @@
  */
 package ch.hearc.daoimplement;
 import ch.hearc.metiers.Action;
+import ch.hearc.metiers.Actionnaire;
+import ch.hearc.metiers.Entreprise;
 import ch.hearc.servicesdao.ServicesActionDAO;
+import java.util.List;
 
 /**
  *
@@ -21,5 +24,15 @@ public class ActionDaoImplement implements ServicesActionDAO{
     public Action getActionByID() {
         //TODO
         return null;
+    }
+
+    @Override
+    public Action getActionOfActionnaireByEnterprise(Actionnaire a, Entreprise e) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void updateAction(Action acVendeur) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }
