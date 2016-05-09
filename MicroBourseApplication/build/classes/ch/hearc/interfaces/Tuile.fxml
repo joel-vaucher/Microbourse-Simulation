@@ -44,7 +44,7 @@
                                                 <Font size="13.0" />
                                             </font>
                                         </Label>
-                                        <Label fx:id="lblPrixOffered" alignment="CENTER" prefHeight="17.0" prefWidth="183.0" text="Label" textAlignment="CENTER">
+                                        <Label fx:id="lblPriceOffered" alignment="CENTER" prefHeight="17.0" prefWidth="183.0" text="Label" textAlignment="CENTER">
                                             <VBox.margin>
                                                 <Insets top="5.0" />
                                             </VBox.margin>

@@ -8,6 +8,7 @@ import java.util.logging.Logger;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.chart.LineChart;
 import javafx.scene.control.Button;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
@@ -23,10 +24,6 @@ public class TuileController implements Initializable {
 
     @FXML
     private TitledPane tilePane;
-//    @FXML
-//    private LineChart<?, ?> chart;
-    @FXML
-    private Label lblPrixOffered;
     @FXML
     private Label lblPriceRequested;
     @FXML
@@ -47,6 +44,12 @@ public class TuileController implements Initializable {
     private TextField txtNbSharesAP;
     @FXML
     private Hyperlink linkDetail;
+    @FXML
+    private LineChart<?, ?> chart;
+    @FXML
+    private Label lblPriceOffered;
+    
+    private int ID;
 
     /**
      * Initializes the controller class.
@@ -59,14 +62,18 @@ public class TuileController implements Initializable {
     @FXML
     private void onMouseClicked_linkDetail(MouseEvent event) {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("Detail.fxml"));
+        StackPane sp = null;
         try {
-            StackPane sp = (StackPane) loader.load();
-//            AppController.getMasterPane().getChildren().clear();
-//            AppController.getMasterPane().getChildren().add(sp);
-//            AppController.getBtnMyAccount().setDisable(false);
-//            AppController.getBtnHome().setDisable(false);
+            sp = (StackPane) loader.load();
+            DetailController detail = loader.getController();
+            detail.setID(ID);
+            AppController.viewDetails(sp);
         } catch (IOException ex) {
            Logger.getLogger(AppController.class.getName()).log(Level.SEVERE, null, ex);
-        } 
+        }  
+    }
+    
+    public void setID(int id) {
+       this.ID = id;
     }
 }

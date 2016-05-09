@@ -36,6 +36,8 @@ public class AccueilController implements Initializable {
             for(int i = 1; i <= 6; i++) {
                 loader = new FXMLLoader(getClass().getResource("Tuile.fxml"));
                 tp = (TitledPane) loader.load();
+                TuileController tc = loader.getController();
+                tc.setID(i);
                 tp.setText("Produit " + i);
                 tilePane.getChildren().add(tp);
             }

@@ -11,6 +11,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 
 /**
@@ -19,17 +20,23 @@ import javafx.scene.layout.StackPane;
 public class AppController implements Initializable {
 
     @FXML
-    private AnchorPane masterPane;
-    @FXML
     private Button btnHome;
     @FXML
     private Button btnMyAccount;
-
+    
+    private static AnchorPane masterPane;
+    
+    @FXML
+    private BorderPane borderPane;
+    
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        masterPane = new AnchorPane();
+        borderPane.setCenter(masterPane);
+        masterPane.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
         FXMLLoader loader = new FXMLLoader(getClass().getResource("Accueil.fxml"));
         try {
             StackPane sp = (StackPane) loader.load();
@@ -46,8 +53,6 @@ public class AppController implements Initializable {
             StackPane sp = (StackPane) loader.load();
             masterPane.getChildren().clear();
             masterPane.getChildren().add(sp);
-            btnMyAccount.setDisable(false);
-            btnHome.setDisable(true);
         } catch (IOException ex) {
            Logger.getLogger(AppController.class.getName()).log(Level.SEVERE, null, ex);
         }     
@@ -55,27 +60,18 @@ public class AppController implements Initializable {
 
     @FXML
     private void HandlerMyAccount(ActionEvent event) {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("Detail.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("Account.fxml"));
         try {
             StackPane sp = (StackPane) loader.load();
             masterPane.getChildren().clear();
             masterPane.getChildren().add(sp);
-            btnMyAccount.setDisable(true);
-            btnHome.setDisable(false);
         } catch (IOException ex) {
            Logger.getLogger(AppController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     
-    public AnchorPane getMasterPane() {
-        return masterPane;
+    public static void viewDetails(StackPane detail) {
+        masterPane.getChildren().clear();
+        masterPane.getChildren().add(detail);
     }
-    
-    public Button getBtnHome() {
-        return btnHome;
-    }
-    public Button getBtnMyAccount() {
-        return btnMyAccount;
-    }
-
 }

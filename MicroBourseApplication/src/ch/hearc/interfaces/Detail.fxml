@@ -29,7 +29,7 @@
           <RowConstraints maxHeight="2000.0" minHeight="10.0" prefHeight="715.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Label prefHeight="60.0" prefWidth="628.0" text="Produit">
+            <Label fx:id="lblProductName" prefHeight="60.0" prefWidth="628.0" text="Produit">
                <padding>
                   <Insets left="20.0" top="5.0" />
                </padding>
@@ -39,7 +39,7 @@
             </Label>
             <VBox maxHeight="2000.0" maxWidth="1.7976931348623157E308" minHeight="190.0" minWidth="90.0" prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="1">
                <children>
-                  <LineChart maxHeight="1500.0" maxWidth="1000.0" minHeight="430.0" minWidth="620.0" prefHeight="460.0" prefWidth="628.0">
+                  <LineChart fx:id="graph" maxHeight="1500.0" maxWidth="1000.0" minHeight="430.0" minWidth="620.0" prefHeight="460.0" prefWidth="628.0">
                     <xAxis>
                       <CategoryAxis side="BOTTOM" />
                     </xAxis>
@@ -55,7 +55,7 @@
                         <Insets left="20.0" />
                      </padding>
                   </Label>
-                  <Label maxHeight="17.0" prefHeight="17.0" prefWidth="670.0" text="Label">
+                  <Label fx:id="lblPriceOffered" maxHeight="17.0" prefHeight="17.0" prefWidth="670.0" text="Label">
                      <font>
                         <Font name="System Bold" size="24.0" />
                      </font>
@@ -71,7 +71,7 @@
                         <Insets left="20.0" />
                      </padding>
                   </Label>
-                  <Label maxHeight="17.0" prefHeight="17.0" prefWidth="670.0" text="Label">
+                  <Label fx:id="lblPriceRequested" maxHeight="17.0" prefHeight="17.0" prefWidth="670.0" text="Label">
                      <font>
                         <Font name="System Bold" size="24.0" />
                      </font>
@@ -94,7 +94,7 @@
                       <RowConstraints maxHeight="1.7976931348623157E308" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                      <children>
-                        <TextField prefWidth="150.0" promptText="Nb d'actions">
+                        <TextField fx:id="txtNbSharesAP" prefWidth="150.0" promptText="Nb d'actions">
                            <font>
                               <Font size="14.0" />
                            </font>
@@ -104,17 +104,17 @@
                               <Font size="14.0" />
                            </font>
                         </Label>
-                        <Button mnemonicParsing="false" prefWidth="100.0" text="Demande" GridPane.rowIndex="1">
+                        <Button fx:id="btnRequestAP" mnemonicParsing="false" prefWidth="100.0" text="Demande" GridPane.rowIndex="1">
                            <font>
                               <Font size="14.0" />
                            </font>
                         </Button>
-                        <Button mnemonicParsing="false" prefWidth="100.0" text="Offre" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                        <Button fx:id="btnOfferAP" mnemonicParsing="false" prefWidth="100.0" text="Offre" GridPane.columnIndex="1" GridPane.rowIndex="1">
                            <font>
                               <Font size="14.0" />
                            </font>
                         </Button>
-                        <Button mnemonicParsing="false" prefWidth="100.0" text="Demande" GridPane.columnIndex="3" GridPane.columnSpan="2" GridPane.rowIndex="1">
+                        <Button fx:id="btnRequest" mnemonicParsing="false" prefWidth="100.0" text="Demande" GridPane.columnIndex="3" GridPane.columnSpan="2" GridPane.rowIndex="1">
                            <font>
                               <Font size="14.0" />
                            </font>
@@ -122,17 +122,17 @@
                               <Insets />
                            </GridPane.margin>
                         </Button>
-                        <Button mnemonicParsing="false" prefWidth="100.0" text="Offre" GridPane.columnIndex="5" GridPane.columnSpan="2" GridPane.rowIndex="1">
+                        <Button fx:id="btnOffer" mnemonicParsing="false" prefWidth="100.0" text="Offre" GridPane.columnIndex="5" GridPane.columnSpan="2" GridPane.rowIndex="1">
                            <font>
                               <Font size="14.0" />
                            </font>
                         </Button>
-                        <TextField prefHeight="30.0" prefWidth="100.0" promptText="Nb d'actions" GridPane.columnIndex="3">
+                        <TextField fx:id="txtNbShares" prefHeight="30.0" prefWidth="100.0" promptText="Nb d'actions" GridPane.columnIndex="3">
                            <font>
                               <Font size="14.0" />
                            </font>
                         </TextField>
-                        <TextField prefWidth="150.0" promptText="Prix d'une action" GridPane.columnIndex="5">
+                        <TextField fx:id="txtPriceShares" prefWidth="150.0" promptText="Prix d'une action" GridPane.columnIndex="5">
                            <font>
                               <Font size="14.0" />
                            </font>
@@ -162,11 +162,10 @@
                         <Font size="24.0" />
                      </font>
                   </Label>
-                  <TableView maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="300.0" prefWidth="200.0">
+                  <TableView fx:id="tableOffers" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="300.0" prefWidth="200.0">
                     <columns>
-                      <TableColumn maxWidth="1.7976931348623157E308" minWidth="50.0" prefWidth="202.0" text="C1" />
-                      <TableColumn maxWidth="1.7976931348623157E308" minWidth="50.0" prefWidth="202.0" text="C2" />
-                        <TableColumn maxWidth="1.7976931348623157E308" minWidth="50.0" prefWidth="202.0" text="C3" />
+                      <TableColumn maxWidth="1.7976931348623157E308" minWidth="50.0" prefWidth="150.0" text="Prix unitaire" />
+                      <TableColumn maxWidth="1.7976931348623157E308" minWidth="50.0" prefWidth="150.0" text="Nombre d'actions" />
                     </columns>
                   </TableView>
                   <Label prefHeight="17.0" prefWidth="684.0" text="Historique des demandes">
@@ -177,11 +176,10 @@
                         <Insets top="20.0" />
                      </VBox.margin>
                   </Label>
-                  <TableView maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="300.0" prefWidth="200.0">
+                  <TableView fx:id="tableRequests" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="300.0" prefWidth="200.0">
                      <columns>
-                        <TableColumn maxWidth="1.7976931348623157E308" minWidth="50.0" prefWidth="202.0" text="C1" />
-                        <TableColumn maxWidth="1.7976931348623157E308" minWidth="50.0" prefWidth="202.0" text="C2" />
-                        <TableColumn maxWidth="1.7976931348623157E308" minWidth="50.0" prefWidth="202.0" text="C3" />
+                        <TableColumn maxWidth="1.7976931348623157E308" minWidth="50.0" prefWidth="150.0" text="Prix unitaire" />
+                        <TableColumn maxWidth="1.7976931348623157E308" minWidth="50.0" prefWidth="150.0" text="Nombre d'actions" />
                      </columns>
                   </TableView>
                </children>
