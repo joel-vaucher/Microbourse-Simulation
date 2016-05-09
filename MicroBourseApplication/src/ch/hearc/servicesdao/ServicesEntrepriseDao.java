@@ -2,6 +2,7 @@ package ch.hearc.servicesdao;
 
 import ch.hearc.metiers.Entreprise;
 import ch.hearc.metiers.HistoriqueEntreprise;
+import java.sql.Date;
 import java.util.List;
 
 /**
@@ -10,11 +11,15 @@ import java.util.List;
  */
 public interface ServicesEntrepriseDao {
     
-    double StockActuel(Entreprise entreprise);
+    public double StockActuel(Entreprise entreprise);
     
     double ConsommationMensuelle(Entreprise entreprise);
+    
+    HistoriqueEntreprise getNearestHistorique(Entreprise entreprise, Date date);
     
     List<HistoriqueEntreprise> getHistoriqueOf(Entreprise entreprise);
     
     Entreprise getEntrepriseByID(Long idEntreprise);
+    
+    List<Entreprise> getEntreprises();
 }

@@ -11,7 +11,16 @@
 hs_err_pid*
 
 *.log
+*.dat
+*.ctrl
+*.dat
 
 *.properties
 
 *.log
+
+*.ctrl
+
+*.ctrl
+
+*.dat

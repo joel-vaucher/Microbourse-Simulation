@@ -10,6 +10,11 @@ public class Entreprise {
     private Long idEntreprise;
     private String nom;
     private int quantiteRessource;
+    //TODO
+    //ajouter les champs :
+    //private int quantiteVendu;
+    //private int quantiteAcheter;
+    //private double capitalTransfere;
     private List<Capital> listeCapitaux;
     private List<Producteur> listeProducteur;
     private List<Consommateur> listeConsommateur;
@@ -25,6 +30,15 @@ public class Entreprise {
         this.listeCapitaux = null;
         this.listeProducteur = null;
         this.listeConsommateur = null;
+    }
+    
+    public Entreprise(Long idEntreprise, String nom, int quantiteRessource, List<Capital> listeCapitaux, List<Producteur> listeProducteur, List<Consommateur> listeConsommateur) {
+        this.idEntreprise = idEntreprise;
+        this.nom = nom;
+        this.quantiteRessource = quantiteRessource;
+        this.listeCapitaux = listeCapitaux;
+        this.listeProducteur = listeProducteur;
+        this.listeConsommateur = listeConsommateur;
     }
 
     public Long getIdEntreprise() {
