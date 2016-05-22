@@ -84,7 +84,7 @@
                                                 <Font size="13.0" />
                                             </font>
                                         </Label>
-                              <Hyperlink fx:id="linkDetail" alignment="CENTER" onMouseClicked="#onMouseClicked_linkDetail" prefHeight="25.0" prefWidth="175.0" text="Détail du produit">
+                              <Hyperlink fx:id="linkDetail" alignment="CENTER" onAction="#linkDetail_onAction" prefHeight="25.0" prefWidth="175.0" text="Détail du produit">
                                  <VBox.margin>
                                     <Insets top="15.0" />
                                  </VBox.margin>
@@ -113,8 +113,8 @@
                                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                     </rowConstraints>
                                     <children>
-                                        <Button fx:id="btnRequest" mnemonicParsing="false" prefHeight="27.0" prefWidth="80.0" text="Demande" GridPane.columnSpan="2" GridPane.rowIndex="1" />
-                                        <Button fx:id="btnOffer" mnemonicParsing="false" prefHeight="27.0" prefWidth="80.0" text="Offre" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.halignment="RIGHT" GridPane.rowIndex="1" />
+                                        <Button fx:id="btnRequest" mnemonicParsing="false" onAction="#btnRequest_noAction" prefHeight="27.0" prefWidth="80.0" text="Demande" GridPane.columnSpan="2" GridPane.rowIndex="1" />
+                                        <Button fx:id="btnOffer" mnemonicParsing="false" onAction="#btnOffer_onAction" prefHeight="27.0" prefWidth="80.0" text="Offre" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.halignment="RIGHT" GridPane.rowIndex="1" />
                                         <TextField fx:id="txtNbShares" promptText="Nb d'actions" />
                                         <TextField fx:id="txtPriceShares" promptText="Prix d'une action" GridPane.columnIndex="2" />
                                         <Label prefHeight="17.0" prefWidth="27.0" text="à" GridPane.columnIndex="1">
@@ -140,8 +140,8 @@
                                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                     </rowConstraints>
                                     <children>
-                                        <Button fx:id="btnRequestAP" mnemonicParsing="false" prefHeight="27.0" prefWidth="80.0" text="Demande" GridPane.rowIndex="1" />
-                                        <Button fx:id="btnOfferAP" mnemonicParsing="false" prefHeight="27.0" prefWidth="80.0" text="Offre" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                        <Button fx:id="btnRequestAP" mnemonicParsing="false" onAction="#btnRequestAP_onAction" prefHeight="27.0" prefWidth="80.0" text="Demande" GridPane.rowIndex="1" />
+                                        <Button fx:id="btnOfferAP" mnemonicParsing="false" onAction="#btnOfferAP_onAction" prefHeight="27.0" prefWidth="80.0" text="Offre" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                                         <Label text="au prix actuel" GridPane.columnIndex="1">
                                             <padding>
                                                 <Insets left="3.0" />
