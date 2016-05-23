@@ -17,11 +17,11 @@ public class Action {
         this.idActionnaire = idActionnaire;
     }
 
-    public Long getIdACtion() {
+    public Long getIdAction() {
         return idAction;
     }
 
-    public void setIdACtion(Long idACtion) {
+    public void setIdAction(Long idACtion) {
         this.idAction = idACtion;
     }
 

@@ -16,7 +16,9 @@ public interface ServicesOffreDao {
     void updateOffre(Offre offre);
     void deleteOffre(Offre offre);   
 
-    public List<Offre> getOffresByEntreprise(Long idE);
+    public List<Offre> getCurrentSellOffersByEntreprise(Long idE);
+    
+    public List<Offre> getCurrentPurchaseOffersByEntreprise(Long idE);
 
     public void buyImmediat(Offre o, Long idA, int quantite);
 

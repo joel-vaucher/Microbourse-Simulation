@@ -36,15 +36,15 @@ public class TestOperationActionnaire {
             ServicesOffreDao soo = new OffreDaoImplement();
             int nbAction = 10;
             Long idA = 1L;
-            Long idE = 1L;
-            List<Offre> offres = soo.getOffresByEntreprise(idE);
+            Long idE = 6L;
+            List<Offre> offres = soo.getCurrentSellOffersByEntreprise(idE);
             
             int nbActionAchetee = 0;
             int iOffre = 0;
             while(nbActionAchetee < nbAction) {
                 int q = offres.get(iOffre).getQuantite();
                 if(nbActionAchetee + q > nbAction){
-                    soo.buyImmediat(offres.get(iOffre), idA, q - (nbAction-nbActionAchetee));
+                    soo.buyImmediat(offres.get(iOffre), idA, nbAction);
                     nbActionAchetee = nbAction;
                 } else {
                     soo.buyImmediat(offres.get(iOffre), idA, q);
@@ -52,7 +52,7 @@ public class TestOperationActionnaire {
                 }
             }
         }
-        
+        /*
         //vente immédiat Actionnaire
         {
             ServicesActionnaireDAO sao = new ActionnaireDaoImplement();
@@ -61,7 +61,7 @@ public class TestOperationActionnaire {
             int nbAction = 10;
             Long idA = 1L;
             Long idE = 1L;
-            List<Offre> offres = soo.getOffresByEntreprise(idE);
+            List<Offre> offres = soo.getCurrentPurchaseOffersByEntreprise(idE);
             
             int nbActionVendu = 0;
             int iOffre = 0;
@@ -102,6 +102,7 @@ public class TestOperationActionnaire {
             
             soo.sellOffer(idA, idE, nbAction, prix);
         }
+                */
     }
     
 }

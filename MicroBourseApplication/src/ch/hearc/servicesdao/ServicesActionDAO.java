@@ -12,6 +12,8 @@ import java.util.List;
  */
 public interface ServicesActionDAO{
     
+    public void createAction(Action action);
+    
     public Action getActionByID();
     
     public Action getActionOfActionnaireByEnterprise(Long idA, Long idE);

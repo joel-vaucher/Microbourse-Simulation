@@ -13,7 +13,7 @@ import java.util.List;
  *
  * @author joel
  */
-public class TestEntrepriseDaoMethod {
+public class TestMakeHistoriqueEntreprise {
 
     /**
      * @param args the command line arguments
@@ -23,7 +23,7 @@ public class TestEntrepriseDaoMethod {
         
         List<Entreprise> entreprises = manager.getEntreprises();
         for(Entreprise e : entreprises) {
-            System.out.println(e.getIdEntreprise() + " - " + manager.StockActuel(e.getIdEntreprise()));
+            manager.recordEntreprise(e.getIdEntreprise());
         }
     }
     

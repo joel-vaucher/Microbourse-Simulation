@@ -11,6 +11,8 @@ import java.util.List;
  */
 public interface ServicesEntrepriseDao {
     
+    public void recordEntreprise(Long idE);
+    
     public double StockActuel(Long idE);
     
     double ConsommationMensuelle(Long idE);

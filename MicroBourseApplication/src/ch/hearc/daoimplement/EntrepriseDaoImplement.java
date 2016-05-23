@@ -6,8 +6,10 @@ import ch.hearc.metiers.Entreprise;
 import ch.hearc.metiers.HistoriqueEntreprise;
 import ch.hearc.metiers.Offre;
 import ch.hearc.servicesdao.ServicesEntrepriseDao;
+import ch.hearc.servicesdao.ServicesHistoriqueEntrepriseDao;
 import java.sql.Connection;
 import java.sql.Date;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -28,12 +30,15 @@ public class EntrepriseDaoImplement implements ServicesEntrepriseDao {
     @Override
     public Entreprise getEntrepriseByID(Long idE) {
         Connection conn;
-        Statement state = null;
+        PreparedStatement state = null;
         Entreprise entreprise = null;
         try {
             conn = DataBaseConnection.getDataBase().getConnection();
-            state = conn.createStatement();
-            ResultSet result = state.executeQuery(String.format("SELECT * FROM Entreprises"));
+            String query = "SELECT * FROM Entreprises WHERE id = ?";
+            state = conn.prepareStatement(query);
+            state.setLong(1, idE);
+            
+            ResultSet result = state.executeQuery();
 
             result.next();
 
@@ -91,11 +96,13 @@ public class EntrepriseDaoImplement implements ServicesEntrepriseDao {
     @Override
     public double ConsommationMensuelle(Long idE) {
         Calendar c = Calendar.getInstance();
+        c.setTimeInMillis(System.currentTimeMillis());
         c.add(Calendar.MONTH, -1);
-        Date lastMonth = new Date(c.get(Calendar.LONG));
+        Date lastMonth = new Date(c.getTimeInMillis());
         Entreprise e = getEntrepriseByID(idE);
         HistoriqueEntreprise h = getNearestHistorique(idE, lastMonth);
-        return e.getQuantiteRessourceVenteTotal() - h.getQuantiteRessourceVenteTotal();
+        int quantiteHistorique = (h != null) ? h.getQuantiteRessourceVenteTotal() : 0;
+        return e.getQuantiteRessourceVenteTotal() - quantiteHistorique;
     }
 
     @Override
@@ -152,6 +159,14 @@ public class EntrepriseDaoImplement implements ServicesEntrepriseDao {
             ex.getMessage();
         }
         return historiqueList;
+    }
+
+    @Override
+    public void recordEntreprise(Long idE) {
+        ServicesHistoriqueEntrepriseDao sho = new HistoriqueEntrepriseDaoImplement();
+        Entreprise e = getEntrepriseByID(idE);
+        
+        sho.createHistoriqueEntreprise(e);
     }
 
 }
