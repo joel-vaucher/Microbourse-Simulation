@@ -1,20 +1,16 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package ch.hearc.daoimplement;
 import ch.hearc.databasefactory.DataBaseConnection;
 import ch.hearc.exception.DatabaseException;
 import ch.hearc.metiers.Action;
 import ch.hearc.metiers.Actionnaire;
-
 import ch.hearc.servicesdao.ServicesActionnaireDAO;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -28,8 +24,29 @@ public class ActionnaireDaoImplement implements ServicesActionnaireDAO{
 
     @Override
     public Actionnaire getActionnaireByID(Long idA) {
-        //TODO
-        return new Actionnaire(1L,"Max",1200.2);
+        
+        Statement state = null;
+        Connection conn = null;
+        ResultSet result = null;
+        Actionnaire actionnaire = null;
+        try{
+            conn = DataBaseConnection.getDataBase().getConnection();
+            state = conn.createStatement();
+            String query = "SELECT ID FORM ACTONNAIRES WHERE ID = idA";
+            result = state.executeQuery(query);
+            
+            while(result.next()){
+                Long idActionnaire = result.getLong("ID");
+                String nom = result.getString("NOM");
+                double capital = result.getLong("CAPITAL");
+                actionnaire = new Actionnaire(idActionnaire, nom,capital);
+            }     
+        }catch(SQLException ex){
+            ex.getMessage();
+        }catch(DatabaseException ex){
+            Logger.getLogger(OffreDaoImplement.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return actionnaire;
     }
 
     @Override
