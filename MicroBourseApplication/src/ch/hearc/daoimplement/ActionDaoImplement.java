@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package ch.hearc.daoimplement;
 import ch.hearc.databasefactory.DataBaseConnection;
 import ch.hearc.exception.DatabaseException;
@@ -16,9 +12,7 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Types;
-import java.util.ArrayList;
-import java.util.List;
+import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -45,7 +39,6 @@ public class ActionDaoImplement implements ServicesActionDAO{
             state.setLong(2, action.getIdActionnaire());
             state.setLong(3, action.getIdEntreprise());
             
-            
             state.executeUpdate();
             DataBaseConnection.getDataBase().commit();
             ResultSet rs = state.getGeneratedKeys();
@@ -61,9 +54,31 @@ public class ActionDaoImplement implements ServicesActionDAO{
     }
     
     @Override
-    public Action getActionByID() {
-        //TODO
-        return null;
+    public Action getActionByID(Long idAction) {
+        
+        Statement state = null;
+        Connection conn = null;
+        ResultSet result = null;
+        Action action = null;
+        try{
+            conn = DataBaseConnection.getDataBase().getConnection();
+            state = conn.createStatement();
+            String query = "SELECT ID FORM ACTONS WHERE ID = idAction";
+            result = state.executeQuery(query);
+            
+            while(result.next()){
+                Long idAct = result.getLong("ID");
+                int quantite = result.getInt("QUANTITE");
+                Long idEntre = result.getLong("FK_ENTREPRISE");
+                Long idActionnaire = result.getLong("FK_ACTIONNAIRE_2");
+                action = new Action(idAct, quantite, idEntre, idActionnaire);
+            }     
+        }catch(SQLException ex){
+            ex.getMessage();
+        }catch(DatabaseException ex){
+            Logger.getLogger(OffreDaoImplement.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return action;
     }
 
     @Override
