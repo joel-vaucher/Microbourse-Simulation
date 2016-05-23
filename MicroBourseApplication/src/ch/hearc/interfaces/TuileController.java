@@ -5,6 +5,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -53,14 +54,21 @@ public class TuileController implements Initializable {
 
     /**
      * Initializes the controller class.
+     * 
+     * @param url
+     * @param rb 
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
     }    
-
+    
+    /**
+     * 
+     * @param event 
+     */
     @FXML
-    private void onMouseClicked_linkDetail(MouseEvent event) {
+    private void linkDetail_onAction(ActionEvent event) {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("Detail.fxml"));
         StackPane sp = null;
         try {
@@ -72,7 +80,43 @@ public class TuileController implements Initializable {
            Logger.getLogger(AppController.class.getName()).log(Level.SEVERE, null, ex);
         }  
     }
+
+    /**
+     * 
+     * @param event 
+     */
+    @FXML
+    private void btnRequest_noAction(ActionEvent event) {
+    }
+
+    /**
+     * 
+     * @param event 
+     */
+    @FXML
+    private void btnOffer_onAction(ActionEvent event) {
+    }
+
+    /**
+     * 
+     * @param event 
+     */
+    @FXML
+    private void btnRequestAP_onAction(ActionEvent event) {
+    }
+
+    /**
+     * 
+     * @param event 
+     */
+    @FXML
+    private void btnOfferAP_onAction(ActionEvent event) {
+    }
     
+    /**
+     * 
+     * @param id 
+     */    
     public void setID(int id) {
        this.ID = id;
     }

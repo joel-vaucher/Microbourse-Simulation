@@ -2,6 +2,7 @@ package ch.hearc.interfaces;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.chart.LineChart;
@@ -17,8 +18,6 @@ import javafx.scene.control.TextField;
  */
 public class DetailController implements Initializable {
 
-    @FXML
-    private LineChart<?, ?> graph;
     @FXML
     private Label lblPriceOffered;
     @FXML
@@ -43,20 +42,60 @@ public class DetailController implements Initializable {
     private TableView<?> tableRequests;
     @FXML
     private Label lblProductName;
+    @FXML
+    private LineChart<?, ?> chart;
     
     private int ID;
 
     /**
      * Initializes the controller class.
+     * 
+     * @param url
+     * @param rb 
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
     }
 
+    /**
+     * 
+     * @param event 
+     */
+    @FXML
+    private void btnRequestAP_onAction(ActionEvent event) {
+    }
+
+    /**
+     * 
+     * @param event 
+     */
+    @FXML
+    private void btnOfferAP_onAction(ActionEvent event) {
+    }
+
+    /**
+     * 
+     * @param event 
+     */
+    @FXML
+    private void btnRequest_onAction(ActionEvent event) {
+    }
+
+    /**
+     * 
+     * @param event 
+     */
+    @FXML
+    private void btnOffer_onAction(ActionEvent event) {
+    }
+    
+    /**
+     * 
+     * @param id 
+     */
     public void setID(int id) {
         ID = id;
         lblProductName.setText("Produit " + ID);
     }
-    
 }

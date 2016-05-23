@@ -1,9 +1,7 @@
 package ch.hearc.interfaces;
 
 import java.io.IOException;
-import java.lang.reflect.Array;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -23,13 +21,12 @@ public class AccueilController implements Initializable {
 
     /**
      * Initializes the controller class.
+     *
+     * @param url
+     * @param rb 
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        loadTiles();
-    }
-
-    private void loadTiles() {
         FXMLLoader loader;
         TitledPane tp;
         try {

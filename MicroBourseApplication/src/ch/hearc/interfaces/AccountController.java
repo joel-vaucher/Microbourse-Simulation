@@ -7,6 +7,7 @@ package ch.hearc.interfaces;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.chart.LineChart;
@@ -17,13 +18,9 @@ import javafx.scene.control.TextField;
 
 /**
  * FXML Controller class
- *
- * @author daniel.rodrigue
  */
 public class AccountController implements Initializable {
 
-    @FXML
-    private LineChart<?, ?> graph;
     @FXML
     private Label lblPriceOffered;
     @FXML
@@ -46,13 +43,50 @@ public class AccountController implements Initializable {
     private TableView<?> tableOffers;
     @FXML
     private Label tableRequests;
+    @FXML
+    private LineChart<?, ?> chart;
 
     /**
      * Initializes the controller class.
+     *
+     * @param url
+     * @param rb 
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
     }    
+
+    /**
+     * 
+     * @param event 
+     */
+    @FXML
+    private void btnRequestAP_onAction(ActionEvent event) {
+    }
+
+    /**
+     * 
+     * @param event 
+     */
+    @FXML
+    private void btnOfferAP_onAction(ActionEvent event) {
+    }
+
+    /**
+     * 
+     * @param event 
+     */
+    @FXML
+    private void btnRequest_onAction(ActionEvent event) {
+    }
+
+    /**
+     * 
+     * @param event 
+     */
+    @FXML
+    private void btnOffer_onAction(ActionEvent event) {
+    }
     
 }
