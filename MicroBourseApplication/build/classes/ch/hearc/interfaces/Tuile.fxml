@@ -126,6 +126,9 @@
                                             <padding>
                                                 <Insets left="3.0" />
                                             </padding>
+                                 <font>
+                                    <Font size="12.0" />
+                                 </font>
                                         </Label>
                                     </children>
                                 </GridPane>

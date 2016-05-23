@@ -122,7 +122,7 @@ public class AppController implements Initializable {
             alert.setHeaderText("Microbourse");
             alert.setContentText("Microbourse\n Projet P2 INF 2015-2016"
                     + "\n\n"
-                    + "Auteurs:"
+                    + "Auteurs:\n"
                     + "\tVaucher Joël\n"
                     + "\tOmbang Ndo Charles\n"
                     + "\tRodrigues Lourenço Daniel");
