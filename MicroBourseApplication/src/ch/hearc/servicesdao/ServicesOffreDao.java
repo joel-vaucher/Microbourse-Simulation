@@ -11,10 +11,10 @@ import java.util.List;
  */
 public interface ServicesOffreDao {
     
-    void createOffre(Offre offre);
-    Offre research(Long idOffre);
-    void updateOffre(Offre offre);
-    void deleteOffre(Offre offre);   
+    public void createOffre(Offre offre);
+    public Offre research(Long idOffre);
+    public void updateOffre(Offre offre);
+    public void deleteOffre(Offre offre);   
 
     public List<Offre> getCurrentSellOffersByEntreprise(Long idE);
     

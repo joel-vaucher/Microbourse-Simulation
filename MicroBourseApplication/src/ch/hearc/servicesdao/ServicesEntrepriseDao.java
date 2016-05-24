@@ -11,17 +11,23 @@ import java.util.List;
  */
 public interface ServicesEntrepriseDao {
     
+    public void updateEntreprise(Entreprise entreprise);
+    
     public void recordEntreprise(Long idE);
     
     public double StockActuel(Long idE);
     
-    double ConsommationMensuelle(Long idE);
+    public void SellRessource(Long idE, int quantiteRessource, double prixUnitaire);
     
-    HistoriqueEntreprise getNearestHistorique(Long idE, Date date);
+    public void BuyRessource(Long idE, int quantiteRessource, double prixUnitaire);
     
-    List<HistoriqueEntreprise> getHistoriqueOf(Long idE);
+    public double ConsommationMensuelle(Long idE);
     
-    Entreprise getEntrepriseByID(Long idE);
+    public HistoriqueEntreprise getNearestHistorique(Long idE, Date date);
     
-    List<Entreprise> getEntreprises();
+    public List<HistoriqueEntreprise> getHistoriqueOf(Long idE);
+    
+    public Entreprise getEntrepriseByID(Long idE);
+    
+    public List<Entreprise> getEntreprises();
 }

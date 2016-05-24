@@ -29,6 +29,7 @@ public class TestOperationActionnaire {
      */
     public static void main(String[] args) {
         
+        
         //achat immédiat Actionnaire
         {
             ServicesActionnaireDAO sao = new ActionnaireDaoImplement();
@@ -52,15 +53,15 @@ public class TestOperationActionnaire {
                 }
             }
         }
-        /*
+        
         //vente immédiat Actionnaire
         {
             ServicesActionnaireDAO sao = new ActionnaireDaoImplement();
             ServicesEntrepriseDao seo = new EntrepriseDaoImplement();
             ServicesOffreDao soo = new OffreDaoImplement();
-            int nbAction = 10;
-            Long idA = 1L;
-            Long idE = 1L;
+            int nbAction = 30;
+            Long idA = 10L;
+            Long idE = 3L;
             List<Offre> offres = soo.getCurrentPurchaseOffersByEntreprise(idE);
             
             int nbActionVendu = 0;
@@ -74,6 +75,7 @@ public class TestOperationActionnaire {
                     soo.sellImmediat(offres.get(iOffre), idA, q);
                     nbActionVendu += q;
                 }
+                iOffre++;
             }
         }
         
@@ -82,10 +84,10 @@ public class TestOperationActionnaire {
             ServicesActionnaireDAO sao = new ActionnaireDaoImplement();
             ServicesEntrepriseDao seo = new EntrepriseDaoImplement();
             ServicesOffreDao soo = new OffreDaoImplement();
-            int nbAction = 10;
-            int prix = 15;
+            int nbAction = 30;
+            int prix = 120;
             Long idA = 1L;
-            Long idE = 1L;
+            Long idE = 2L;
             
             soo.buyOffer(idA, idE, nbAction, prix);
         }
@@ -95,14 +97,13 @@ public class TestOperationActionnaire {
             ServicesActionnaireDAO sao = new ActionnaireDaoImplement();
             ServicesEntrepriseDao seo = new EntrepriseDaoImplement();
             ServicesOffreDao soo = new OffreDaoImplement();
-            int nbAction = 10;
-            int prix = 15;
-            Long idA = 1L;
-            Long idE = 1L;
+            int nbAction = 250;
+            int prix = 190;
+            Long idA = 3L;
+            Long idE = 6L;
             
             soo.sellOffer(idA, idE, nbAction, prix);
         }
-                */
     }
     
 }

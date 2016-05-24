@@ -169,4 +169,55 @@ public class EntrepriseDaoImplement implements ServicesEntrepriseDao {
         sho.createHistoriqueEntreprise(e);
     }
 
+    @Override
+    public void SellRessource(Long idE, int quantiteRessource, double prixUnitaire) {
+        Entreprise e = getEntrepriseByID(idE);
+        e.setQuantiteRessource(e.getQuantiteRessource()-quantiteRessource);
+        e.setCapital(e.getCapital()+(quantiteRessource*prixUnitaire));
+        
+        e.setQuantiteRessourceVenteTotal(e.getQuantiteRessourceVenteTotal()+quantiteRessource);
+        e.setCapitalVenteTotal(e.getCapitalVenteTotal()+(quantiteRessource*prixUnitaire));
+        
+        updateEntreprise(e);
+        ServicesHistoriqueEntrepriseDao sho = new HistoriqueEntrepriseDaoImplement();
+        sho.createHistoriqueEntreprise(e);
+    }
+
+    @Override
+    public void BuyRessource(Long idE, int quantiteRessource, double prixUnitaire) {
+        Entreprise e = getEntrepriseByID(idE);
+        e.setQuantiteRessource(e.getQuantiteRessource()+quantiteRessource);
+        e.setCapital(e.getCapital()-(quantiteRessource*prixUnitaire));
+        
+        updateEntreprise(e);
+        ServicesHistoriqueEntrepriseDao sho = new HistoriqueEntrepriseDaoImplement();
+        sho.createHistoriqueEntreprise(e);
+    }
+
+    @Override
+    public void updateEntreprise(Entreprise entreprise) {
+        PreparedStatement state = null;
+        Connection conn = null;
+        ResultSet result = null;
+        try{
+            conn = DataBaseConnection.getDataBase().getConnection();
+            String query = "UPDATE Entreprises SET nom=?, capital=?, capital_vente_total=?, quantite_ressource=?, quantite_res_vente_totale=? WHERE id = ?";
+            state = conn.prepareStatement(query);
+            state.setString(1, entreprise.getNom());
+            state.setDouble(2, entreprise.getCapital());
+            state.setDouble(3, entreprise.getCapitalVenteTotal());
+            state.setInt(4, entreprise.getQuantiteRessource());
+            state.setInt(5, entreprise.getQuantiteRessourceVenteTotal());
+            state.setLong(6, entreprise.getIdEntreprise());
+            
+            state.executeUpdate();
+            DataBaseConnection.getDataBase().commit();
+        }catch(SQLException ex){
+            ex.getMessage();
+          
+        } catch (DatabaseException ex) {
+            Logger.getLogger(OffreDaoImplement.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
 }

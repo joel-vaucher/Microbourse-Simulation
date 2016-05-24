@@ -119,7 +119,21 @@ public class OffreDaoImplement implements ServicesOffreDao{
 
     @Override
     public void deleteOffre(Offre offre) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        PreparedStatement state = null;
+        Connection conn = null;
+        ResultSet result = null;
+        try{
+            conn = DataBaseConnection.getDataBase().getConnection();
+            String query = "DELETE FROM Offres WHERE id = ?";
+            state = conn.prepareStatement(query);
+            state.setLong(1, offre.getIdOffre());
+            state.executeUpdate();
+            DataBaseConnection.getDataBase().commit();
+        }catch(SQLException ex){
+            ex.getMessage();
+        } catch (DatabaseException ex) {
+            Logger.getLogger(OffreDaoImplement.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     @Override
@@ -246,9 +260,9 @@ public class OffreDaoImplement implements ServicesOffreDao{
         ServicesActionDAO saco = new ActionDaoImplement();
         
         Action acVendeur = saco.getActionOfActionnaireByEnterprise(historiqueTransaction.getIdActionnaireOpIm(), historiqueTransaction.getIdEntreprise());
-        acVendeur.setQuantite(acVendeur.getQuantite()-historiqueTransaction.getQuantite());
+        acVendeur.setQuantite(acVendeur.getQuantite()+historiqueTransaction.getQuantite());
         Action acAcheteur = saco.getActionOfActionnaireByEnterprise(historiqueTransaction.getIdActionnaireOffre(), historiqueTransaction.getIdEntreprise());
-        acAcheteur.setQuantite(acAcheteur.getQuantite()+historiqueTransaction.getQuantite());
+        acAcheteur.setQuantite(acAcheteur.getQuantite()-historiqueTransaction.getQuantite());
         
         saco.updateAction(acVendeur);
         saco.updateAction(acAcheteur);
@@ -256,17 +270,13 @@ public class OffreDaoImplement implements ServicesOffreDao{
 
     @Override
     public void buyOffer(Long idA, Long idE, int nbAction, int prix) {
-        Calendar c = Calendar.getInstance();
-        c.setTimeInMillis(System.currentTimeMillis());
-        Offre newOffer = new Offre(null, nbAction, prix, Offre.statusType.EN_COURS, Offre.operationType.ACHAT, new Date(c.getTimeInMillis()), idA, null, idE);
+        Offre newOffer = new Offre(null, nbAction, prix, Offre.statusType.EN_COURS, Offre.operationType.ACHAT, null, idA, null, idE);
         createOffre(newOffer);
     }
 
     @Override
     public void sellOffer(Long idA, Long idE, int nbAction, int prix) {
-        Calendar c = Calendar.getInstance();
-        c.setTimeInMillis(System.currentTimeMillis());
-        Offre newOffer = new Offre(null, nbAction, prix, Offre.statusType.EN_COURS, Offre.operationType.VENTE, new Date(c.getTimeInMillis()), idA, null, idE);
+        Offre newOffer = new Offre(null, nbAction, prix, Offre.statusType.EN_COURS, Offre.operationType.VENTE, null, idA, null, idE);
         createOffre(newOffer);
     }
 
