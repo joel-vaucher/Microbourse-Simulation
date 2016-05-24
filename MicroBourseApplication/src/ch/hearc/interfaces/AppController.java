@@ -11,7 +11,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
-import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuItem;
@@ -122,7 +121,7 @@ public class AppController implements Initializable {
             alert.setHeaderText("Microbourse");
             alert.setContentText("Microbourse\n Projet P2 INF 2015-2016"
                     + "\n\n"
-                    + "Auteurs:"
+                    + "Auteurs:\n"
                     + "\tVaucher Joël\n"
                     + "\tOmbang Ndo Charles\n"
                     + "\tRodrigues Lourenço Daniel");

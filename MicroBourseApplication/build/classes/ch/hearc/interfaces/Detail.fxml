@@ -164,8 +164,8 @@
                   </Label>
                   <TableView fx:id="tableOffers" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="300.0" prefWidth="200.0">
                     <columns>
-                      <TableColumn maxWidth="1.7976931348623157E308" minWidth="50.0" prefWidth="150.0" text="Prix unitaire" />
-                      <TableColumn maxWidth="1.7976931348623157E308" minWidth="50.0" prefWidth="150.0" text="Nombre d'actions" />
+                      <TableColumn fx:id="uniteOfferPriceCol" maxWidth="1.7976931348623157E308" minWidth="50.0" prefWidth="150.0" text="Prix unitaire" />
+                      <TableColumn fx:id="nbOfferActionCol" maxWidth="1.7976931348623157E308" minWidth="50.0" prefWidth="150.0" text="Nombre d'actions" />
                     </columns>
                   </TableView>
                   <Label prefHeight="17.0" prefWidth="684.0" text="Historique des demandes">
@@ -178,8 +178,8 @@
                   </Label>
                   <TableView fx:id="tableRequests" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="300.0" prefWidth="200.0">
                      <columns>
-                        <TableColumn maxWidth="1.7976931348623157E308" minWidth="50.0" prefWidth="150.0" text="Prix unitaire" />
-                        <TableColumn maxWidth="1.7976931348623157E308" minWidth="50.0" prefWidth="150.0" text="Nombre d'actions" />
+                        <TableColumn fx:id="uniteRequestPriceCol" maxWidth="1.7976931348623157E308" minWidth="50.0" prefWidth="150.0" text="Prix unitaire" />
+                        <TableColumn fx:id="nbRequestActionCol" maxWidth="1.7976931348623157E308" minWidth="50.0" prefWidth="150.0" text="Nombre d'actions" />
                      </columns>
                   </TableView>
                </children>

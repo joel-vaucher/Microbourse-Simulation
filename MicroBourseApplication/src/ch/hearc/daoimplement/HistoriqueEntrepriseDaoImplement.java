@@ -4,15 +4,12 @@ import ch.hearc.databasefactory.DataBaseConnection;
 import ch.hearc.exception.DatabaseException;
 import ch.hearc.metiers.Entreprise;
 import ch.hearc.metiers.HistoriqueEntreprise;
-import ch.hearc.metiers.Offre;
 import ch.hearc.servicesdao.ServicesHistoriqueEntrepriseDao;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
-import java.sql.Types;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -60,7 +57,4 @@ public class HistoriqueEntrepriseDaoImplement implements ServicesHistoriqueEntre
         
         createHistoriqueEntreprise(h);
     }
-
-
-
 }
