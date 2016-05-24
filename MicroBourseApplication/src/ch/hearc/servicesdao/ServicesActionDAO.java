@@ -1,10 +1,10 @@
 package ch.hearc.servicesdao;
 
-import ch.hearc.exception.DatabaseException;
+//import ch.hearc.exception.DatabaseException;
 import ch.hearc.metiers.Action;
-import ch.hearc.metiers.Actionnaire;
-import ch.hearc.metiers.Entreprise;
-import java.util.List;
+//import ch.hearc.metiers.Actionnaire;
+//import ch.hearc.metiers.Entreprise;
+//import java.util.List;
 
 /**
  *
@@ -14,7 +14,7 @@ public interface ServicesActionDAO{
     
     public void createAction(Action action);
     
-    public Action getActionByID();
+    public Action getActionByID(Long idAction);
     
     public Action getActionOfActionnaireByEnterprise(Long idA, Long idE);
 

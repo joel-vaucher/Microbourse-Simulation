@@ -4,7 +4,6 @@ import ch.hearc.databasefactory.DataBaseConnection;
 import ch.hearc.exception.DatabaseException;
 import ch.hearc.metiers.Action;
 import ch.hearc.metiers.Actionnaire;
-import ch.hearc.metiers.Entreprise;
 import ch.hearc.metiers.Offre;
 import ch.hearc.servicesdao.ServicesActionDAO;
 import ch.hearc.servicesdao.ServicesEntrepriseDao;
@@ -16,7 +15,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Types;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -75,8 +73,36 @@ public class OffreDaoImplement implements ServicesOffreDao{
     }
 
     @Override
-    public Offre research(Long idOffre) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Offre getOffreByID(Long idOffre) {
+        
+        Statement state = null;
+        Connection conn = null;
+        ResultSet result = null;
+        Offre offre = null;
+        try{
+            conn = DataBaseConnection.getDataBase().getConnection();
+            state = conn.createStatement();
+            String query = "SELECT ID FORM OFFRES WHERE ID = idOffre";
+            result = state.executeQuery(query);
+            
+            while(result.next()){
+                Long idOf = result.getLong("ID");
+                int quantite = result.getInt("QUANTITE");
+                double price = result.getDouble("PRIX");
+                Offre.statusType status = Offre.statusType.values()[result.getInt("STATUT")];
+                Offre.operationType  operation= Offre.operationType.values()[result.getInt("OPERATIONS")];
+                Date date = result.getDate("DATE_ECHANGE");
+                Long idEntre = result.getLong("FK_ENTREPRISE_2");
+                Long idAc_of = result.getLong("FK_ACTIONNAIRE_OFFRE");
+                Long idAc_op = result.getLong("FK_ACTIONNAIRE_OP_IM");
+                offre = new Offre(idOf,quantite,price,status,operation,date,idEntre,idAc_of,idAc_op);
+            }     
+        }catch(SQLException ex){
+            ex.getMessage();
+        }catch(DatabaseException ex){
+            Logger.getLogger(OffreDaoImplement.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return offre;
     }
 
     @Override
@@ -119,7 +145,23 @@ public class OffreDaoImplement implements ServicesOffreDao{
 
     @Override
     public void deleteOffre(Offre offre) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
+        PreparedStatement state = null;
+        Connection conn = null;
+        ResultSet result = null;
+        try{
+            conn = DataBaseConnection.getDataBase().getConnection();
+            String query = "DELETE OFFRES WHERE ID = ?";
+            state = conn.prepareStatement(query);
+            state.setLong(1, offre.getIdOffre());
+            state.executeUpdate();
+            DataBaseConnection.getDataBase().commit();
+        }catch(SQLException ex){
+            ex.getMessage();
+          
+        } catch (DatabaseException ex) {
+            Logger.getLogger(OffreDaoImplement.class.getName()).log(Level.SEVERE, null, ex);
+        }    
     }
 
     @Override
@@ -210,9 +252,7 @@ public class OffreDaoImplement implements ServicesOffreDao{
             o.setQuantite(o.getQuantite() - quantite);
             updateOffre(o);
         }
-        
-        //TODO
-        //Check unexisting action
+
         ServicesEntrepriseDao seo = new EntrepriseDaoImplement();
         ServicesActionDAO saco = new ActionDaoImplement();
         
@@ -239,9 +279,6 @@ public class OffreDaoImplement implements ServicesOffreDao{
             o.setQuantite(o.getQuantite() - quantite);
             updateOffre(o);
         }
-        
-        //TODO
-        //Check unexisting action
         ServicesEntrepriseDao seo = new EntrepriseDaoImplement();
         ServicesActionDAO saco = new ActionDaoImplement();
         
