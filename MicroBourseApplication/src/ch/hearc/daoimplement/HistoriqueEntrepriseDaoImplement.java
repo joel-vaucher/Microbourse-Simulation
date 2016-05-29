@@ -20,7 +20,7 @@ import java.util.logging.Logger;
 public class HistoriqueEntrepriseDaoImplement implements ServicesHistoriqueEntrepriseDao{
 
     @Override
-    public void createHistoriqueEntreprise(HistoriqueEntreprise h) {
+    public synchronized void createHistoriqueEntreprise(HistoriqueEntreprise h) {
         
         PreparedStatement state = null;
         Connection conn = null;
@@ -51,10 +51,16 @@ public class HistoriqueEntrepriseDaoImplement implements ServicesHistoriqueEntre
     }
 
     @Override
-    public void createHistoriqueEntreprise(Entreprise e) {
+    public synchronized void createHistoriqueEntreprise(Entreprise e) {
         HistoriqueEntreprise h = new HistoriqueEntreprise(null, e.getQuantiteRessource(), e.getQuantiteRessourceVenteTotal(), e.getCapital(),
                                                         e.getCapitalVenteTotal(), new Date(System.currentTimeMillis()),e.getIdEntreprise());
         
         createHistoriqueEntreprise(h);
     }
+
+    public static ServicesHistoriqueEntrepriseDao getWritingIntance() {
+        return writingInstance;
+    }
+    
+    private static ServicesHistoriqueEntrepriseDao writingInstance = new HistoriqueEntrepriseDaoImplement();
 }

@@ -12,7 +12,7 @@ import java.util.List;
 public interface ServicesOffreDao {
     
     public void createOffre(Offre offre);
-    public Offre research(Long idOffre);
+    public Offre getOffreByID(Long idOffre);
     public void updateOffre(Offre offre);
     public void deleteOffre(Offre offre);   
 

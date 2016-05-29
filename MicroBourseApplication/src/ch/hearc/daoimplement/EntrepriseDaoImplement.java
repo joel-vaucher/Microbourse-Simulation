@@ -160,7 +160,7 @@ public class EntrepriseDaoImplement implements ServicesEntrepriseDao {
 
     @Override
     public void recordEntreprise(Long idE) {
-        ServicesHistoriqueEntrepriseDao sho = new HistoriqueEntrepriseDaoImplement();
+        ServicesHistoriqueEntrepriseDao sho = HistoriqueEntrepriseDaoImplement.getWritingIntance();
         Entreprise e = getEntrepriseByID(idE);
         
         sho.createHistoriqueEntreprise(e);
@@ -176,7 +176,7 @@ public class EntrepriseDaoImplement implements ServicesEntrepriseDao {
         e.setCapitalVenteTotal(e.getCapitalVenteTotal()+(quantiteRessource*prixUnitaire));
         
         updateEntreprise(e);
-        ServicesHistoriqueEntrepriseDao sho = new HistoriqueEntrepriseDaoImplement();
+        ServicesHistoriqueEntrepriseDao sho = HistoriqueEntrepriseDaoImplement.getWritingIntance();
         sho.createHistoriqueEntreprise(e);
     }
 
@@ -187,7 +187,7 @@ public class EntrepriseDaoImplement implements ServicesEntrepriseDao {
         e.setCapital(e.getCapital()-(quantiteRessource*prixUnitaire));
         
         updateEntreprise(e);
-        ServicesHistoriqueEntrepriseDao sho = new HistoriqueEntrepriseDaoImplement();
+        ServicesHistoriqueEntrepriseDao sho = HistoriqueEntrepriseDaoImplement.getWritingIntance();
         sho.createHistoriqueEntreprise(e);
     }
 
