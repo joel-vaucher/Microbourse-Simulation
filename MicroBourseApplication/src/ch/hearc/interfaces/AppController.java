@@ -34,11 +34,10 @@ public class AppController implements Initializable {
     @FXML
     private Menu fileMenu;
     @FXML
-    private Menu editMenu;
-    @FXML
     private Menu helpMenu;
     
     private static AnchorPane masterPane;
+    private static long ID_USER;
     
     /**
      * Initializes the controller class.
@@ -89,6 +88,10 @@ public class AppController implements Initializable {
         }  
     }
     
+    public static long getIdUser() {
+        return ID_USER;
+    }
+    
     /**
      * 
      * @param detail 
@@ -103,7 +106,7 @@ public class AppController implements Initializable {
      * 
      */
     public static void animatePane() {
-        FadeTransition ft = new FadeTransition(Duration.millis(600), masterPane);
+        FadeTransition ft = new FadeTransition(Duration.millis(500), masterPane);
         ft.setFromValue(0.0);
         ft.setToValue(1.0);
         ft.setCycleCount(1);

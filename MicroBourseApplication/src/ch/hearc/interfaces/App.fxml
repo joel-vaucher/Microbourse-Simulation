@@ -15,7 +15,6 @@
             <MenuBar BorderPane.alignment="CENTER">
               <menus>
                 <Menu fx:id="fileMenu" mnemonicParsing="false" text="Fichier" />
-                <Menu fx:id="editMenu" mnemonicParsing="false" text="Edition" />
                 <Menu fx:id="helpMenu" mnemonicParsing="false" text="Aide" />
               </menus>
             </MenuBar>

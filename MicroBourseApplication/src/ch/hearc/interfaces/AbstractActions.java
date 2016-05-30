@@ -34,13 +34,14 @@ public abstract class AbstractActions {
             achatSeries.setName("Achat");
             venteSeries.setName("Vente");
 
-            for(Offre offre : offresAchat) {            
-                achatSeries.getData().add(new XYChart.Data(offre.getDate().toString(), offre.getPrix()));
-            }
-            
             DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
             Date date = new Date();
             String currentDate = dateFormat.format(date);
+            
+            for(Offre offre : offresAchat) { 
+                String offreDate = offre.getDate() == null ? currentDate : offre.getDate().toString();
+                achatSeries.getData().add(new XYChart.Data(offreDate, offre.getPrix()));
+            }
             
             for(Offre offre : offresVente) {
                 String offreDate = offre.getDate() == null ? currentDate : offre.getDate().toString(); 
@@ -58,10 +59,11 @@ public abstract class AbstractActions {
         public void buyAP(int nbAction) {
             if(nbAction == 0) return;
             
+            Long idA = AppController.getIdUser();
+            
             ServicesActionnaireDAO sao = new ActionnaireDaoImplement();
             ServicesEntrepriseDao seo = new EntrepriseDaoImplement();
             ServicesOffreDao soo = new OffreDaoImplement();
-            Long idA = 10L;
             List<Offre> offres = soo.getCurrentPurchaseOffersByEntreprise(this.ID);
             
             int nbActionVendu = 0;
@@ -86,10 +88,12 @@ public abstract class AbstractActions {
         public void saleAP(int nbAction) {
             if(nbAction == 0) return;
             
+            Long idA = AppController.getIdUser();
+            
             ServicesActionnaireDAO sao = new ActionnaireDaoImplement();
             ServicesEntrepriseDao seo = new EntrepriseDaoImplement();
             ServicesOffreDao soo = new OffreDaoImplement();
-            Long idA = 1L;
+            
             List<Offre> offres = soo.getCurrentSellOffersByEntreprise(this.ID);
             
             int nbActionAchetee = 0;
@@ -114,10 +118,11 @@ public abstract class AbstractActions {
         public void sale(int nbAction, int prix) {
             if(nbAction == 0 || nbAction == 0) return;
             
+            Long idA = AppController.getIdUser();
+            
             ServicesActionnaireDAO sao = new ActionnaireDaoImplement();
             ServicesEntrepriseDao seo = new EntrepriseDaoImplement();
             ServicesOffreDao soo = new OffreDaoImplement();
-            Long idA = 3L;
             
             soo.sellOffer(idA, this.ID, nbAction, prix);
         }
@@ -130,10 +135,11 @@ public abstract class AbstractActions {
         public void buy(int nbAction, int prix) {
             if(nbAction == 0 || nbAction == 0) return;
             
+            Long idA = AppController.getIdUser();
+            
             ServicesActionnaireDAO sao = new ActionnaireDaoImplement();
             ServicesEntrepriseDao seo = new EntrepriseDaoImplement();
             ServicesOffreDao soo = new OffreDaoImplement();
-            Long idA = 1L;
             
             soo.buyOffer(idA, this.ID, nbAction, prix); 
         }

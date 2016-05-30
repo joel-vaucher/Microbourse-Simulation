@@ -100,17 +100,27 @@ public class TuileController extends AbstractActions implements Initializable {
 
     @FXML
     private void btnSale_noAction(ActionEvent event) {
+        String nbAction = txtNbShares.getText().equals("") ? "0" : txtNbShares.getText();
+        String prix = txtPriceShares.getText().equals("") ? "0" : txtPriceShares.getText();
+        sale(Integer.parseInt(nbAction), Integer.parseInt(prix));
     }
 
     @FXML
     private void btnBuy_onAction(ActionEvent event) {
+        String nbAction = txtNbShares.getText().equals("") ? "0" : txtNbShares.getText();
+        String prix = txtPriceShares.getText().equals("") ? "0" : txtPriceShares.getText();
+        buy(Integer.parseInt(nbAction), Integer.parseInt(prix));
     }
 
     @FXML
     private void btnSaleAP_onAction(ActionEvent event) {
+        String nbAction = txtNbSharesAP.getText().equals("") ? "0" : txtNbSharesAP.getText();
+        saleAP(Integer.parseInt(nbAction));
     }
 
     @FXML
     private void btnBuyAP_onAction(ActionEvent event) {
+        String nbAction = txtNbSharesAP.getText().equals("") ? "0" : txtNbSharesAP.getText();
+        buyAP(Integer.parseInt(nbAction));
     }
 }
