@@ -1,23 +1,16 @@
 package ch.hearc.interfaces;
 
 import ch.hearc.daoimplement.EntrepriseDaoImplement;
-import ch.hearc.daoimplement.OffreDaoImplement;
 import ch.hearc.metiers.Entreprise;
 import ch.hearc.metiers.HistoriqueEntreprise;
-import ch.hearc.metiers.Offre;
-import ch.hearc.servicesdao.ServicesOffreDao;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
 import javafx.beans.property.SimpleStringProperty;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.chart.LineChart;
-import javafx.scene.chart.XYChart;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
@@ -27,25 +20,11 @@ import javafx.scene.control.cell.PropertyValueFactory;
 
 /**
  * FXML Controller class
- *
- * @author daniel.rodrigue
  */
-public class DetailController implements Initializable {
+public class DetailController extends AbstractActions implements Initializable {
 
     @FXML
-    private Label lblPriceOffered;
-    @FXML
-    private Label lblPriceRequested;
-    @FXML
     private TextField txtNbSharesAP;
-    @FXML
-    private Button btnRequestAP;
-    @FXML
-    private Button btnOfferAP;
-    @FXML
-    private Button btnRequest;
-    @FXML
-    private Button btnOffer;
     @FXML
     private TextField txtNbShares;
     @FXML
@@ -66,8 +45,20 @@ public class DetailController implements Initializable {
     private TableColumn<ModeleHistorique, Number> nbOfferActionCol;
     @FXML
     private TableColumn<ModeleHistorique, Number> nbRequestActionCol;
+    @FXML
+    private Label lblPriceSale;
+    @FXML
+    private Label lblPriceBuy;
+    @FXML
+    private Button btnSaleAP;
+    @FXML
+    private Button btnBuyAP;
+    @FXML
+    private Button btnSale;
+    @FXML
+    private Button btnBuy;
     
-    private long ID;
+
     
     /**
      * Initializes the controller class.
@@ -79,76 +70,60 @@ public class DetailController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
     }
-
-    /**
-     * 
-     * @param event 
-     */
-    @FXML
-    private void btnRequestAP_onAction(ActionEvent event) {
-    }
-
-    /**
-     * 
-     * @param event 
-     */
-    @FXML
-    private void btnOfferAP_onAction(ActionEvent event) {
-    }
-
-    /**
-     * 
-     * @param event 
-     */
-    @FXML
-    private void btnRequest_onAction(ActionEvent event) {
-    }
-
-    /**
-     * 
-     * @param event 
-     */
-    @FXML
-    private void btnOffer_onAction(ActionEvent event) {
-    }
     
+    /**
+     * 
+     * @param event 
+     */
+    @FXML
+    private void btnSaleAP_onAction(ActionEvent event) {
+        String nbAction = txtNbSharesAP.getText().equals("") ? "0" : txtNbSharesAP.getText();
+        saleAP(Integer.parseInt(nbAction));
+    }
+
+    /**
+     * 
+     * @param event 
+     */
+    @FXML
+    private void btnBuyAP_onAction(ActionEvent event) {
+        String nbAction = txtNbSharesAP.getText().equals("") ? "0" : txtNbSharesAP.getText();
+        buyAP(Integer.parseInt(nbAction));
+    }
+
+    /**
+     * 
+     * @param event 
+     */
+    @FXML
+    private void btnSale_onAction(ActionEvent event) {
+        String nbAction = txtNbShares.getText().equals("") ? "0" : txtNbShares.getText();
+        String prix = txtPriceShares.getText().equals("") ? "0" : txtPriceShares.getText();
+        sale(Integer.parseInt(nbAction), Integer.parseInt(prix));
+    }
+
+    /**
+     * 
+     * @param event 
+     */
+    @FXML
+    private void btnBuy_onAction(ActionEvent event) {
+        String nbAction = txtNbShares.getText().equals("") ? "0" : txtNbShares.getText();
+        String prix = txtPriceShares.getText().equals("") ? "0" : txtPriceShares.getText();
+        buy(Integer.parseInt(nbAction), Integer.parseInt(prix));
+    }
+
     /**
      * 
      * @param id 
      */
     public void setID(long id) {
-        ID = id;
+        this.ID = id;
         EntrepriseDaoImplement manager = new EntrepriseDaoImplement();
-        Entreprise entreprise = manager.getEntrepriseByID(ID);
+        Entreprise entreprise = manager.getEntrepriseByID(this.ID);
         lblProductName.setText(entreprise.getNom());
         
-        showChart();
-    }
-    
-        
-    /**
-     * 
-     * @param manager
-     */
-    public void showChart() {
-        ServicesOffreDao soo = new OffreDaoImplement();
-        List<Offre> offresVente = soo.getCurrentSellOffersByEntreprise(this.ID);
-        List<Offre> offresAchat = soo.getCurrentPurchaseOffersByEntreprise(this.ID);
-        
-        XYChart.Series achatSeries = new XYChart.Series();
-        XYChart.Series venteSeries = new XYChart.Series();
-        achatSeries.setName("Offre");
-        venteSeries.setName("Demande");
-        
-        for (Offre offre : offresAchat) {            
-            achatSeries.getData().add(new XYChart.Data(offre.getDate().toString(), offre.getPrix()));
-        }
-        for (Offre offre : offresVente) {
-            venteSeries.getData().add(new XYChart.Data(offre.getDate().toString(), offre.getPrix()));
-        }
-        
-        // Affichage des trois series
-        chart.getData().addAll(achatSeries, venteSeries);
+        showChart(chart);
     }
     
     /**
@@ -166,7 +141,6 @@ public class DetailController implements Initializable {
         
         uniteOfferPriceCol.setCellValueFactory(new PropertyValueFactory<>("unitePrice"));
         nbOfferActionCol.setCellValueFactory(new PropertyValueFactory<>("nbActions"));
-
     }
     
     /**
@@ -200,7 +174,5 @@ class ModeleHistorique {
     
     public void setNbActions(String nba) {
         nbActions.set(nba);
-    }
-    
-    
+    }  
 }
