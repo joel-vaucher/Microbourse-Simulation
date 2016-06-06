@@ -28,7 +28,7 @@ public class TestRunProdCons {
         List<ProducteurConsommateur> producteurs = spco.getProducteurs();
         List<ProducteurConsommateur> consommateurs = spco.getConsommateurs();
         
-        /*
+        
         List<Thread> threads = new LinkedList<Thread>();
         for(ProducteurConsommateur p : producteurs){
             threads.add(new Thread(new RunnableProducteur(p.getIdProducteurConsommateur())));
@@ -39,11 +39,12 @@ public class TestRunProdCons {
         
         for(Thread t : threads){
             t.start();
-        }*/
+        }
+        /*
         Thread tp = new Thread(new RunnableProducteur(1L));
         tp.start();
         Thread tc = new Thread(new RunnableConsommateur(1L));
-        tc.start();
+        tc.start();*/
     }
     
 }

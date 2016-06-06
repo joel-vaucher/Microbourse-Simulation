@@ -32,6 +32,7 @@ public class ProducteurConsommateurDaoImplement implements ServicesProducteurCon
         ServicesEntrepriseDao seo = new EntrepriseDaoImplement();
         Entreprise entreprise = getEntrepriseById(idProd);
         ProducteurConsommateur prod = getProducteurConsommateurById(idProd);
+        
         double stockActuel = seo.StockActuel(entreprise.getIdEntreprise());  //nbre mois avant épuisement des stock
         int quantiteVendu = prod.getQuantiteRessource();
         double coeffPrix = (double)quantiteVendu/(quantiteVendu+entreprise.getQuantiteRessource());
@@ -52,7 +53,6 @@ public class ProducteurConsommateurDaoImplement implements ServicesProducteurCon
         ProducteurConsommateur prod = getProducteurConsommateurById(idCons);
         double prixunitaire = entreprise.getCapitalVenteTotal()/entreprise.getQuantiteRessourceVenteTotal();
         double stockActuel = seo.StockActuel(entreprise.getIdEntreprise());  //nbre mois avant épuisement des stock
-        prixunitaire /= stockActuel/2;    // trop de stock signifie un prix moins cher, pas assez augmente le prix, peut aller de 0 à PrixUnitairePlafond
         double coeffAchat = 1.2/(prixunitaire/5+1);   //doit être au maximum à 1.2 et tendre vers 0
         int quantiteAcheter = (int)(coeffAchat*(double)entreprise.getQuantiteRessource());        
         

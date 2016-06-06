@@ -14,4 +14,6 @@ public interface ServicesActionnaireDAO{
     int getQuantiteAction(Actionnaire actionnaire, Action action) throws DatabaseException;
 
     public Actionnaire getActionnaireByID(Long idA);
+    
+    public void updateActionnaire(Actionnaire actionnaire);
 }

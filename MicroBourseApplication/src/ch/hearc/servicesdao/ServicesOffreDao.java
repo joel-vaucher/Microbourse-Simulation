@@ -3,6 +3,7 @@ package ch.hearc.servicesdao;
 import ch.hearc.metiers.Actionnaire;
 import ch.hearc.metiers.Entreprise;
 import ch.hearc.metiers.Offre;
+import java.sql.Date;
 import java.util.List;
 
 /**
@@ -19,6 +20,10 @@ public interface ServicesOffreDao {
     public List<Offre> getCurrentSellOffersByEntreprise(Long idE);
     
     public List<Offre> getCurrentPurchaseOffersByEntreprise(Long idE);
+    
+    public List<Offre> getBestOffersByDay(Long idE, Date afterDate);
+    
+    public Offre getBestOfferOfDay(Long idE, Date afterDate);
 
     public void buyImmediat(Offre o, Long idA, int quantite);
 

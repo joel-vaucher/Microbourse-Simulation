@@ -10,6 +10,8 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.text.SimpleDateFormat;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -22,21 +24,21 @@ public class HistoriqueEntrepriseDaoImplement implements ServicesHistoriqueEntre
     @Override
     public synchronized void createHistoriqueEntreprise(HistoriqueEntreprise h) {
         
-        PreparedStatement state = null;
+        Statement state = null;
         Connection conn = null;
         ResultSet result = null;
         try{
             conn = DataBaseConnection.getDataBase().getConnection();
-            String query = "INSERT INTO HistoriquesEntreprises(quantite_ressource, quantite_res_vente_totale, capital, capital_vente_total, date_histo, fk_historique_entre) VALUES(?,?,?,?,?,?)";
-            state = conn.prepareStatement(query, new String[]{"ID"});
-            state.setInt(1, h.getQuantiteRessource());
-            state.setInt(2, h.getQuantiteRessourceVenteTotal());
-            state.setDouble(3, h.getCapital());
-            state.setDouble(4, h.getCapitalVenteTotal());
-            state.setDate(5, h.getDate());
-            state.setLong(6, h.getIdEntreprise());
+            state = conn.createStatement();
+            String query = String.format("INSERT INTO HistoriquesEntreprises(quantite_ressource, quantite_res_vente_totale, capital, capital_vente_total, date_histo, fk_historique_entre) VALUES(%1$d,%2$d,%3$f,%4$f,\'%s\',%6$d)",
+                    h.getQuantiteRessource(),
+                    h.getQuantiteRessourceVenteTotal(),
+                    h.getCapital(),
+                    h.getCapitalVenteTotal(),
+                    h.getDate(),
+                    h.getIdEntreprise());
             
-            state.executeUpdate();
+            state.executeUpdate(query, new String[]{"ID"});
             DataBaseConnection.getDataBase().commit();
             ResultSet rs = state.getGeneratedKeys();
             rs.next();
