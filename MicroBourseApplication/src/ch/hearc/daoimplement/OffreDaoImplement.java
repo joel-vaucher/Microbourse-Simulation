@@ -312,41 +312,23 @@ public class OffreDaoImplement implements ServicesOffreDao{
     }
 
     @Override
-    public List<Offre> getBestOffersByDay(Long idE, Date afterDate) {
-        Calendar c = Calendar.getInstance();
-        c.setTime(afterDate);
-        Long goal = System.currentTimeMillis();
-        List<Offre> offres = new ArrayList<>();
-        while(c.getTimeInMillis() < goal){
-            Offre o = getBestOfferOfDay(idE, afterDate);
-            if(o != null){
-                offres.add(o);
-            }
-            c.add(Calendar.DAY_OF_YEAR, 1);
-        }
-        return offres;
-    }
-
-    @Override
-    public Offre getBestOfferOfDay(Long idE, Date afterDate) {
+    public List<Offre> getBestOffersByDay(Long idE, Offre.operationType operation) {
         
         PreparedStatement state = null;
         Connection conn = null;
         ResultSet result = null;
-        Offre offre = null;
+        List<Offre> offres = new ArrayList<>();
         try{
             conn = DataBaseConnection.getDataBase().getConnection();
-            String query = String.format("SELECT * FROM OFFRES WHERE statut = %d AND operations = %d AND fk_entreprise_2 = ? AND DATE_ECHANGE=? ORDER BY prix DESC", Offre.statusType.EN_COURS.ordinal(), Offre.operationType.ACHAT.ordinal());
+            String query = String.format("SELECT * FROM offres o INNER JOIN (SELECT date_echange, MAX(prix) AS maxPrix FROM offres WHERE statut=%d AND operations=%d AND fk_entreprise_2=? GROUP BY date_echange ) bestOffres ON o.date_echange = bestOffres.date_echange AND o.prix = bestOffres.maxPrix ORDER BY o.date_echange DESC", Offre.statusType.FINI.ordinal(), operation.ordinal());
             state = conn.prepareStatement(query);
             state.setLong(1, idE);
-            state.setDate(2, afterDate);
             result = state.executeQuery();
-            if(result.next()) {
+            while(result.next()) {
                 Long id = result.getLong("ID");
                 int quantite = result.getInt("QUANTITE");
                 double prix = result.getDouble("PRIX");
                 Offre.statusType status = Offre.statusType.values()[result.getInt("STATUT")];
-                Offre.operationType operation = Offre.operationType.values()[result.getInt("OPERATIONS")];
                 Date date = result.getDate("DATE_ECHANGE");
                 Long idActionnaireOffre = result.getLong("FK_ACTIONNAIRE_OFFRE");
                 Long idActionnaireOPIM = result.getLong("FK_ACTIONNAIRE_OP_IM");
@@ -354,7 +336,7 @@ public class OffreDaoImplement implements ServicesOffreDao{
                     idActionnaireOPIM = null;
                 }
                 Long idEntreprise = result.getLong("FK_ENTREPRISE_2");
-                offre = new Offre(id,quantite,prix,status,operation,date,idActionnaireOffre,idActionnaireOPIM,idEntreprise);
+                offres.add(new Offre(id,quantite,prix,status,operation,date,idActionnaireOffre,idActionnaireOPIM,idEntreprise));
             }
         }catch(SQLException ex){
             ex.getMessage();
@@ -362,7 +344,7 @@ public class OffreDaoImplement implements ServicesOffreDao{
         } catch (DatabaseException ex) {
             Logger.getLogger(OffreDaoImplement.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return offre;
+        return offres;
     }
 
 }

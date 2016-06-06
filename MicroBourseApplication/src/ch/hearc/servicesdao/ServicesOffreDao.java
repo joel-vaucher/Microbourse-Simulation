@@ -21,9 +21,7 @@ public interface ServicesOffreDao {
     
     public List<Offre> getCurrentPurchaseOffersByEntreprise(Long idE);
     
-    public List<Offre> getBestOffersByDay(Long idE, Date afterDate);
-    
-    public Offre getBestOfferOfDay(Long idE, Date afterDate);
+    public List<Offre> getBestOffersByDay(Long idE, Offre.operationType operation);
 
     public void buyImmediat(Offre o, Long idA, int quantite);
 

@@ -46,8 +46,12 @@ public class TestGetListOffre {
         System.out.println("HISTORY");
         //get history
         for(Entreprise e : entreprises) {
-            offresVente = soo.getBestOffersByDay(e.getIdEntreprise(), new Date(System.currentTimeMillis()-3600000 * 24 * 50));
+            offresAchat = soo.getBestOffersByDay(e.getIdEntreprise(), Offre.operationType.ACHAT);
+            offresVente = soo.getBestOffersByDay(e.getIdEntreprise(), Offre.operationType.VENTE);
             System.out.println("Entreprise "+e.getIdEntreprise()+":");
+            for(Offre o : offresAchat){
+                System.out.println(" - a: "+o.getIdEntreprise()+", "+o.getPrix()+", "+o.getDate()+", "+o.getIdActionnaireOffre());
+            }
             for(Offre o : offresVente){
                 System.out.println(" - v: "+o.getIdEntreprise()+", "+o.getPrix()+", "+o.getDate()+", "+o.getIdActionnaireOffre());
             }
