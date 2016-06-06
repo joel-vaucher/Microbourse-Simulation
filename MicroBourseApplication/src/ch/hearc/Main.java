@@ -1,12 +1,18 @@
 package ch.hearc;
 
+import ch.hearc.daoimplement.ActionnaireDaoImplement;
 import ch.hearc.interfaces.AppController;
+import ch.hearc.metiers.Actionnaire;
+import ch.hearc.servicesdao.ServicesActionnaireDAO;
 import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.ChoiceDialog;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
@@ -29,8 +35,31 @@ public class Main extends Application{
     }
     
     private Long selectUser() {
-
-        return 10L;
+        ServicesActionnaireDAO soo = new ActionnaireDaoImplement();
+        List<Actionnaire> listAct = soo.getActionnaires();
+        
+        Map<String, Actionnaire> choices = new HashMap<String, Actionnaire>();
+        
+        for(Actionnaire a : listAct){
+            choices.put(a.getNom(), a);
+        }
+        
+        ChoiceDialog<String> dialog = new ChoiceDialog<>("", choices.keySet());
+        dialog.setTitle("Choix du compte");
+        dialog.setHeaderText("Choix du compte d'utilisateur");
+        dialog.setContentText("Choisissez votre compte: ");
+        
+        Optional<String> result = dialog.showAndWait();
+        
+        Long toReturn = null;
+        
+        if (!result.isPresent() || result.get().equals("")){
+            System.exit(0);
+        } else {
+            toReturn = choices.get(result.get()).getIdActionnaire();
+        }
+        
+        return toReturn;
     }
     
     private void showApp(Long ID , Stage primaryStage) {
@@ -54,14 +83,3 @@ public class Main extends Application{
         }
     }
 }
-//
-//        FXMLLoader loader = new FXMLLoader(getClass().getResource("Detail.fxml"));
-//        StackPane sp = null;
-//        try {
-//            sp = (StackPane) loader.load();
-//            DetailController detail = loader.getController();
-//            detail.setID(ID);
-//            AppController.viewDetails(sp);
-//        } catch (IOException ex) {
-//           Logger.getLogger(AppController.class.getName()).log(Level.SEVERE, null, ex);
-//        } 
