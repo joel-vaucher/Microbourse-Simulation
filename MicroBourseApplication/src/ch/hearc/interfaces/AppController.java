@@ -88,6 +88,14 @@ public class AppController implements Initializable {
         }  
     }
     
+    /**
+     * Obtention de l'id de l'entreprise associée à la tuile
+     * @param id 
+     */    
+    public void setID(Long id) {
+        this.ID_USER = id;
+    }
+    
     public static long getIdUser() {
         return ID_USER;
     }

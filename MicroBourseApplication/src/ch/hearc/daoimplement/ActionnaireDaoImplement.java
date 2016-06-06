@@ -4,12 +4,16 @@ import ch.hearc.databasefactory.DataBaseConnection;
 import ch.hearc.exception.DatabaseException;
 import ch.hearc.metiers.Action;
 import ch.hearc.metiers.Actionnaire;
+import ch.hearc.metiers.HistoriqueActionnaire;
 import ch.hearc.servicesdao.ServicesActionnaireDAO;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -92,5 +96,34 @@ public class ActionnaireDaoImplement implements ServicesActionnaireDAO{
         } catch (DatabaseException ex) {
             Logger.getLogger(OffreDaoImplement.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+
+    @Override
+    public List<Actionnaire> getActionnaires() {
+        PreparedStatement state = null;
+        Connection conn = null;
+        ResultSet rs = null;
+        List<Actionnaire> listAct = new ArrayList<>();
+        try{
+            conn = DataBaseConnection.getDataBase().getConnection();
+            String query = "SELECT * FROM actionnaires";
+            state = conn.prepareStatement(query, new String[]{"ID"});
+            
+            rs = state.executeQuery();
+            
+            while(rs.next()) {
+                HistoriqueActionnaire ha;
+                Long id = rs.getLong("ID");
+                String nom = rs.getString("NOM");
+                Double capital = rs.getDouble("CAPITAL");
+                Actionnaire actionnaire = new Actionnaire(id, nom, capital);
+                listAct.add(actionnaire);
+            }
+            
+        }catch(SQLException | DatabaseException ex){
+            ex.getMessage();
+        }
+        
+        return listAct;
     }
 }

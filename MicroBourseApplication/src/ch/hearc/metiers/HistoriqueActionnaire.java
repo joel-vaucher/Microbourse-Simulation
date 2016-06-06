@@ -12,6 +12,11 @@ public class HistoriqueActionnaire {
     private Date date;
     private Long idActionnaire;
 
+    public HistoriqueActionnaire(double capital, Date date) {
+        this.capital = capital;
+        this.date = date;
+    }
+    
     public HistoriqueActionnaire(Long idHisto, double capital, Date date, Long idActionnaire) {
         this.idHisto = idHisto;
         this.capital = capital;

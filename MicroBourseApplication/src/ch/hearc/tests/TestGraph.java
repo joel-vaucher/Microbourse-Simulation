@@ -1,4 +1,4 @@
-package ch.hearc.programme;
+package ch.hearc.tests;
 
 import ch.hearc.metiers.Offre;
 import java.util.ArrayList;

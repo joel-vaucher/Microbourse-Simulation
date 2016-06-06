@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ch.hearc.programme;
+package ch.hearc.tests;
 
 import ch.hearc.daoimplement.ProducteurConsommateurDaoImplement;
 import ch.hearc.metiers.ProducteurConsommateur;

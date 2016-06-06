@@ -5,11 +5,18 @@
  */
 package ch.hearc.interfaces;
 
+import ch.hearc.daoimplement.HistoriqueActionnaireDaoImplement;
+import ch.hearc.metiers.HistoriqueActionnaire;
+import ch.hearc.servicesdao.ServicesHistoriqueActionnaireDao;
 import java.net.URL;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.List;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.chart.LineChart;
+import javafx.scene.chart.XYChart;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableView;
 
@@ -37,6 +44,24 @@ public class AccountController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        chart.setTitle("Capital");
-    }      
+        chart.setTitle("Mon Capital");
+        showChart();
+    }
+    
+    /**
+     * Show the graph
+     */
+    public void showChart() {
+        ServicesHistoriqueActionnaireDao soo = new HistoriqueActionnaireDaoImplement();
+        List<HistoriqueActionnaire> capitalHisto = soo.getHistoriqueActionnaire(AppController.getIdUser());
+
+        XYChart.Series capitalSeries = new XYChart.Series();
+        capitalSeries.setName("Capital");
+
+        for(HistoriqueActionnaire ha : capitalHisto)
+            capitalSeries.getData().add(new XYChart.Data(ha.getDate().toString(), ha.getCapital()));
+
+        // Affichage de la série
+        chart.getData().addAll(capitalSeries);
+    }
 }
