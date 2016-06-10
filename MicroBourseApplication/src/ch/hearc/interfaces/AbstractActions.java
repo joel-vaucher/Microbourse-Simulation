@@ -26,8 +26,8 @@ public abstract class AbstractActions {
          */
         public void showChart(LineChart<String, Number> chart) {
             ServicesOffreDao soo = new OffreDaoImplement();
-            List<Offre> offresVente = soo.getCurrentSellOffersByEntreprise(this.ID);
-            List<Offre> offresAchat = soo.getCurrentPurchaseOffersByEntreprise(this.ID);
+            List<Offre> offresVente = soo.getBestOffersByDay(this.ID, Offre.operationType.VENTE);
+            List<Offre> offresAchat = soo.getBestOffersByDay(this.ID, Offre.operationType.ACHAT);
 
             XYChart.Series achatSeries = new XYChart.Series();
             XYChart.Series venteSeries = new XYChart.Series();

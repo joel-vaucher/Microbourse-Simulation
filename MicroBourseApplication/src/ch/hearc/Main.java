@@ -74,8 +74,8 @@ public class Main extends Application{
         } finally {                   
             Scene scene = new Scene(app);
             
-            primaryStage.setMaxHeight(800.0);
-            primaryStage.setMaxWidth(1280.0);
+            primaryStage.setMaxHeight(900.0);
+            primaryStage.setMaxWidth(1380.0);
             primaryStage.setTitle("Minibourse");
             //stage.getIcons().add(new Image(""));
             primaryStage.setScene(scene); 

@@ -347,4 +347,14 @@ public class OffreDaoImplement implements ServicesOffreDao{
         return offres;
     }
 
+    @Override
+    public List<Offre> getCurrentSellOffersByActionnaire(Long idA) {
+        return null;
+    }
+
+    @Override
+    public List<Offre> getCurrentPurchaseOffersByActionnaire(Long idA) {
+        return null;
+    }
+
 }

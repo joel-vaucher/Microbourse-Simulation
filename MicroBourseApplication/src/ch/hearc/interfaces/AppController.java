@@ -34,7 +34,7 @@ public class AppController implements Initializable {
     @FXML
     private Menu fileMenu;
     @FXML
-    private Menu helpMenu;
+    private Menu aboutMenu;
     
     private static AnchorPane masterPane;
     private static long ID_USER;
@@ -130,9 +130,11 @@ public class AppController implements Initializable {
         about.setOnAction(e -> {
             Alert alert = new Alert(AlertType.INFORMATION);
             alert.setTitle("A Propos");
-            alert.setHeaderText("Microbourse");
-            alert.setContentText("Microbourse\n Projet P2 INF 2015-2016"
-                    + "\n\n"
+            alert.setHeaderText("Microbourse v1.0.0");
+            alert.setContentText("Microbourse\n"
+                    + "\tProjet P2 INF 2015-2016\n"
+                    + "\tVersion 1.0.0\n"
+                    + "\n"
                     + "Auteurs:\n"
                     + "\tVaucher Joël\n"
                     + "\tOmbang Ndo Charles\n"
@@ -140,16 +142,7 @@ public class AppController implements Initializable {
             alert.showAndWait();   
         });
         
-        MenuItem help = new MenuItem("Aide");
-        help.setOnAction(e -> {
-            Alert alert = new Alert(AlertType.INFORMATION);
-            alert.setTitle("Ade");
-            alert.setHeaderText("Microbourse");
-            alert.setContentText("Un peu d'aide ?");
-            alert.showAndWait();   
-        });
-        
-        helpMenu.getItems().addAll(help, about);
+        aboutMenu.getItems().addAll(about);
     }
     
     /**

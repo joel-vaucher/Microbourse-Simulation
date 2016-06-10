@@ -80,20 +80,20 @@
             </VBox>
             <VBox maxHeight="2000.0" maxWidth="1.7976931348623157E308" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                <children>
-                  <Label prefHeight="17.0" prefWidth="669.0" text="Historique de mes offres">
+                  <Label prefHeight="17.0" prefWidth="669.0" text="Historique de mes ventes">
                      <font>
                         <Font size="24.0" />
                      </font>
                   </Label>
-                  <TableView fx:id="tableOffers" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="300.0" prefWidth="200.0">
+                  <TableView fx:id="tableSale" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="300.0" prefWidth="200.0">
                      <columns>
-                        <TableColumn maxWidth="1.7976931348623157E308" minWidth="50.0" prefWidth="150.0" text="Prix unitaire" />
-                        <TableColumn maxWidth="1.7976931348623157E308" minWidth="50.0" prefWidth="150.0" text="Nombre d'actions" />
-                        <TableColumn maxWidth="1.7976931348623157E308" minWidth="50.0" prefWidth="150.0" text="Prix" />
-                        <TableColumn prefWidth="150.0" text="Produit" />
+                        <TableColumn fx:id="unitPriceSaleCol" maxWidth="1.7976931348623157E308" minWidth="50.0" prefWidth="150.0" text="Prix unitaire" />
+                        <TableColumn fx:id="nbSaleActionCol" maxWidth="1.7976931348623157E308" minWidth="50.0" prefWidth="150.0" text="Nombre d'actions" />
+                        <TableColumn fx:id="priceSaleCol" maxWidth="1.7976931348623157E308" minWidth="50.0" prefWidth="150.0" text="Prix" />
+                        <TableColumn fx:id="productSaleCol" prefWidth="150.0" text="Produit" />
                      </columns>
                   </TableView>
-                  <Label fx:id="tableRequests" prefHeight="17.0" prefWidth="684.0" text="Historique de mes demandes">
+                  <Label fx:id="tableRequests" prefHeight="17.0" prefWidth="684.0" text="Historique de mes achats">
                      <font>
                         <Font size="24.0" />
                      </font>
@@ -101,12 +101,12 @@
                         <Insets top="20.0" />
                      </VBox.margin>
                   </Label>
-                  <TableView maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="300.0" prefWidth="200.0">
+                  <TableView fx:id="tableBuy" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="300.0" prefWidth="200.0">
                      <columns>
-                        <TableColumn maxWidth="1.7976931348623157E308" minWidth="50.0" prefWidth="150.0" text="Prix unitaire" />
-                        <TableColumn maxWidth="1.7976931348623157E308" minWidth="50.0" prefWidth="150.0" text="Nombre d'actions" />
-                        <TableColumn maxWidth="1.7976931348623157E308" minWidth="50.0" prefWidth="150.0" text="Prix" />
-                        <TableColumn prefWidth="150.0" text="Produit" />
+                        <TableColumn fx:id="unitPriceBuyCol" maxWidth="1.7976931348623157E308" minWidth="50.0" prefWidth="150.0" text="Prix unitaire" />
+                        <TableColumn fx:id="nbBuyActionCol" maxWidth="1.7976931348623157E308" minWidth="50.0" prefWidth="150.0" text="Nombre d'actions" />
+                        <TableColumn fx:id="priceBuyCol" maxWidth="1.7976931348623157E308" minWidth="50.0" prefWidth="150.0" text="Prix" />
+                        <TableColumn fx:id="productBuyCol" prefWidth="150.0" text="Produit" />
                      </columns>
                   </TableView>
                </children>

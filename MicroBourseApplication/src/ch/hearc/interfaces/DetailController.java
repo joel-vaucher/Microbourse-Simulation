@@ -1,12 +1,15 @@
 package ch.hearc.interfaces;
 
 import ch.hearc.daoimplement.EntrepriseDaoImplement;
+import ch.hearc.daoimplement.OffreDaoImplement;
 import ch.hearc.metiers.Entreprise;
-import ch.hearc.metiers.HistoriqueEntreprise;
+import ch.hearc.metiers.Offre;
+import ch.hearc.servicesdao.ServicesOffreDao;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
-import javafx.beans.property.SimpleStringProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -30,21 +33,9 @@ public class DetailController extends AbstractActions implements Initializable {
     @FXML
     private TextField txtPriceShares;
     @FXML
-    private TableView<ModeleHistorique> tableOffers;
-    @FXML
-    private TableView<ModeleHistorique> tableRequests;
-    @FXML
     private Label lblProductName;
     @FXML
     private LineChart<String, Number> chart;
-    @FXML
-    private TableColumn<ModeleHistorique, Number> uniteOfferPriceCol;
-    @FXML
-    private TableColumn<ModeleHistorique, Number> uniteRequestPriceCol;
-    @FXML
-    private TableColumn<ModeleHistorique, Number> nbOfferActionCol;
-    @FXML
-    private TableColumn<ModeleHistorique, Number> nbRequestActionCol;
     @FXML
     private Label lblPriceSale;
     @FXML
@@ -57,6 +48,18 @@ public class DetailController extends AbstractActions implements Initializable {
     private Button btnSale;
     @FXML
     private Button btnBuy;
+    @FXML
+    private TableView<HistoriqueModel> tableSale;
+    @FXML
+    private TableColumn<HistoriqueModel, String> salePriceCol;
+    @FXML
+    private TableColumn<HistoriqueModel, String> nbSaleActionCol;
+    @FXML
+    private TableView<HistoriqueModel> tableBuy;
+    @FXML
+    private TableColumn<HistoriqueModel, String> buyPriceCol;
+    @FXML
+    private TableColumn<HistoriqueModel, String> nbBuyActionCol;
     
 
     
@@ -67,9 +70,7 @@ public class DetailController extends AbstractActions implements Initializable {
      * @param rb 
      */
     @Override
-    public void initialize(URL url, ResourceBundle rb) {
-        // TODO
-    }
+    public void initialize(URL url, ResourceBundle rb) {}
     
     /**
      * 
@@ -124,55 +125,34 @@ public class DetailController extends AbstractActions implements Initializable {
         lblProductName.setText(entreprise.getNom());
         
         showChart(chart);
+        showTables();
     }
     
     /**
      * 
      */
-    public void showSalesTable() {
-        EntrepriseDaoImplement manager = new EntrepriseDaoImplement();
-        List<HistoriqueEntreprise> historique = manager.getHistoriqueOf(this.ID);
+    public void showTables() {
+        ServicesOffreDao soo = new OffreDaoImplement();
+        List<Offre> offresVente = soo.getCurrentSellOffersByEntreprise(this.ID);
+        List<Offre> offresAchat = soo.getCurrentPurchaseOffersByEntreprise(this.ID);
 
-        // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-        // ObservableList<String> data;
-        for (HistoriqueEntreprise he : historique) {
-            
+        ObservableList<HistoriqueModel> achats = FXCollections.observableArrayList();
+        for (Offre offre : offresAchat) {
+            achats.add(new HistoriqueModel(offre));
         }
         
-        uniteOfferPriceCol.setCellValueFactory(new PropertyValueFactory<>("unitePrice"));
-        nbOfferActionCol.setCellValueFactory(new PropertyValueFactory<>("nbActions"));
-    }
-    
-    /**
-     * 
-     */
-    public void showPurchasesTable() {
+        ObservableList<HistoriqueModel> ventes = FXCollections.observableArrayList();
+        for (Offre offre : offresVente) {
+            ventes.add(new HistoriqueModel(offre));
+        }
         
+        buyPriceCol.setCellValueFactory(new PropertyValueFactory<>("unitePrice"));
+        nbBuyActionCol.setCellValueFactory(new PropertyValueFactory<>("nbActions"));
+        
+        salePriceCol.setCellValueFactory(new PropertyValueFactory<>("unitePrice"));
+        nbSaleActionCol.setCellValueFactory(new PropertyValueFactory<>("nbActions"));
+                
+        tableBuy.setItems(achats);
+        tableSale.setItems(ventes);
     }
-}
-
-class ModeleHistorique {
-    private final SimpleStringProperty unitePrice;
-    private final SimpleStringProperty nbActions;
-    
-    private ModeleHistorique(String up, String nba) {
-        this.unitePrice = new SimpleStringProperty(up);
-        this.nbActions = new SimpleStringProperty(nba);
-    }
-    
-    public String getUnitePrice() {
-        return unitePrice.get();
-    }
-    
-    public void setUnitePrice(String un) {
-        unitePrice.set(un);
-    }
-    
-    public String getNbActions() {
-        return nbActions.get();
-    }
-    
-    public void setNbActions(String nba) {
-        nbActions.set(nba);
-    }  
 }
