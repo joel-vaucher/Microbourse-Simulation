@@ -44,7 +44,7 @@
                         <NumberAxis side="LEFT" />
                      </yAxis>
                   </LineChart>
-                  <Label maxHeight="17.0" maxWidth="1.7976931348623157E308" prefHeight="17.0" prefWidth="670.0" text="Prix offert">
+                  <Label maxHeight="17.0" maxWidth="1.7976931348623157E308" prefHeight="17.0" prefWidth="670.0" text="Capital Actuel">
                      <font>
                         <Font size="24.0" />
                      </font>
@@ -52,23 +52,7 @@
                         <Insets left="20.0" />
                      </padding>
                   </Label>
-                  <Label fx:id="lblInitCapital" maxHeight="17.0" prefHeight="17.0" prefWidth="670.0" text="Label">
-                     <font>
-                        <Font name="System Bold" size="24.0" />
-                     </font>
-                     <padding>
-                        <Insets left="20.0" />
-                     </padding>
-                  </Label>
-                  <Label maxHeight="17.0" prefHeight="17.0" prefWidth="670.0" text="Prix demandé">
-                     <font>
-                        <Font size="24.0" />
-                     </font>
-                     <padding>
-                        <Insets left="20.0" />
-                     </padding>
-                  </Label>
-                  <Label fx:id="lblActualCapital" maxHeight="17.0" prefHeight="17.0" prefWidth="670.0" text="Label">
+                  <Label fx:id="lblActualCapital" maxHeight="17.0" prefHeight="17.0" prefWidth="670.0" text="0.00">
                      <font>
                         <Font name="System Bold" size="24.0" />
                      </font>
@@ -90,10 +74,10 @@
                         <TableColumn fx:id="unitPriceSaleCol" maxWidth="1.7976931348623157E308" minWidth="50.0" prefWidth="150.0" text="Prix unitaire" />
                         <TableColumn fx:id="nbSaleActionCol" maxWidth="1.7976931348623157E308" minWidth="50.0" prefWidth="150.0" text="Nombre d'actions" />
                         <TableColumn fx:id="priceSaleCol" maxWidth="1.7976931348623157E308" minWidth="50.0" prefWidth="150.0" text="Prix" />
-                        <TableColumn fx:id="productSaleCol" prefWidth="150.0" text="Produit" />
+                        <TableColumn fx:id="entrepriseSaleCol" prefWidth="150.0" text="Entreprise" />
                      </columns>
                   </TableView>
-                  <Label fx:id="tableRequests" prefHeight="17.0" prefWidth="684.0" text="Historique de mes achats">
+                  <Label prefHeight="17.0" prefWidth="684.0" text="Historique de mes achats">
                      <font>
                         <Font size="24.0" />
                      </font>
@@ -106,7 +90,7 @@
                         <TableColumn fx:id="unitPriceBuyCol" maxWidth="1.7976931348623157E308" minWidth="50.0" prefWidth="150.0" text="Prix unitaire" />
                         <TableColumn fx:id="nbBuyActionCol" maxWidth="1.7976931348623157E308" minWidth="50.0" prefWidth="150.0" text="Nombre d'actions" />
                         <TableColumn fx:id="priceBuyCol" maxWidth="1.7976931348623157E308" minWidth="50.0" prefWidth="150.0" text="Prix" />
-                        <TableColumn fx:id="productBuyCol" prefWidth="150.0" text="Produit" />
+                        <TableColumn fx:id="entrepriseBuyCol" prefWidth="150.0" text="Entreprise" />
                      </columns>
                   </TableView>
                </children>

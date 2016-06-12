@@ -69,7 +69,7 @@ public class HistoriqueActionnaireDaoImplement implements ServicesHistoriqueActi
         List<HistoriqueActionnaire> listHisto = new ArrayList<>();
         try{
             conn = DataBaseConnection.getDataBase().getConnection();
-            String query = String.format("SELECT * FROM historiquesactionnaires ha WHERE id=? ORDER BY ha.date_HISTO DESC");
+            String query = String.format("SELECT * FROM historiquesactionnaires ha WHERE id=? ORDER BY ha.date_HISTO ASC");
             state = conn.prepareStatement(query, new String[]{"ID"});
             state.setLong(1, idActionnaire);
             

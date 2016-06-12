@@ -1,10 +1,17 @@
 package ch.hearc.interfaces;
 
+import ch.hearc.daoimplement.OffreDaoImplement;
+import ch.hearc.metiers.Offre;
+import ch.hearc.servicesdao.ServicesOffreDao;
 import java.io.IOException;
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
+import java.util.Timer;
+import java.util.TimerTask;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -62,6 +69,17 @@ public class TuileController extends AbstractActions implements Initializable {
         NumberAxis yAxis = (NumberAxis) chart.getYAxis();
         yAxis.setAutoRanging(true);
         yAxis.setForceZeroInRange(false);
+        
+        Timer timer = new java.util.Timer();
+        timer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                 Platform.runLater(() -> {
+                     showChart(chart);
+                     showPrices();
+                 });
+            }
+        }, 0, 60000);
     }    
     
     /**
@@ -90,12 +108,23 @@ public class TuileController extends AbstractActions implements Initializable {
     public void setID(Long id) {
         this.ID = id;
         showChart(this.chart);
+        showPrices();
     }
     
     /**
      * 
      */
     public void showPrices() {
+        ServicesOffreDao soo = new OffreDaoImplement();
+        List<Offre> offresVente = soo.getBestOffersByDay(this.ID, Offre.operationType.VENTE);
+        List<Offre> offresAchat = soo.getBestOffersByDay(this.ID, Offre.operationType.ACHAT);
+        
+        if(!offresAchat.isEmpty()) {
+            lblPriceBuy.setText(offresAchat.get(offresAchat.size()-1).getPrix()+"");
+        }
+        if(!offresVente.isEmpty()) {
+            lblPriceSale.setText(offresVente.get(offresVente.size()-1).getPrix()+"");
+        }
     }
 
     @FXML

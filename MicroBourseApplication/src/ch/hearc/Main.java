@@ -10,11 +10,14 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import javafx.application.Application;
+import javafx.application.Platform;
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.ChoiceDialog;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 
 /**
  *
@@ -24,6 +27,10 @@ public class Main extends Application{
     @Override
     public void start(Stage primaryStage) throws Exception {
         showApp(selectUser(), primaryStage);
+        primaryStage.setOnCloseRequest((WindowEvent t) -> {
+            Platform.exit();
+            System.exit(0);
+        });
     }
     
     /**

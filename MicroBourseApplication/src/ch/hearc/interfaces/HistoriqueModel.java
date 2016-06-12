@@ -10,13 +10,13 @@ import javafx.beans.property.SimpleStringProperty;
  *
  */
 public class HistoriqueModel {
-    private final SimpleStringProperty unitePrice;
+    private final SimpleStringProperty unitPrice;
     private final SimpleStringProperty nbActions;
     private final SimpleStringProperty totalPrice;
     private final SimpleStringProperty entreprise;
     
     public HistoriqueModel(String unitP, String nbA, String totalP, String e) {
-        this.unitePrice = new SimpleStringProperty(unitP);
+        this.unitPrice = new SimpleStringProperty(unitP);
         this.nbActions = new SimpleStringProperty(nbA);
         this.totalPrice = new SimpleStringProperty(totalP);
         this.entreprise = new SimpleStringProperty(e);
@@ -27,18 +27,18 @@ public class HistoriqueModel {
         Entreprise e = soo.getEntrepriseByID(offre.getIdEntreprise());
         double total = offre.getPrix() * offre.getQuantite();
         
-        this.unitePrice = new SimpleStringProperty(Double.toString(offre.getPrix()));
+        this.unitPrice = new SimpleStringProperty(Double.toString(offre.getPrix()));
         this.nbActions = new SimpleStringProperty(Integer.toString(offre.getQuantite()));
         this.totalPrice = new SimpleStringProperty(Double.toString(total));
         this.entreprise = new SimpleStringProperty(e.getNom());
     }
     
-    public String getUnitePrice() {
-        return unitePrice.get();
+    public String getUnitPrice() {
+        return unitPrice.get();
     }
     
-    public void setUnitePrice(String un) {
-        unitePrice.set(un);
+    public void setUnitPrice(String un) {
+        unitPrice.set(un);
     }
     
     public String getNbActions() {

@@ -29,6 +29,8 @@ public abstract class AbstractActions {
             List<Offre> offresVente = soo.getBestOffersByDay(this.ID, Offre.operationType.VENTE);
             List<Offre> offresAchat = soo.getBestOffersByDay(this.ID, Offre.operationType.ACHAT);
 
+            chart.getData().clear();
+            
             XYChart.Series achatSeries = new XYChart.Series();
             XYChart.Series venteSeries = new XYChart.Series();
             achatSeries.setName("Achat");

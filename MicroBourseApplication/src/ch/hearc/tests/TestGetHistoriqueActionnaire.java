@@ -52,7 +52,7 @@ public class TestGetHistoriqueActionnaire {
         for(Actionnaire a : actionnaires) {
             HistoOffreVente = soo.getHistoSellOffersByActionnaire(a.getIdActionnaire());
             HistoOffreAchat = soo.getHistoPurchaseOffersByActionnaire(a.getIdActionnaire());
-            System.out.println("Entreprise "+a.getIdActionnaire()+":");
+            System.out.println("Entreprise "+a.getIdActionnaire()+" "+a.getNom()+":");
             for(Offre o : HistoOffreAchat){
                 System.out.println(" - a: "+o.getIdEntreprise()+", "+o.getPrix()+", "+o.getDate()+", "+o.getIdActionnaireOffre()+", "+o.getIdActionnaireOpIm());
             }

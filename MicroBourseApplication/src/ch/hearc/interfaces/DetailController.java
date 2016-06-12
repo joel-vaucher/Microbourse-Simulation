@@ -8,6 +8,9 @@ import ch.hearc.servicesdao.ServicesOffreDao;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.Timer;
+import java.util.TimerTask;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -70,7 +73,19 @@ public class DetailController extends AbstractActions implements Initializable {
      * @param rb 
      */
     @Override
-    public void initialize(URL url, ResourceBundle rb) {}
+    public void initialize(URL url, ResourceBundle rb) {
+        Timer timer = new java.util.Timer();
+        timer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                 Platform.runLater(() -> {
+                     showChart(chart);
+                     showTables();
+                     showPrices();
+                 });
+            }
+        }, 0, 60000);
+    }
     
     /**
      * 
@@ -126,6 +141,7 @@ public class DetailController extends AbstractActions implements Initializable {
         
         showChart(chart);
         showTables();
+        showPrices();
     }
     
     /**
@@ -146,13 +162,29 @@ public class DetailController extends AbstractActions implements Initializable {
             ventes.add(new HistoriqueModel(offre));
         }
         
-        buyPriceCol.setCellValueFactory(new PropertyValueFactory<>("unitePrice"));
+        buyPriceCol.setCellValueFactory(new PropertyValueFactory<>("unitPrice"));
         nbBuyActionCol.setCellValueFactory(new PropertyValueFactory<>("nbActions"));
         
-        salePriceCol.setCellValueFactory(new PropertyValueFactory<>("unitePrice"));
+        salePriceCol.setCellValueFactory(new PropertyValueFactory<>("unitPrice"));
         nbSaleActionCol.setCellValueFactory(new PropertyValueFactory<>("nbActions"));
                 
         tableBuy.setItems(achats);
         tableSale.setItems(ventes);
+    }
+    
+    /**
+     * 
+     */
+    public void showPrices() {
+        ServicesOffreDao soo = new OffreDaoImplement();
+        List<Offre> offresVente = soo.getBestOffersByDay(this.ID, Offre.operationType.VENTE);
+        List<Offre> offresAchat = soo.getBestOffersByDay(this.ID, Offre.operationType.ACHAT);
+        
+        if(!offresAchat.isEmpty()) {
+            lblPriceBuy.setText(offresAchat.get(offresAchat.size()-1).getPrix()+"");
+        }
+        if(!offresVente.isEmpty()) {
+            lblPriceSale.setText(offresVente.get(offresVente.size()-1).getPrix()+"");
+        }
     }
 }

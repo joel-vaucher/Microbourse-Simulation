@@ -320,7 +320,7 @@ public class OffreDaoImplement implements ServicesOffreDao{
         List<Offre> offres = new ArrayList<>();
         try{
             conn = DataBaseConnection.getDataBase().getConnection();
-            String query = String.format("SELECT * FROM offres o INNER JOIN (SELECT date_echange, MAX(prix) AS maxPrix FROM offres WHERE statut=%d AND operations=%d AND fk_entreprise_2=? GROUP BY date_echange ) bestOffres ON o.date_echange = bestOffres.date_echange AND o.prix = bestOffres.maxPrix ORDER BY o.date_echange DESC", Offre.statusType.FINI.ordinal(), operation.ordinal());
+            String query = String.format("SELECT * FROM offres o INNER JOIN (SELECT date_echange, MAX(prix) AS maxPrix FROM offres WHERE statut=%d AND operations=%d AND fk_entreprise_2=? GROUP BY date_echange ) bestOffres ON o.date_echange = bestOffres.date_echange AND o.prix = bestOffres.maxPrix ORDER BY o.date_echange ASC", Offre.statusType.FINI.ordinal(), operation.ordinal());
             state = conn.prepareStatement(query);
             state.setLong(1, idE);
             result = state.executeQuery();
