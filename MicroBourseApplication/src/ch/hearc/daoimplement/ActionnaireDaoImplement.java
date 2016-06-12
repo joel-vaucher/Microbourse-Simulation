@@ -6,6 +6,7 @@ import ch.hearc.metiers.Action;
 import ch.hearc.metiers.Actionnaire;
 import ch.hearc.metiers.HistoriqueActionnaire;
 import ch.hearc.servicesdao.ServicesActionnaireDAO;
+import ch.hearc.servicesdao.ServicesHistoriqueActionnaireDao;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
@@ -90,6 +91,10 @@ public class ActionnaireDaoImplement implements ServicesActionnaireDAO{
             
             state.executeUpdate();
             DataBaseConnection.getDataBase().commit();
+            
+            ServicesHistoriqueActionnaireDao sha = HistoriqueActionnaireDaoImplement.getWritingIntance();
+            sha.createHistoriqueActionnaire(actionnaire);
+            
         }catch(SQLException ex){
             ex.getMessage();
           

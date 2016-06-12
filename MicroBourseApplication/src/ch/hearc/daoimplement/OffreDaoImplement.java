@@ -348,13 +348,119 @@ public class OffreDaoImplement implements ServicesOffreDao{
     }
 
     @Override
-    public List<Offre> getCurrentSellOffersByActionnaire(Long idA) {
-        return null;
+    public List<Offre> getHistoSellOffersByActionnaire(Long idA) {
+        
+        PreparedStatement state = null;
+        Connection conn = null;
+        ResultSet result = null;
+        List<Offre> offres = new ArrayList<>();
+        try{
+            conn = DataBaseConnection.getDataBase().getConnection();
+            String query = String.format("SELECT * FROM OFFRES WHERE statut = %d AND operations = %d AND fk_actionnaire_offre = ?", Offre.statusType.FINI.ordinal(), Offre.operationType.VENTE.ordinal());
+            state = conn.prepareStatement(query);
+            state.setLong(1, idA);
+            result = state.executeQuery();
+            while(result.next()){
+                Long id = result.getLong("ID");
+                int quantite = result.getInt("QUANTITE");
+                double prix = result.getDouble("PRIX");
+                Offre.statusType status = Offre.statusType.values()[result.getInt("STATUT")];
+                Offre.operationType operation = Offre.operationType.values()[result.getInt("OPERATIONS")];
+                Date date = result.getDate("DATE_ECHANGE");
+                Long idActionnaireOffre = result.getLong("FK_ACTIONNAIRE_OFFRE");
+                Long idActionnaireOPIM = result.getLong("FK_ACTIONNAIRE_OP_IM");
+                if(idActionnaireOPIM == 0){
+                    idActionnaireOPIM = null;
+                }
+                Long idEntreprise = result.getLong("FK_ENTREPRISE_2");
+                offres.add(new Offre(id,quantite,prix,status,operation,date,idActionnaireOffre,idActionnaireOPIM,idEntreprise));
+            }
+            
+            
+            String query_2 = String.format("SELECT * FROM OFFRES WHERE statut = %d AND operations = %d AND fk_actionnaire_OP_IM = ?", Offre.statusType.FINI.ordinal(), Offre.operationType.ACHAT.ordinal());
+            state = conn.prepareStatement(query_2);
+            state.setLong(1, idA);
+            result = state.executeQuery();
+            while(result.next()){
+                Long id = result.getLong("ID");
+                int quantite = result.getInt("QUANTITE");
+                double prix = result.getDouble("PRIX");
+                Offre.statusType status = Offre.statusType.values()[result.getInt("STATUT")];
+                Offre.operationType operation = Offre.operationType.values()[result.getInt("OPERATIONS")];
+                Date date = result.getDate("DATE_ECHANGE");
+                Long idActionnaireOffre = result.getLong("FK_ACTIONNAIRE_OFFRE");
+                Long idActionnaireOPIM = result.getLong("FK_ACTIONNAIRE_OP_IM");
+                if(idActionnaireOPIM == 0){
+                    idActionnaireOPIM = null;
+                }
+                Long idEntreprise = result.getLong("FK_ENTREPRISE_2");
+                offres.add(new Offre(id,quantite,prix,status,operation,date,idActionnaireOffre,idActionnaireOPIM,idEntreprise));
+            }
+        }catch(SQLException ex){
+            ex.getMessage();
+          
+        } catch (DatabaseException ex) {
+            Logger.getLogger(OffreDaoImplement.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return offres;
     }
 
     @Override
-    public List<Offre> getCurrentPurchaseOffersByActionnaire(Long idA) {
-        return null;
+    public List<Offre> getHistoPurchaseOffersByActionnaire(Long idA) {
+        
+        PreparedStatement state = null;
+        Connection conn = null;
+        ResultSet result = null;
+        List<Offre> offres = new ArrayList<>();
+        try{
+            conn = DataBaseConnection.getDataBase().getConnection();
+            String query = String.format("SELECT * FROM OFFRES WHERE statut = %d AND operations = %d AND fk_actionnaire_offre = ?", Offre.statusType.FINI.ordinal(), Offre.operationType.ACHAT.ordinal());
+            state = conn.prepareStatement(query);
+            state.setLong(1, idA);
+            result = state.executeQuery();
+            while(result.next()){
+                Long id = result.getLong("ID");
+                int quantite = result.getInt("QUANTITE");
+                double prix = result.getDouble("PRIX");
+                Offre.statusType status = Offre.statusType.values()[result.getInt("STATUT")];
+                Offre.operationType operation = Offre.operationType.values()[result.getInt("OPERATIONS")];
+                Date date = result.getDate("DATE_ECHANGE");
+                Long idActionnaireOffre = result.getLong("FK_ACTIONNAIRE_OFFRE");
+                Long idActionnaireOPIM = result.getLong("FK_ACTIONNAIRE_OP_IM");
+                if(idActionnaireOPIM == 0){
+                    idActionnaireOPIM = null;
+                }
+                Long idEntreprise = result.getLong("FK_ENTREPRISE_2");
+                offres.add(new Offre(id,quantite,prix,status,operation,date,idActionnaireOffre,idActionnaireOPIM,idEntreprise));
+            }
+            
+            
+            String query_2 = String.format("SELECT * FROM OFFRES WHERE statut = %d AND operations = %d AND fk_actionnaire_OP_IM = ?", Offre.statusType.FINI.ordinal(), Offre.operationType.VENTE.ordinal());
+            state = conn.prepareStatement(query_2);
+            state.setLong(1, idA);
+            result = state.executeQuery();
+            while(result.next()){
+                Long id = result.getLong("ID");
+                int quantite = result.getInt("QUANTITE");
+                double prix = result.getDouble("PRIX");
+                Offre.statusType status = Offre.statusType.values()[result.getInt("STATUT")];
+                Offre.operationType operation = Offre.operationType.values()[result.getInt("OPERATIONS")];
+                Date date = result.getDate("DATE_ECHANGE");
+                Long idActionnaireOffre = result.getLong("FK_ACTIONNAIRE_OFFRE");
+                Long idActionnaireOPIM = result.getLong("FK_ACTIONNAIRE_OP_IM");
+                if(idActionnaireOPIM == 0){
+                    idActionnaireOPIM = null;
+                }
+                Long idEntreprise = result.getLong("FK_ENTREPRISE_2");
+                offres.add(new Offre(id,quantite,prix,status,operation,date,idActionnaireOffre,idActionnaireOPIM,idEntreprise));
+            }
+        }catch(SQLException ex){
+            ex.getMessage();
+          
+        } catch (DatabaseException ex) {
+            Logger.getLogger(OffreDaoImplement.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return offres;
     }
 
 }

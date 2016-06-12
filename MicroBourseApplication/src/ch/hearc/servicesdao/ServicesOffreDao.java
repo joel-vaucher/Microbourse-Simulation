@@ -21,9 +21,9 @@ public interface ServicesOffreDao {
     
     public List<Offre> getCurrentPurchaseOffersByEntreprise(Long idE);
     
-    public List<Offre> getCurrentSellOffersByActionnaire(Long idA);
+    public List<Offre> getHistoSellOffersByActionnaire(Long idA);
     
-    public List<Offre> getCurrentPurchaseOffersByActionnaire(Long idA);
+    public List<Offre> getHistoPurchaseOffersByActionnaire(Long idA);
     
     public List<Offre> getBestOffersByDay(Long idE, Offre.operationType operation);
 
