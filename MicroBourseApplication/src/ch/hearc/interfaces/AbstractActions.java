@@ -73,7 +73,7 @@ public abstract class AbstractActions {
             while(nbActionVendu < nbAction) {
                 int q = offres.get(iOffre).getQuantite();
                 if(nbActionVendu + q > nbAction){
-                    soo.sellImmediat(offres.get(iOffre), idA, q - (nbAction-nbActionVendu));
+                    soo.sellImmediat(offres.get(iOffre), idA, nbAction-nbActionVendu);
                     nbActionVendu = nbAction;
                 } else {
                     soo.sellImmediat(offres.get(iOffre), idA, q);
@@ -103,7 +103,7 @@ public abstract class AbstractActions {
             while(nbActionAchetee < nbAction) {
                 int q = offres.get(iOffre).getQuantite();
                 if(nbActionAchetee + q > nbAction){
-                    soo.buyImmediat(offres.get(iOffre), idA, nbAction);
+                    soo.buyImmediat(offres.get(iOffre), idA, nbAction-nbActionAchetee);
                     nbActionAchetee = nbAction;
                 } else {
                     soo.buyImmediat(offres.get(iOffre), idA, q);

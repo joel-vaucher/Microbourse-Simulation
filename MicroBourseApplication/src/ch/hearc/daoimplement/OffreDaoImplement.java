@@ -255,14 +255,22 @@ public class OffreDaoImplement implements ServicesOffreDao{
 
         ServicesEntrepriseDao seo = new EntrepriseDaoImplement();
         ServicesActionDAO saco = new ActionDaoImplement();
+        ServicesActionnaireDAO saa = new ActionnaireDaoImplement();
         
         Action acVendeur = saco.getActionOfActionnaireByEnterprise(historiqueTransaction.getIdActionnaireOffre(), historiqueTransaction.getIdEntreprise());
         acVendeur.setQuantite(acVendeur.getQuantite()-historiqueTransaction.getQuantite());
         Action acAcheteur = saco.getActionOfActionnaireByEnterprise(historiqueTransaction.getIdActionnaireOpIm(), historiqueTransaction.getIdEntreprise());
         acAcheteur.setQuantite(acAcheteur.getQuantite()+historiqueTransaction.getQuantite());
         
+        Actionnaire pAcAcheteur = saa.getActionnaireByID(historiqueTransaction.getIdActionnaireOpIm());
+        pAcAcheteur.setCapital(pAcAcheteur.getCapital()-historiqueTransaction.getQuantite()*historiqueTransaction.getPrix());
+        Actionnaire pAcVendeur = saa.getActionnaireByID(historiqueTransaction.getIdActionnaireOffre());
+        pAcVendeur.setCapital(pAcVendeur.getCapital()+historiqueTransaction.getQuantite()*historiqueTransaction.getPrix());
+        
         saco.updateAction(acVendeur);
         saco.updateAction(acAcheteur);
+        saa.updateActionnaire(pAcVendeur);
+        saa.updateActionnaire(pAcAcheteur);
     }
 
     @Override
