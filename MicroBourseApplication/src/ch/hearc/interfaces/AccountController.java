@@ -113,6 +113,9 @@ public class AccountController implements Initializable {
         List<Offre> histoOffreVente = soo.getHistoSellOffersByActionnaire(AppController.getIdUser());
         List<Offre> histoOffreAchat = soo.getHistoPurchaseOffersByActionnaire(AppController.getIdUser());
         
+        tableBuy.getItems().clear();
+        tableSale.getItems().clear();
+        
         ObservableList<HistoriqueModel> achats = FXCollections.observableArrayList();
         for (Offre offre : histoOffreAchat) {
             achats.add(new HistoriqueModel(offre));

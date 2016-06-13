@@ -160,6 +160,9 @@ public class DetailController extends AbstractActions implements Initializable {
         List<Offre> offresVente = soo.getCurrentSellOffersByEntreprise(this.ID);
         List<Offre> offresAchat = soo.getCurrentPurchaseOffersByEntreprise(this.ID);
 
+        tableBuy.getItems().clear();
+        tableSale.getItems().clear();
+        
         ObservableList<HistoriqueModel> achats = FXCollections.observableArrayList();
         for (Offre offre : offresAchat) {
             achats.add(new HistoriqueModel(offre));
