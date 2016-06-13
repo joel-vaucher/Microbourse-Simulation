@@ -78,11 +78,9 @@ public class DetailController extends AbstractActions implements Initializable {
         timer.schedule(new TimerTask() {
             @Override
             public void run() {
-                 Platform.runLater(() -> {
-                     showChart(chart);
-                     showTables();
-                     showPrices();
-                 });
+                Platform.runLater(() -> {
+                    refresh();
+                });
             }
         }, 0, 60000);
     }
@@ -95,6 +93,7 @@ public class DetailController extends AbstractActions implements Initializable {
     private void btnSaleAP_onAction(ActionEvent event) {
         String nbAction = txtNbSharesAP.getText().equals("") ? "0" : txtNbSharesAP.getText();
         saleAP(Integer.parseInt(nbAction));
+        refresh();
     }
 
     /**
@@ -105,6 +104,7 @@ public class DetailController extends AbstractActions implements Initializable {
     private void btnBuyAP_onAction(ActionEvent event) {
         String nbAction = txtNbSharesAP.getText().equals("") ? "0" : txtNbSharesAP.getText();
         buyAP(Integer.parseInt(nbAction));
+        refresh();
     }
 
     /**
@@ -116,6 +116,7 @@ public class DetailController extends AbstractActions implements Initializable {
         String nbAction = txtNbShares.getText().equals("") ? "0" : txtNbShares.getText();
         String prix = txtPriceShares.getText().equals("") ? "0" : txtPriceShares.getText();
         sale(Integer.parseInt(nbAction), Integer.parseInt(prix));
+        refresh();
     }
 
     /**
@@ -127,6 +128,7 @@ public class DetailController extends AbstractActions implements Initializable {
         String nbAction = txtNbShares.getText().equals("") ? "0" : txtNbShares.getText();
         String prix = txtPriceShares.getText().equals("") ? "0" : txtPriceShares.getText();
         buy(Integer.parseInt(nbAction), Integer.parseInt(prix));
+        refresh();
     }
 
     /**
@@ -144,10 +146,16 @@ public class DetailController extends AbstractActions implements Initializable {
         showPrices();
     }
     
+    private void refresh() {
+        showChart(chart);
+        showTables();
+        showPrices();  
+    }
+    
     /**
      * 
      */
-    public void showTables() {
+    private void showTables() {
         ServicesOffreDao soo = new OffreDaoImplement();
         List<Offre> offresVente = soo.getCurrentSellOffersByEntreprise(this.ID);
         List<Offre> offresAchat = soo.getCurrentPurchaseOffersByEntreprise(this.ID);
@@ -175,7 +183,7 @@ public class DetailController extends AbstractActions implements Initializable {
     /**
      * 
      */
-    public void showPrices() {
+    private void showPrices() {
         ServicesOffreDao soo = new OffreDaoImplement();
         List<Offre> offresVente = soo.getBestOffersByDay(this.ID, Offre.operationType.VENTE);
         List<Offre> offresAchat = soo.getBestOffersByDay(this.ID, Offre.operationType.ACHAT);

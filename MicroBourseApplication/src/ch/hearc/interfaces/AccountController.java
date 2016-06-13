@@ -73,10 +73,10 @@ public class AccountController implements Initializable {
         timer.schedule(new TimerTask() {
             @Override
             public void run() {
-                 Platform.runLater(() -> {
-                     showChart();
-                     showTables();
-                 });
+                Platform.runLater(() -> {
+                    showChart();
+                    showTables();
+                });
             }
         }, 0, 60000);
     }

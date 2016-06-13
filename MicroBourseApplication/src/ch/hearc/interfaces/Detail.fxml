@@ -157,7 +157,7 @@
             </VBox>
             <VBox maxHeight="2000.0" maxWidth="1.7976931348623157E308" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                <children>
-                  <Label prefHeight="17.0" prefWidth="669.0" text="Historique des ventes">
+                  <Label prefHeight="17.0" prefWidth="669.0" text="Offres de ventes">
                      <font>
                         <Font size="24.0" />
                      </font>
@@ -168,7 +168,7 @@
                       <TableColumn fx:id="nbSaleActionCol" maxWidth="1.7976931348623157E308" minWidth="50.0" prefWidth="150.0" text="Nombre d'actions" />
                     </columns>
                   </TableView>
-                  <Label prefHeight="17.0" prefWidth="684.0" text="Historique des achats">
+                  <Label prefHeight="17.0" prefWidth="684.0" text="Offres d'achats">
                      <font>
                         <Font size="24.0" />
                      </font>
