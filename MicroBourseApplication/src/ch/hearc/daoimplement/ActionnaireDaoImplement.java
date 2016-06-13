@@ -38,7 +38,7 @@ public class ActionnaireDaoImplement implements ServicesActionnaireDAO{
         try{
             conn = DataBaseConnection.getDataBase().getConnection();
             state = conn.createStatement();
-            String query = "SELECT ID FORM ACTONNAIRES WHERE ID = idA";
+            String query = "SELECT * FROM ACTIONNAIRES WHERE ID = "+idA;
             result = state.executeQuery(query);
             
             while(result.next()){
@@ -85,6 +85,7 @@ public class ActionnaireDaoImplement implements ServicesActionnaireDAO{
         try{
             conn = DataBaseConnection.getDataBase().getConnection();
             String query = "UPDATE Actionnaires SET nom=?, capital=? WHERE id = ?";
+            state = conn.prepareStatement(query);
             state.setString(1, actionnaire.getNom());
             state.setDouble(2, actionnaire.getCapital());
             state.setLong(3, actionnaire.getIdActionnaire());

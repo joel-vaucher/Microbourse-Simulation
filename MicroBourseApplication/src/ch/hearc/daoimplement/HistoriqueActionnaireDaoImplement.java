@@ -30,7 +30,7 @@ public class HistoriqueActionnaireDaoImplement implements ServicesHistoriqueActi
         try{
             conn = DataBaseConnection.getDataBase().getConnection();
             state = conn.createStatement();
-            String query = String.format("INSERT INTO HistoriquesActionnaires(capital,date_histo,fk_actionnaire_3) VALUES(%1$f,%2$d,%3$d)",
+            String query = String.format("INSERT INTO HistoriquesActionnaires(capital,date_histo,fk_actionnaire_3) VALUES(%1$f,\'%2$s\',%3$d)",
                     h.getCapital(),
                     h.getDate(),
                     h.getIdActionnaire());
