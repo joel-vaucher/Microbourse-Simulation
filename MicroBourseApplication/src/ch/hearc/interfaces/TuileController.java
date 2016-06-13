@@ -128,9 +128,10 @@ public class TuileController extends AbstractActions implements Initializable {
     }
 
     @FXML
-    private void btnSale_noAction(ActionEvent event) {
+    private void btnSale_onAction(ActionEvent event) {
         String nbAction = txtNbShares.getText().equals("") ? "0" : txtNbShares.getText();
         String prix = txtPriceShares.getText().equals("") ? "0" : txtPriceShares.getText();
+        System.out.println(nbAction + " " + prix);
         sale(Integer.parseInt(nbAction), Integer.parseInt(prix));
     }
 

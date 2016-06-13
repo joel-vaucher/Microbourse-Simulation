@@ -58,7 +58,7 @@ public abstract class AbstractActions {
          * Effectue une vente immédiate
          * @param nbAction
          */
-        public void buyAP(int nbAction) {
+        public void saleAP(int nbAction) {
             if(nbAction == 0) return;
             
             Long idA = AppController.getIdUser();
@@ -84,10 +84,10 @@ public abstract class AbstractActions {
         }
         
         /**
-         * Effectue une vente immédiate
+         * Effectue un achat immédiat
          * @param nbAction
          */
-        public void saleAP(int nbAction) {
+        public void buyAP(int nbAction) {
             if(nbAction == 0) return;
             
             Long idA = AppController.getIdUser();

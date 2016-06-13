@@ -118,7 +118,7 @@
                                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                     </rowConstraints>
                                     <children>
-                                        <Button fx:id="btnSale" mnemonicParsing="false" onAction="#btnSale_noAction" prefHeight="27.0" prefWidth="80.0" text="Vendre" GridPane.columnSpan="2" GridPane.rowIndex="1" />
+                                        <Button fx:id="btnSale" mnemonicParsing="false" onAction="#btnSale_onAction" prefHeight="27.0" prefWidth="80.0" text="Vendre" GridPane.columnSpan="2" GridPane.rowIndex="1" />
                                         <Button fx:id="btnBuy" mnemonicParsing="false" onAction="#btnBuy_onAction" prefHeight="27.0" prefWidth="80.0" text="Achater" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.halignment="RIGHT" GridPane.rowIndex="1" />
                                         <TextField fx:id="txtNbShares" promptText="Nb d'actions" />
                                         <TextField fx:id="txtPriceShares" promptText="Prix d'une action" GridPane.columnIndex="2" />
