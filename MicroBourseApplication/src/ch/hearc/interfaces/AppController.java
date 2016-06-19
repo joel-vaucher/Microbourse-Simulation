@@ -22,6 +22,9 @@ import javafx.util.Duration;
 
 /**
  * FXML Controller class
+ * Classe permettant de controller le composant graphique "App"
+ * Il s'agit du corps de l'application, 
+ * celui-ci contiendra l'ensemble des composants graphiques
  */
 public class AppController implements Initializable {
 
@@ -40,8 +43,8 @@ public class AppController implements Initializable {
     private static long ID_USER;
     
     /**
-     * Initializes the controller class.
-     * 
+     * Initialise le controlleur
+     *
      * @param url
      * @param rb 
      */
@@ -55,7 +58,7 @@ public class AppController implements Initializable {
     }
 
     /**
-     * 
+     * Chargement du composant "Accueil" lors du clique du bouton "Accueil"
      * @param event 
      */
     @FXML
@@ -64,7 +67,7 @@ public class AppController implements Initializable {
     }
 
     /**
-     * 
+     * Chargement du composant "Account" lors du clique du bouton "Account"
      * @param event 
      */
     @FXML
@@ -73,7 +76,7 @@ public class AppController implements Initializable {
     }
     
     /**
-     * 
+     * Effectue le chargement du composant à afficher
      * @param fxml 
      */
     public void loadFxmlToMasterPane(String fxml) {
@@ -89,20 +92,26 @@ public class AppController implements Initializable {
     }
     
     /**
-     * Obtention de l'id de l'entreprise associée à la tuile
-     * @param id 
+     * Obtention de l'id de l'utilisateur connecté
+     * @param id : ID utilisateur
      */    
-    public void setID(Long id) {
+    public void setUserID(Long id) {
         this.ID_USER = id;
     }
     
-    public static long getIdUser() {
+    /**
+     * Envoie de l'id de l'utilisateur connecté
+     * @return ID utilisateur
+     */
+    public static long getUserID() {
         return ID_USER;
     }
     
     /**
-     * 
-     * @param detail 
+     * Affiche les détails d'une entreprise
+     * Cette méthode est appeler par le composant permettant 
+     * d'afficher les détails d'une entreprise (par exemple une Tuile)
+     * @param detail : "Page à afficher" 
      */    
     public static void viewDetails(StackPane detail) {
         masterPane.getChildren().clear();
@@ -111,7 +120,7 @@ public class AppController implements Initializable {
     }
     
     /**
-     * 
+     * Animation lors de l'affichage d'un composant graphique
      */
     public static void animatePane() {
         FadeTransition ft = new FadeTransition(Duration.millis(500), masterPane);
@@ -123,7 +132,7 @@ public class AppController implements Initializable {
     }
     
     /**
-     * 
+     * Création du menu d'aide
      */
     public void createHelpMenu() {
         MenuItem about = new MenuItem("A Propos");
@@ -146,7 +155,7 @@ public class AppController implements Initializable {
     }
     
     /**
-     * 
+     * Création du menu fichier
      */
     public void createFileMenu() {
         MenuItem exit = new MenuItem("Quitter");

@@ -27,6 +27,8 @@ import javafx.scene.layout.StackPane;
 
 /**
  * FXML Controller class
+ * Classe permettant de controller le composant graphique "Tuile"
+ * Le composant "Tuile" permet d'afficher un résumé d'une entreprise sur l'accueil
  */
 public class TuileController extends AbstractActions implements Initializable {
 
@@ -58,8 +60,8 @@ public class TuileController extends AbstractActions implements Initializable {
     private Button btnBuyAP;
 
     /**
-     * Initializes the controller class.
-     * 
+     * Initialise le controlleur
+     *
      * @param url
      * @param rb 
      */
@@ -68,22 +70,22 @@ public class TuileController extends AbstractActions implements Initializable {
         // Parametrage du graphe
         NumberAxis yAxis = (NumberAxis) chart.getYAxis();
         yAxis.setAutoRanging(true);
-        yAxis.setForceZeroInRange(false);
-        
+        yAxis.setForceZeroInRange(false); 
+        // Lancement du timer de rafraichissement
         Timer timer = new java.util.Timer();
         timer.schedule(new TimerTask() {
             @Override
             public void run() {
-                 Platform.runLater(() -> {
-                     showChart(chart);
-                     showPrices();
-                 });
+                Platform.runLater(() -> {
+                    showChart(chart);
+                    showPrices(lblPriceBuy, lblPriceSale);
+                });
             }
         }, 0, 60000);
     }    
     
     /**
-     * 
+     * Affiche le détail d'une entreprise lors du clique du lien "Détail"
      * @param event 
      */
     @FXML
@@ -108,25 +110,33 @@ public class TuileController extends AbstractActions implements Initializable {
     public void setID(Long id) {
         this.ID = id;
         showChart(this.chart);
-        showPrices();
+        showPrices(lblPriceBuy, lblPriceSale);
     }
     
     /**
-     * 
+     * Effectue une vente au prix actuel lors du clique du bouton "Vendre"
+     * @param event 
      */
-    public void showPrices() {
-        ServicesOffreDao soo = new OffreDaoImplement();
-        List<Offre> offresVente = soo.getBestOffersByDay(this.ID, Offre.operationType.VENTE);
-        List<Offre> offresAchat = soo.getBestOffersByDay(this.ID, Offre.operationType.ACHAT);
-        
-        if(!offresAchat.isEmpty()) {
-            lblPriceBuy.setText(offresAchat.get(offresAchat.size()-1).getPrix()+"");
-        }
-        if(!offresVente.isEmpty()) {
-            lblPriceSale.setText(offresVente.get(offresVente.size()-1).getPrix()+"");
-        }
+    @FXML
+    private void btnSaleAP_onAction(ActionEvent event) {
+        String nbAction = txtNbSharesAP.getText().equals("") ? "0" : txtNbSharesAP.getText();
+        saleAP(Integer.parseInt(nbAction));
     }
 
+    /**
+     * Effectue un achat au prix actuel lors du clique du bouton "Acheter"
+     * @param event 
+     */
+    @FXML
+    private void btnBuyAP_onAction(ActionEvent event) {
+        String nbAction = txtNbSharesAP.getText().equals("") ? "0" : txtNbSharesAP.getText();
+        buyAP(Integer.parseInt(nbAction));
+    }
+    
+    /**
+     * Effectue une vente au prix indiqué lors du clique du bouton "Vendre"
+     * @param event 
+     */
     @FXML
     private void btnSale_onAction(ActionEvent event) {
         String nbAction = txtNbShares.getText().equals("") ? "0" : txtNbShares.getText();
@@ -134,7 +144,11 @@ public class TuileController extends AbstractActions implements Initializable {
         System.out.println(nbAction + " " + prix);
         sale(Integer.parseInt(nbAction), Integer.parseInt(prix));
     }
-
+    
+    /**
+     * Effectue un achat au prix indiqué lors du clique du bouton "Acheter"
+     * @param event 
+     */
     @FXML
     private void btnBuy_onAction(ActionEvent event) {
         String nbAction = txtNbShares.getText().equals("") ? "0" : txtNbShares.getText();
@@ -142,15 +156,4 @@ public class TuileController extends AbstractActions implements Initializable {
         buy(Integer.parseInt(nbAction), Integer.parseInt(prix));
     }
 
-    @FXML
-    private void btnSaleAP_onAction(ActionEvent event) {
-        String nbAction = txtNbSharesAP.getText().equals("") ? "0" : txtNbSharesAP.getText();
-        saleAP(Integer.parseInt(nbAction));
-    }
-
-    @FXML
-    private void btnBuyAP_onAction(ActionEvent event) {
-        String nbAction = txtNbSharesAP.getText().equals("") ? "0" : txtNbSharesAP.getText();
-        buyAP(Integer.parseInt(nbAction));
-    }
 }

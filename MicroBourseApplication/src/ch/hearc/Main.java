@@ -20,10 +20,15 @@ import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
 /**
- *
+ * Classe Main du projet
  */
 public class Main extends Application{
 
+    /**
+     * Lancement du projet (partie graphique)
+     * @param primaryStage : Stage (fenêtre) principal
+     * @throws Exception 
+     */
     @Override
     public void start(Stage primaryStage) throws Exception {
         showApp(selectUser(), primaryStage);
@@ -34,13 +39,18 @@ public class Main extends Application{
     }
     
     /**
-     * 
+     * Point d'entrée du projet
      * @param args 
      */
     public static void main(String[] args) {
         launch(args);
     }
     
+    /**
+     * Affichage d'une boîte de dialogue permettant de choisir 
+     * l'actionnaire représentant l'utilisateur
+     * @return ID de l'actionnaire choisi(e) (utilisateur) 
+     */
     private Long selectUser() {
         ServicesActionnaireDAO soo = new ActionnaireDaoImplement();
         List<Actionnaire> listAct = soo.getActionnaires();
@@ -69,13 +79,18 @@ public class Main extends Application{
         return toReturn;
     }
     
+    /**
+     * Lancement concret de l'application
+     * @param ID            : ID de l'actionnaire sélectionné(e)
+     * @param primaryStage  : Stage (fenêtre) principal
+     */
     private void showApp(Long ID , Stage primaryStage) {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/ch/hearc/interfaces/App.fxml"));
         AnchorPane app = null;
         try {
             app = (AnchorPane) loader.load();
             AppController appController = loader.getController();
-            appController.setID(ID);
+            appController.setUserID(ID);
         } catch (IOException ex) {
             ex.getMessage();
         } finally {                   
@@ -84,7 +99,6 @@ public class Main extends Application{
             primaryStage.setMaxHeight(900.0);
             primaryStage.setMaxWidth(1380.0);
             primaryStage.setTitle("Minibourse");
-            //stage.getIcons().add(new Image(""));
             primaryStage.setScene(scene); 
             primaryStage.show();
         }

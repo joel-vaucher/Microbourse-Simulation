@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package ch.hearc.interfaces;
 
 import ch.hearc.daoimplement.HistoriqueActionnaireDaoImplement;
@@ -22,6 +17,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.chart.LineChart;
+import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
@@ -30,6 +26,8 @@ import javafx.scene.control.cell.PropertyValueFactory;
 
 /**
  * FXML Controller class
+ * Classe permettant de controller le composant graphique "Account"
+ * Ce composant permet d'afficher le compte de l'utilisateur
  */
 public class AccountController implements Initializable {
 
@@ -61,14 +59,19 @@ public class AccountController implements Initializable {
     private long ID;
     
     /**
-     * Initializes the controller class.
+     * Initialise le controlleur
      *
      * @param url
      * @param rb 
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        // Parametrage du graphe
+        NumberAxis yAxis = (NumberAxis) chart.getYAxis();
+        yAxis.setAutoRanging(true);
+        yAxis.setForceZeroInRange(false);
         chart.setTitle("Mon Capital");
+        // Lancement du timer de rafraichissement
         Timer timer = new java.util.Timer();
         timer.schedule(new TimerTask() {
             @Override
@@ -82,40 +85,48 @@ public class AccountController implements Initializable {
     }
     
     /**
-     * Show the graph
+     * Récupération et traitemement des données reçues depuis la BDD
+     * afin de créer la courbe affichée sur le graphique
      */
     public void showChart() {
+        // Récupération des données
         ServicesHistoriqueActionnaireDao sha = new HistoriqueActionnaireDaoImplement();
-        List<HistoriqueActionnaire> capitalHisto = sha.getHistoriqueActionnaire(AppController.getIdUser());
+        List<HistoriqueActionnaire> capitalHisto = sha.getHistoriqueActionnaire(AppController.getUserID());
 
+        // Nettoyage du graphique
         chart.getData().clear();
         
+        // Création de la courbe
         XYChart.Series capitalSeries = new XYChart.Series();
         capitalSeries.setName("Capital");
 
         for(HistoriqueActionnaire ha : capitalHisto)
             capitalSeries.getData().add(new XYChart.Data(ha.getDate().toString(), ha.getCapital()));
 
-        // Affichage de la série
+        // Affectation de la courbe au graphique
         chart.getData().addAll(capitalSeries);
         
+        // Affichage du capital actuel
         if(!capitalHisto.isEmpty()) {
-            // Affichage du capital actuel
             lblActualCapital.setText(capitalHisto.get(capitalHisto.size()-1).getCapital()+"");
         }
     }
     
     /**
-     * 
+     * Récupération et traitemement des données reçues depuis la BDD
+     * afin de peupler les tableaux.
      */
     public void showTables() {
+        // Récupération des données
         ServicesOffreDao soo = new OffreDaoImplement();
-        List<Offre> histoOffreVente = soo.getHistoSellOffersByActionnaire(AppController.getIdUser());
-        List<Offre> histoOffreAchat = soo.getHistoPurchaseOffersByActionnaire(AppController.getIdUser());
+        List<Offre> histoOffreVente = soo.getHistoSellOffersByActionnaire(AppController.getUserID());
+        List<Offre> histoOffreAchat = soo.getHistoPurchaseOffersByActionnaire(AppController.getUserID());
         
+        // Nettoyage des tableaux
         tableBuy.getItems().clear();
         tableSale.getItems().clear();
         
+        // Préparation des données à l'aide d'un modèle
         ObservableList<HistoriqueModel> achats = FXCollections.observableArrayList();
         for (Offre offre : histoOffreAchat) {
             achats.add(new HistoriqueModel(offre));
@@ -126,6 +137,7 @@ public class AccountController implements Initializable {
             ventes.add(new HistoriqueModel(offre));
         }
         
+        // Association des attributs du modèle aux colonnes du tableau
         unitPriceBuyCol.setCellValueFactory(new PropertyValueFactory<>("unitPrice"));
         nbBuyActionCol.setCellValueFactory(new PropertyValueFactory<>("nbActions"));
         priceBuyCol.setCellValueFactory(new PropertyValueFactory<>("totalPrice"));
@@ -136,6 +148,7 @@ public class AccountController implements Initializable {
         priceSaleCol.setCellValueFactory(new PropertyValueFactory<>("totalPrice"));
         entrepriseSaleCol.setCellValueFactory(new PropertyValueFactory<>("entreprise"));
         
+        // Peuplement des tableaux
         tableBuy.setItems(achats);
         tableSale.setItems(ventes);
     }

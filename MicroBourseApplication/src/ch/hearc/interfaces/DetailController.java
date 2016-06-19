@@ -17,6 +17,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.chart.LineChart;
+import javafx.scene.chart.NumberAxis;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
@@ -26,6 +27,8 @@ import javafx.scene.control.cell.PropertyValueFactory;
 
 /**
  * FXML Controller class
+ * Classe permettant de controller le composant graphique "Detail"
+ * Le composant "Detail" permet d'afficher les détails d'une entreprise
  */
 public class DetailController extends AbstractActions implements Initializable {
 
@@ -64,16 +67,19 @@ public class DetailController extends AbstractActions implements Initializable {
     @FXML
     private TableColumn<HistoriqueModel, String> nbBuyActionCol;
     
-
-    
     /**
-     * Initializes the controller class.
-     * 
+     * Initialise le controlleur
+     *
      * @param url
      * @param rb 
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        // Parametrage du graphe
+        NumberAxis yAxis = (NumberAxis) chart.getYAxis();
+        yAxis.setAutoRanging(true);
+        yAxis.setForceZeroInRange(false);
+        // Lancement du timer de rafraichissement
         Timer timer = new java.util.Timer();
         timer.schedule(new TimerTask() {
             @Override
@@ -86,7 +92,7 @@ public class DetailController extends AbstractActions implements Initializable {
     }
     
     /**
-     * 
+     * Effectue une vente au prix actuel lors du clique du bouton "Vendre"
      * @param event 
      */
     @FXML
@@ -97,7 +103,7 @@ public class DetailController extends AbstractActions implements Initializable {
     }
 
     /**
-     * 
+     * Effectue un achat au prix actuel lors du clique du bouton "Acheter"
      * @param event 
      */
     @FXML
@@ -108,7 +114,7 @@ public class DetailController extends AbstractActions implements Initializable {
     }
 
     /**
-     * 
+     * Effectue une vente au prix indiqué lors du clique du bouton "Vendre"
      * @param event 
      */
     @FXML
@@ -120,7 +126,7 @@ public class DetailController extends AbstractActions implements Initializable {
     }
 
     /**
-     * 
+     * Effectue un achat au prix indiqué lors du clique du bouton "Acheter"
      * @param event 
      */
     @FXML
@@ -132,8 +138,12 @@ public class DetailController extends AbstractActions implements Initializable {
     }
 
     /**
+     * Recherche les informations de l'entreprise et affiche :
+     *  - Le graphique du cours des actions
+     *  - Les tableaux des historiques
+     *  - Les prix actuels
      * 
-     * @param id 
+     * @param id : ID entreprise
      */
     public void setID(long id) {
         this.ID = id;
@@ -143,26 +153,33 @@ public class DetailController extends AbstractActions implements Initializable {
         
         showChart(chart);
         showTables();
-        showPrices();
-    }
-    
-    private void refresh() {
-        showChart(chart);
-        showTables();
-        showPrices();  
+        showPrices(lblPriceBuy, lblPriceSale);
     }
     
     /**
-     * 
+     * Rafraichissement des valeurs affichées
+     */
+    private void refresh() {
+        showChart(chart);
+        showTables();
+        showPrices(lblPriceBuy, lblPriceSale);  
+    }
+    
+    /**
+     * Récupération et traitemement des données reçues depuis la BDD
+     * afin de peupler les tableaux.
      */
     private void showTables() {
+        // Récupération des données
         ServicesOffreDao soo = new OffreDaoImplement();
         List<Offre> offresVente = soo.getCurrentSellOffersByEntreprise(this.ID);
         List<Offre> offresAchat = soo.getCurrentPurchaseOffersByEntreprise(this.ID);
 
+        // Nettoyage des tableaux
         tableBuy.getItems().clear();
         tableSale.getItems().clear();
         
+        // Préparation des données à l'aide d'un modèle
         ObservableList<HistoriqueModel> achats = FXCollections.observableArrayList();
         for (Offre offre : offresAchat) {
             achats.add(new HistoriqueModel(offre));
@@ -173,29 +190,15 @@ public class DetailController extends AbstractActions implements Initializable {
             ventes.add(new HistoriqueModel(offre));
         }
         
+        // Association des attributs du modèle aux colonnes du tableau
         buyPriceCol.setCellValueFactory(new PropertyValueFactory<>("unitPrice"));
         nbBuyActionCol.setCellValueFactory(new PropertyValueFactory<>("nbActions"));
         
         salePriceCol.setCellValueFactory(new PropertyValueFactory<>("unitPrice"));
         nbSaleActionCol.setCellValueFactory(new PropertyValueFactory<>("nbActions"));
                 
+        // Peuplement des tableaux
         tableBuy.setItems(achats);
         tableSale.setItems(ventes);
-    }
-    
-    /**
-     * 
-     */
-    private void showPrices() {
-        ServicesOffreDao soo = new OffreDaoImplement();
-        List<Offre> offresVente = soo.getBestOffersByDay(this.ID, Offre.operationType.VENTE);
-        List<Offre> offresAchat = soo.getBestOffersByDay(this.ID, Offre.operationType.ACHAT);
-        
-        if(!offresAchat.isEmpty()) {
-            lblPriceBuy.setText(offresAchat.get(offresAchat.size()-1).getPrix()+"");
-        }
-        if(!offresVente.isEmpty()) {
-            lblPriceSale.setText(offresVente.get(offresVente.size()-1).getPrix()+"");
-        }
     }
 }

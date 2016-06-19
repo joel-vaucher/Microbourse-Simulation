@@ -16,6 +16,8 @@ import javafx.scene.layout.TilePane;
 
 /**
  * FXML Controller class
+ * Classe permettant de controller le composant graphique "Accueil"
+ * Ce composant contient l'ensemble des tuiles représentant une entreprise
  */
 public class AccueilController implements Initializable {
 
@@ -23,7 +25,7 @@ public class AccueilController implements Initializable {
     private TilePane tilePane;
 
     /**
-     * Initializes the controller class.
+     * Initialise le controlleur
      *
      * @param url
      * @param rb 
@@ -34,7 +36,8 @@ public class AccueilController implements Initializable {
     }
     
     /**
-     * 
+     * Récupération de la liste des entreprises et affichage des informations
+     * dans des tuiles
      */
     public void showTuiles() {
         FXMLLoader loader;
